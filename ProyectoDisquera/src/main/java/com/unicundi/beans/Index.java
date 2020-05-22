@@ -5,8 +5,8 @@
  */
 package com.unicundi.beans;
 
-import com.unicundi.core.UsuarioService;
-import com.unicundi.model.Usuario;
+import com.unicundi.core.CoreUsuario;
+import com.unicundi.utilitarios.UUsuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -22,7 +22,7 @@ import javax.faces.context.FacesContext;
 public class Index implements Serializable {
     private String username;
     private String contrasenia;
-    private Usuario usuarioLogueado;
+    private UUsuario usuarioLogueado;
     /**
      * Creates a new instance of Index
      */
@@ -30,7 +30,7 @@ public class Index implements Serializable {
     }
     
     public String iniciarSesion(){
-        usuarioLogueado = new UsuarioService().iniciarSesion(username, contrasenia);
+        usuarioLogueado = new CoreUsuario().iniciarSesion(username, contrasenia);
         if(usuarioLogueado != null){
             if(usuarioLogueado.getIdRol() == 1){
                 return "faces/administrador.xhtml?faces-redirect=true";
@@ -60,11 +60,11 @@ public class Index implements Serializable {
         this.contrasenia = contrasenia;
     }
     
-    public Usuario getUsuarioLogueado() {
+    public UUsuario getUsuarioLogueado() {
         return usuarioLogueado;
     }
 
-    public void setUsuarioLogueado(Usuario usuarioLogueado) {
+    public void setUsuarioLogueado(UUsuario usuarioLogueado) {
         this.usuarioLogueado = usuarioLogueado;
     }
     

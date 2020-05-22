@@ -5,8 +5,8 @@
  */
 package com.unicundi.beans;
 
-import com.unicundi.core.UsuarioService;
-import com.unicundi.model.Usuario;
+import com.unicundi.core.CoreUsuario;
+import com.unicundi.utilitarios.UUsuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -23,7 +23,7 @@ import javax.faces.context.FacesContext;
 @Named(value = "registro")
 @ViewScoped
 public class Registro implements Serializable{
-    private Usuario usuario;
+    private UUsuario usuario;
     private String nombre;
     private String apellido;
     private String username;
@@ -36,11 +36,11 @@ public class Registro implements Serializable{
     }
     
     public void registrar(){
-        Usuario usuarioValidador = new UsuarioService().buscarPorUsername(username);
+        UUsuario usuarioValidador = new CoreUsuario().buscarPorUsername(username);
         if(usuarioValidador == null){
             if(contrasenia.equals(confirmacionContrasenia) == true){
-                usuario = new Usuario(0, nombre, apellido, username, contrasenia, 2);
-                new UsuarioService().registrar(usuario);
+                usuario = new UUsuario(0, nombre, apellido, username, contrasenia, 2);
+                new CoreUsuario().registrar(usuario);
                 redireccionarIndex();
             }else{
                 FacesMessage mensaje = new FacesMessage("LAS CONTRASEÑAS DEBEN COINCIDIR");
@@ -60,11 +60,11 @@ public class Registro implements Serializable{
         }
     }
 
-    public Usuario getUsuario() {
+    public UUsuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UUsuario usuario) {
         this.usuario = usuario;
     }
 

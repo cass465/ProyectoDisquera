@@ -5,7 +5,7 @@
  */
 package com.unicundi.BD;
 
-import com.unicundi.model.Usuario;
+import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,8 +18,8 @@ import java.sql.SQLException;
  */
 public class DAOUsuario implements Serializable {
 
-    public Usuario iniciarSesion(Usuario usuario) {
-        Usuario usuarioLogueado = null;
+    public UUsuario iniciarSesion(UUsuario usuario) {
+        UUsuario usuarioLogueado = null;
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {
@@ -36,7 +36,7 @@ public class DAOUsuario implements Serializable {
                     String contrasenia = resultado.getString("contrasenia");
                     int idRol = resultado.getInt("id_rol");
 
-                    usuarioLogueado = new Usuario(id, nombre, apellido, username, contrasenia, idRol);
+                    usuarioLogueado = new UUsuario(id, nombre, apellido, username, contrasenia, idRol);
 
                 }
                 stmt.close();
@@ -48,8 +48,8 @@ public class DAOUsuario implements Serializable {
         return usuarioLogueado;
     }
 
-    public Usuario buscarPorUsername(String username){
-        Usuario usuarioEncontrado = null;
+    public UUsuario buscarPorUsername(String username){
+        UUsuario usuarioEncontrado = null;
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {
@@ -59,7 +59,7 @@ public class DAOUsuario implements Serializable {
                 while (resultado.next()) {
                     String usernameEncontrado = resultado.getString("username");
                     
-                    usuarioEncontrado = new Usuario(0, null,  null, username, null, 0);
+                    usuarioEncontrado = new UUsuario(0, null,  null, username, null, 0);
 
                 }
                 stmt.close();
@@ -71,7 +71,7 @@ public class DAOUsuario implements Serializable {
         return usuarioEncontrado;
     }
     
-    public void registrar(Usuario usuario) {
+    public void registrar(UUsuario usuario) {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {

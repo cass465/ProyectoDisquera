@@ -6,27 +6,27 @@
 package com.unicundi.core;
 
 import com.unicundi.BD.DAOUsuario;
-import com.unicundi.model.Usuario;
+import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 
 /**
  *
  * @author cass465
  */
-public class UsuarioService implements Serializable{
+public class CoreUsuario implements Serializable{
     
-    public Usuario iniciarSesion(String username, String contrasenia){
-        Usuario usuario = new Usuario();
+    public UUsuario iniciarSesion(String username, String contrasenia){
+        UUsuario usuario = new UUsuario();
         usuario.setUsername(username);
         usuario.setContrasenia(contrasenia);
         return new DAOUsuario().iniciarSesion(usuario);
     }
     
-    public Usuario buscarPorUsername(String username){
+    public UUsuario buscarPorUsername(String username){
         return new DAOUsuario().buscarPorUsername(username);
     }
     
-    public void registrar(Usuario usuario){
+    public void registrar(UUsuario usuario){
         new DAOUsuario().registrar(usuario);
     }
 }

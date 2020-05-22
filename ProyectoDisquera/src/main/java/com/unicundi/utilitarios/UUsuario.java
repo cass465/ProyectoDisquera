@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicundi.model;
+package com.unicundi.utilitarios;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author cass465
  */
-public class Usuario implements Serializable{
+public class UUsuario implements Serializable{
     private int id;
     private String nombre; 
     private String apellido;
@@ -19,11 +19,11 @@ public class Usuario implements Serializable{
     private String contrasenia;
     private int idRol;
     
-    public Usuario() {
+    public UUsuario() {
         
     }
     
-    public Usuario(int id, String nombre, String apellido, String username, String contrasenia, int idRol) {
+    public UUsuario(int id, String nombre, String apellido, String username, String contrasenia, int idRol) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
