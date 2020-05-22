@@ -20,9 +20,7 @@ public class BDConector implements Serializable {
     private final String DB_URL = "jdbc:postgresql://localhost:5432/Disquera";
     private String user;
     private String pass;
-    private Connection conexion = null;
-
-    public static boolean acceso = false;
+    private Connection conexion;
 
     public BDConector() {
         this.user = "postgres";
@@ -34,9 +32,7 @@ public class BDConector implements Serializable {
             Class.forName(JDBC_DRIVER);
             try {
                 conexion = DriverManager.getConnection(DB_URL, user, pass);
-                acceso = true;
             } catch (SQLException e) {
-                acceso = false;
                 e.printStackTrace();
                 System.out.println("No se pudo conectar a la BD");
             }
