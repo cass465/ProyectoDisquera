@@ -47,4 +47,46 @@ public class DAOUsuario implements Serializable {
 
         return usuarioLogueado;
     }
+
+    public Usuario buscarPorUsername(String username){
+        Usuario usuarioEncontrado = null;
+        Connection conexion = new BDConector().open();
+        if (conexion != null) {
+            try {
+                String query = "SELECT * FROM usuarios.usuario WHERE usuario.username = '" + username + "';";
+                PreparedStatement stmt = conexion.prepareStatement(query);
+                ResultSet resultado = stmt.executeQuery();
+                while (resultado.next()) {
+                    String usernameEncontrado = resultado.getString("username");
+                    
+                    usuarioEncontrado = new Usuario(0, null,  null, username, null, 0);
+
+                }
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return usuarioEncontrado;
+    }
+    
+    public void registrar(Usuario usuario) {
+        Connection conexion = new BDConector().open();
+        if (conexion != null) {
+            try {
+                String query = "INSERT INTO usuarios.usuario(nombre, apellido, username, contrasenia, id_rol) VALUES ('"
+                        + usuario.getNombre() + "','"
+                        + usuario.getApellido() + "','"
+                        + usuario.getUsername() + "','"
+                        + usuario.getContrasenia()+ "','"
+                        + usuario.getIdRol()+ "');";
+                PreparedStatement stmt = conexion.prepareStatement(query);
+                stmt.executeUpdate();
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
