@@ -33,7 +33,7 @@ public class Index implements Serializable {
         usuarioLogueado = new CoreUsuario().iniciarSesion(username, contrasenia);
         if(usuarioLogueado != null){
             if(usuarioLogueado.getIdRol() == 1){
-                return "faces/administrador.xhtml?faces-redirect=true";
+                return "faces/Administrador/administrador.xhtml?faces-redirect=true";
             }else{
                 return "faces/usuario.xhtml?faces-redirect=true";
             }
