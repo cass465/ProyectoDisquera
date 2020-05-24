@@ -7,14 +7,9 @@ package com.unicundi.beans;
 
 import com.unicundi.core.CoreUsuario;
 import com.unicundi.utilitarios.UUsuario;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -36,30 +31,10 @@ public class Registro implements Serializable{
     }
     
     public void registrar(){
-        UUsuario usuarioValidador = new CoreUsuario().buscarPorUsername(username);
-        if(usuarioValidador == null){
-            if(contrasenia.equals(confirmacionContrasenia) == true){
-                usuario = new UUsuario(0, nombre, apellido, username, contrasenia, 2);
-                new CoreUsuario().registrar(usuario);
-                redireccionarIndex();
-            }else{
-                FacesMessage mensaje = new FacesMessage("LAS CONTRASEÑAS DEBEN COINCIDIR");
-                FacesContext.getCurrentInstance().addMessage(null, mensaje);
-            }
-        }else{
-            FacesMessage mensaje = new FacesMessage("EL USERNAME YA SE ENCUENTRA REGISTRADO");
-            FacesContext.getCurrentInstance().addMessage(null, mensaje);
-        }
+        usuario = new UUsuario(0, nombre, apellido, username, contrasenia, 2);
+        new CoreUsuario().registrar(usuario, confirmacionContrasenia);
     }
     
-    public void redireccionarIndex(){
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-        } catch (IOException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public UUsuario getUsuario() {
         return usuario;
     }

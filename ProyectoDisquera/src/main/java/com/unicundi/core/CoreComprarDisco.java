@@ -5,7 +5,15 @@
  */
 package com.unicundi.core;
 
+import com.unicundi.BD.DAOCompraDisco;
+import com.unicundi.utilitarios.UCompraDisco;
+import com.unicundi.utilitarios.UDisco;
+import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -13,4 +21,21 @@ import java.io.Serializable;
  */
 public class CoreComprarDisco implements Serializable{
     
+    public void registrar(List<UDisco> discos){
+        int nCompras = 0;
+        for(UDisco disco : discos){
+            if(disco.isSeleccionado()){
+                int idUsuario = ((UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getId();
+                int idDisco = disco.getId();
+                float valorCompra = disco.getPrecio();
+                Date fechaCompra = new Date();
+                
+                UCompraDisco compra = new UCompraDisco(0, idUsuario, idDisco, valorCompra, fechaCompra);
+                new DAOCompraDisco().registrar(compra);
+                nCompras ++;
+            }
+        }
+        FacesMessage mensaje = new FacesMessage("DISCOS COMPRADOS: " + nCompras);
+        FacesContext.getCurrentInstance().addMessage(null, mensaje);
+    }
 }

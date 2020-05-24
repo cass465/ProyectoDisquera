@@ -14,14 +14,16 @@ import java.io.Serializable;
 public class UDisco implements Serializable{
     private int id;
     private String nombre;
-    private int nCanciones;
+    private int numeroCanciones;
     private float precio;
     private int idArtista;
+    //
+    private boolean seleccionado;
 
-    public UDisco(int id, String nombre, int nCanciones, float precio, int idArtista) {
+    public UDisco(int id, String nombre, int numeroCanciones, float precio, int idArtista) {
         this.id = id;
         this.nombre = nombre;
-        this.nCanciones = nCanciones;
+        this.numeroCanciones = numeroCanciones;
         this.precio = precio;
         this.idArtista = idArtista;
     }
@@ -42,12 +44,12 @@ public class UDisco implements Serializable{
         this.nombre = nombre;
     }
 
-    public int getnCanciones() {
-        return nCanciones;
+    public int getNumeroCanciones() {
+        return numeroCanciones;
     }
 
-    public void setnCanciones(int nCanciones) {
-        this.nCanciones = nCanciones;
+    public void setNumeroCanciones(int numeroCanciones) {
+        this.numeroCanciones = numeroCanciones;
     }
 
     public float getPrecio() {
@@ -64,6 +66,14 @@ public class UDisco implements Serializable{
 
     public void setIdArtista(int idArtista) {
         this.idArtista = idArtista;
+    }
+
+    public boolean isSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
     }
     
 }

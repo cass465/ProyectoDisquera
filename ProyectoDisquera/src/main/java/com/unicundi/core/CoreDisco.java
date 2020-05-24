@@ -5,7 +5,10 @@
  */
 package com.unicundi.core;
 
+import com.unicundi.BD.DAODisco;
+import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -13,4 +16,7 @@ import java.io.Serializable;
  */
 public class CoreDisco implements Serializable{
     
+    public List<UDisco> listar(){
+        return new DAODisco().listar();
+    }
 }

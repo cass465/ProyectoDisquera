@@ -5,6 +5,7 @@
  */
 package com.unicundi.beans;
 
+import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
@@ -17,7 +18,8 @@ import javax.faces.view.ViewScoped;
 @Named(value = "usuario")
 @ViewScoped
 public class Usuario implements Serializable {
-    private List<Usuario> usuarios;
+    private List<UDisco> discos;
+    
     /**
      * Creates a new instance of Usuario
      */
