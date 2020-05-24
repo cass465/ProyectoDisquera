@@ -17,6 +17,9 @@ public class UCancion implements Serializable{
     private String duracion;
     private float precio;
     private int idDisco;
+    //
+    private String genero;
+    private String nombreCompletoArtista;
 
     public UCancion(int id, String nombre, String duracion, float precio, int idDisco) {
         this.id = id;
@@ -24,6 +27,16 @@ public class UCancion implements Serializable{
         this.duracion = duracion;
         this.precio = precio;
         this.idDisco = idDisco;
+    }
+
+    public UCancion(int id, String nombre, String duracion, float precio, int idDisco, String genero, String nombreCompletoArtista) {
+        this.id = id;
+        this.nombre = nombre;
+        this.duracion = duracion;
+        this.precio = precio;
+        this.idDisco = idDisco;
+        this.genero = genero;
+        this.nombreCompletoArtista = nombreCompletoArtista;
     }
     
     public int getId() {
@@ -64,6 +77,22 @@ public class UCancion implements Serializable{
 
     public void setIdDisco(int idDisco) {
         this.idDisco = idDisco;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getNombreCompletoArtista() {
+        return nombreCompletoArtista;
+    }
+
+    public void setNombreCompletoArtista(String nombreCompletoArtista) {
+        this.nombreCompletoArtista = nombreCompletoArtista;
     }
     
 }

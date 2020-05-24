@@ -25,7 +25,9 @@ public class DAOCancion implements Serializable{
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {
-                String query = "SELECT * FROM musica.cancion;";
+                String query = "SELECT artista.genero, artista.nombre AS nombre_artista, artista.apellido AS apellido_artista, cancion.* "
+                        + "FROM musica.artista, musica.cancion, musica.disco "
+                        + "WHERE disco.id_artista = artista.id AND cancion.id_disco = disco.id;";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
@@ -34,8 +36,10 @@ public class DAOCancion implements Serializable{
                     String duaracion = resultado.getString("duracion");
                     float precio = (float) resultado.getDouble("precio");
                     int idDisco = resultado.getInt("id_disco");
+                    String genero = resultado.getString("genero");
+                    String nombreCompletoArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");
                     
-                    canciones.add(new UCancion(id, nombre, duaracion, precio, idDisco));
+                    canciones.add(new UCancion(id, nombre, duaracion, precio, idDisco, genero, nombreCompletoArtista));
                 }
                 stmt.close();
             } catch (SQLException e) {
