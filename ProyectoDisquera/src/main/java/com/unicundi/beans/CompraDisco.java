@@ -5,13 +5,16 @@
  */
 package com.unicundi.beans;
 
-import com.unicundi.core.CoreComprarDisco;
+import com.unicundi.core.CoreCancion;
+import com.unicundi.core.CoreCompraDisco;
 import com.unicundi.core.CoreDisco;
+import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -21,6 +24,7 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class CompraDisco implements Serializable{
     private List<UDisco> discos;
+    private List<UCancion> canciones;
     
     /**
      * Creates a new instance of CompraDisco
@@ -30,7 +34,13 @@ public class CompraDisco implements Serializable{
     }
     
     public void comprar(){
-        new CoreComprarDisco().registrar(discos);
+        new CoreCompraDisco().registrar(discos);
+    }
+    
+    public void buscarCancionesPorDisco(UDisco disco){
+        this.canciones = new CoreCancion().buscarPorDisco(disco.getId());
+        //Abrir modal de canciones
+        RequestContext.getCurrentInstance().execute("PF('cancionesDialog').show();");
     }
 
     public List<UDisco> getDiscos() {
@@ -40,4 +50,13 @@ public class CompraDisco implements Serializable{
     public void setDiscos(List<UDisco> discos) {
         this.discos = discos;
     }
+
+    public List<UCancion> getCanciones() {
+        return canciones;
+    }
+
+    public void setCanciones(List<UCancion> canciones) {
+        this.canciones = canciones;
+    }
+    
 }

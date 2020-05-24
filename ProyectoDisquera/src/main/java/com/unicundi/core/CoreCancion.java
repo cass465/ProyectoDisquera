@@ -5,7 +5,10 @@
  */
 package com.unicundi.core;
 
+import com.unicundi.BD.DAOCancion;
+import com.unicundi.utilitarios.UCancion;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -13,4 +16,11 @@ import java.io.Serializable;
  */
 public class CoreCancion implements Serializable{
     
+    public List<UCancion> listar(){
+        return new DAOCancion().listar();
+    }
+    
+    public List<UCancion> buscarPorDisco(int idDisco){
+        return new DAOCancion().buscarPorDisco(idDisco);
+    }
 }

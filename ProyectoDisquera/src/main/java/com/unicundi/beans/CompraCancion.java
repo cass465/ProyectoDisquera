@@ -5,6 +5,7 @@
  */
 package com.unicundi.beans;
 
+import java.io.Serializable;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -14,7 +15,7 @@ import javax.enterprise.context.RequestScoped;
  */
 @Named(value = "compraCancion")
 @RequestScoped
-public class CompraCancion {
+public class CompraCancion implements Serializable{
 
     /**
      * Creates a new instance of CompraCancion

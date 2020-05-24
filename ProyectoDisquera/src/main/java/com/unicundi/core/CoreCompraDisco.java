@@ -19,23 +19,28 @@ import javax.faces.context.FacesContext;
  *
  * @author cass465
  */
-public class CoreComprarDisco implements Serializable{
-    
-    public void registrar(List<UDisco> discos){
+public class CoreCompraDisco implements Serializable {
+
+    public void registrar(List<UDisco> discos) {
         int nCompras = 0;
-        for(UDisco disco : discos){
-            if(disco.isSeleccionado()){
+        for (UDisco disco : discos) {
+            if (disco.isSeleccionado()) {
                 int idUsuario = ((UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getId();
                 int idDisco = disco.getId();
                 float valorCompra = disco.getPrecio();
                 Date fechaCompra = new Date();
-                
+
                 UCompraDisco compra = new UCompraDisco(0, idUsuario, idDisco, valorCompra, fechaCompra);
                 new DAOCompraDisco().registrar(compra);
-                nCompras ++;
+                nCompras++;
             }
         }
-        FacesMessage mensaje = new FacesMessage("DISCOS COMPRADOS: " + nCompras);
-        FacesContext.getCurrentInstance().addMessage(null, mensaje);
+        if (nCompras > 0) {
+            FacesMessage mensaje = new FacesMessage("DISCOS COMPRADOS: " + nCompras);
+            FacesContext.getCurrentInstance().addMessage(null, mensaje);
+        }else{
+            FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_WARN, "NO HA SELECCIONADO DISCOS", null);
+            FacesContext.getCurrentInstance().addMessage(null, mensaje);
+        }
     }
 }

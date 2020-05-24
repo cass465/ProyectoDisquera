@@ -25,7 +25,9 @@ public class DAODisco implements Serializable{
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {
-                String query = "SELECT * FROM musica.disco;";
+                String query = "SELECT artista.genero, artista.nombre AS nombre_artista, artista.apellido AS apellido_artista, disco.* "
+                        + "FROM musica.artista, musica.disco "
+                        + "WHERE disco.id_artista = artista.id;";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
@@ -34,8 +36,10 @@ public class DAODisco implements Serializable{
                     int numeroCanciones = resultado.getInt("n_canciones");
                     float precio = (float) resultado.getDouble("precio");
                     int idArtista = resultado.getInt("id_artista");
+                    String genero = resultado.getString("genero");
+                    String nombreCompletoArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");
                     
-                    discos.add(new UDisco(id, nombre, numeroCanciones, precio, idArtista));
+                    discos.add(new UDisco(id, nombre, numeroCanciones, precio, idArtista, nombreCompletoArtista, genero));
                 }
                 stmt.close();
             } catch (SQLException e) {
