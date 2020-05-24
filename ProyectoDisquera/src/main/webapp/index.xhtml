@@ -9,12 +9,13 @@
     <h:body>
         
         <h:form id="form">
-         
-            <p:growl id="msgs" showDetail="true"/>
+            <p:growl id="msg"/>
             <p:inputText value="#{index.username}"/>
             <p:inputText value="#{index.contrasenia}" type="password"/>
-            <p:commandButton value="Login" action="#{index.iniciarSesion()}" update="form"/>
+            <p:commandButton value="Login" action="#{index.iniciarSesion()}" update=":form"/>
         </h:form>
+        
+        <p:button value="Ir al registro" icon="pi pi-user-plus" outcome="registro"/>
     </h:body>
 </html>
 

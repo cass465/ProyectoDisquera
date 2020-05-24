@@ -7,18 +7,21 @@ package com.unicundi.beans;
 
 import com.unicundi.core.CoreUsuario;
 import com.unicundi.utilitarios.UUsuario;
+import java.io.IOException;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 /**
  *
  * @author cass465
  */
 @Named(value = "index")
-@SessionScoped
+@RequestScoped
 public class Index implements Serializable {
     private String username;
     private String contrasenia;
@@ -29,21 +32,46 @@ public class Index implements Serializable {
     public Index() {
     }
     
-    public String iniciarSesion(){
-        usuarioLogueado = new CoreUsuario().iniciarSesion(username, contrasenia);
-        if(usuarioLogueado != null){
-            if(usuarioLogueado.getIdRol() == 1){
-                return "faces/Administrador/administrador.xhtml?faces-redirect=true";
-            }else{
-                return "faces/usuario.xhtml?faces-redirect=true";
-            }
-        }else{
-            FacesMessage mensaje = new FacesMessage("DATOS INCORRECTOS");
-            FacesContext.getCurrentInstance().addMessage(null, mensaje);
-            return "index";
+    public void validarSesionAdministrador(ComponentSystemEvent event){
+        //Obtiene la sesion de administrador
+        UUsuario administrador = (UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("administrador");
+        
+        if(administrador == null){
+            redireccionar("../index.xhtml");
         }
     }
-
+    
+    public void validarSesionUsuario(ComponentSystemEvent event){
+        //Obtiene la sesion de usuario
+        UUsuario usuario = (UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        
+        if(usuario == null){
+            redireccionar("../index.xhtml");
+        }
+    }
+    
+    public void iniciarSesion(){
+        new CoreUsuario().iniciarSesion(username, contrasenia);
+    }
+    
+    public void cerrarSesionAdministrador(){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("administrador");
+        redireccionar("../index.xhtml");
+    }
+    
+    public void cerrarSesionUsuario(){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+        redireccionar("../index.xhtml");
+    }
+    
+    public void redireccionar(String url){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+        } catch (IOException ex) {
+            Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public String getUsername() {
         return username;
     }
