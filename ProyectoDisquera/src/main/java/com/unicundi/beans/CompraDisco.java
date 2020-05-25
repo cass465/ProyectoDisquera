@@ -7,7 +7,7 @@ package com.unicundi.beans;
 
 import com.unicundi.core.CoreCancion;
 import com.unicundi.core.CoreCompraDisco;
-import com.unicundi.core.CoreDisco;
+import com.unicundi.core.Administrador.CoreDisco;
 import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
