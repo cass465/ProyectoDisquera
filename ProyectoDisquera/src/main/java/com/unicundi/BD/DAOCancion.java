@@ -36,7 +36,7 @@ public class DAOCancion implements Serializable{
                     int id = resultado.getInt("id");
                     String nombre = resultado.getString("nombre");
                     String duaracion = resultado.getString("duracion");
-                    float precio = (float) resultado.getDouble("precio");
+                    int precio = resultado.getInt("precio");
                     int idDisco = resultado.getInt("id_disco");
                     String genero = resultado.getString("genero");
                     String nombreCompletoArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");
@@ -64,7 +64,7 @@ public class DAOCancion implements Serializable{
                     int id = resultado.getInt("id");
                     String nombre = resultado.getString("nombre");
                     String duaracion = resultado.getString("duracion");
-                    float precio = (float) resultado.getDouble("precio");
+                    int precio = resultado.getInt("precio");
                     
                     canciones.add(new UCancion(id, nombre, duaracion, precio, idDisco, true));
                 }

@@ -15,14 +15,14 @@ public class UCancion implements Serializable{
     private int id;
     private String nombre;
     private String duracion;
-    private float precio;
+    private int precio;
     private int idDisco;
     private boolean estado;
     //
     private String genero;
     private String nombreCompletoArtista;
 
-    public UCancion(int id, String nombre, String duracion, float precio, int idDisco, boolean estado) {
+    public UCancion(int id, String nombre, String duracion, int precio, int idDisco, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
@@ -31,7 +31,7 @@ public class UCancion implements Serializable{
         this.estado = estado;
     }
 
-    public UCancion(int id, String nombre, String duracion, float precio, int idDisco, String genero, String nombreCompletoArtista) {
+    public UCancion(int id, String nombre, String duracion, int precio, int idDisco, String genero, String nombreCompletoArtista) {
         this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
@@ -65,11 +65,11 @@ public class UCancion implements Serializable{
         this.duracion = duracion;
     }
 
-    public float getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 

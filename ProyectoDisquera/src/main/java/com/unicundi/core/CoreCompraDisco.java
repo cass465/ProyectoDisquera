@@ -27,7 +27,7 @@ public class CoreCompraDisco implements Serializable {
             if (disco.isSeleccionado()) {
                 int idUsuario = ((UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getId();
                 int idDisco = disco.getId();
-                float valorCompra = disco.getPrecio();
+                int valorCompra = disco.getPrecio();
                 Date fechaCompra = new Date();
 
                 UCompraDisco compra = new UCompraDisco(0, idUsuario, idDisco, valorCompra, fechaCompra);

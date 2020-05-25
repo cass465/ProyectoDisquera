@@ -24,7 +24,7 @@ public class CoreCompraCancion implements Serializable {
     public void registrar(UCancion cancion) {
         int idUsuario = ((UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getId();
         int idCancion = cancion.getId();
-        float valorCompra = cancion.getPrecio();
+        int valorCompra = cancion.getPrecio();
         Date fechaCompra = new Date();
         
         UCompraCancion compra = new UCompraCancion(0, idUsuario, idCancion, valorCompra, fechaCompra);

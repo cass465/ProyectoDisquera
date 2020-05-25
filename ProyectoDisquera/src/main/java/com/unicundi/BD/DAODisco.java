@@ -35,7 +35,7 @@ public class DAODisco implements Serializable{
                     int id = resultado.getInt("id");
                     String nombre = resultado.getString("nombre");
                     int numeroCanciones = resultado.getInt("n_canciones");
-                    float precio = (float) resultado.getDouble("precio");
+                    int precio = resultado.getInt("precio");
                     int idArtista = resultado.getInt("id_artista");
                     String genero = resultado.getString("genero");
                     String nombreCompletoArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");

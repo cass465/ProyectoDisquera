@@ -16,7 +16,7 @@ public class UCompraDisco implements Serializable{
     private int id;
     private int idUsuario;
     private int idDisco;
-    private float valorCompra;
+    private int valorCompra;
     private Date fechaCompra;
     //
     private String genero;
@@ -24,7 +24,7 @@ public class UCompraDisco implements Serializable{
     private String disco;
     private int numeroCanciones;
 
-    public UCompraDisco(int id, int idUsuario, int idDisco, float valorCompra, Date fechaCompra) {
+    public UCompraDisco(int id, int idUsuario, int idDisco, int valorCompra, Date fechaCompra) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idDisco = idDisco;
@@ -32,7 +32,7 @@ public class UCompraDisco implements Serializable{
         this.fechaCompra = fechaCompra;
     }
 
-    public UCompraDisco(float valorCompra, Date fechaCompra, String genero, String nombreCompletoArtista, String disco, int numeroCanciones) {
+    public UCompraDisco(int valorCompra, Date fechaCompra, String genero, String nombreCompletoArtista, String disco, int numeroCanciones) {
         this.valorCompra = valorCompra;
         this.fechaCompra = fechaCompra;
         this.genero = genero;
@@ -65,11 +65,11 @@ public class UCompraDisco implements Serializable{
         this.idDisco = idDisco;
     }
 
-    public float getValorCompra() {
+    public int getValorCompra() {
         return valorCompra;
     }
 
-    public void setValorCompra(float valorCompra) {
+    public void setValorCompra(int valorCompra) {
         this.valorCompra = valorCompra;
     }
 

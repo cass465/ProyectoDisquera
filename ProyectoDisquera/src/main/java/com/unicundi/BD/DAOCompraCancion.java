@@ -53,7 +53,7 @@ public class DAOCompraCancion implements Serializable{
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
-                    float valorCompra = (float) resultado.getDouble("valor_compra");
+                    int valorCompra = resultado.getInt("valor_compra");
                     Date fechaCompra = resultado.getDate("fecha_compra");
                     String genero = resultado.getString("genero");
                     String nombreCompletoArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");
