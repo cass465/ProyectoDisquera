@@ -182,5 +182,24 @@ public class DAODisco implements Serializable {
             }
         }
     }
+    
+    public void actualizarNCanciones() {
+        Connection conexion = new BDConector().open();
+        
+        if (conexion != null) {
+            try {               
+                
+                String query = "UPDATE musica.disco SET n_canciones=(SELECT  COUNT(id_disco)  FROM musica.cancion where cancion.id_disco=disco.id);";
+                PreparedStatement stmt = conexion.prepareStatement(query);
+                stmt.executeUpdate();
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    
+     
 
 }

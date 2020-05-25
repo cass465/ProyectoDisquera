@@ -29,7 +29,9 @@ public class CoreCancion implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La cancion ya existe", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } else {
+
             new DAOCancion().registrar(cancion);
+             new DAODisco().actualizarNCanciones();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado Satisfactoriamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
@@ -42,16 +44,17 @@ public class CoreCancion implements Serializable {
     }
 
     public void modificar(UCancion cancion) {
-       UCancion cancionAux = new DAOCancion().obtenerExistente(cancion);
-        if (cancionAux.getNombre() != null && cancionAux.getId()!=cancion.getId()) {
+        UCancion cancionAux = new DAOCancion().obtenerExistente(cancion);
+        if (cancionAux.getNombre() != null && cancionAux.getId() != cancion.getId()) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La cancion ya existe", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } else {
+
             new DAOCancion().modificar(cancion);
+            new DAODisco().actualizarNCanciones();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado Satisfactoriamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-        
 
     }
 
