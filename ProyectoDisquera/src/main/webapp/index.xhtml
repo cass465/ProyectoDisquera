@@ -10,20 +10,24 @@
 
         <h:form id="form">
             <p:growl id="msg"/>
-            <h:panelGrid id="PG_Grid" columns="2" cellpadding="5">
-                
-                <p:outputLabel value="Username: " for="IT_Username"/>
-                <p:inputText id="IT_Username" value="${index.username}" required="true" type="text"/>
-                
-                <p:outputLabel value="Contraseña: " for="IT_Contrasenia"/>
-                <p:inputText id="IT_Contrasenia" value="${index.contrasenia}" required="true" type="password"/>
-                
-                <p:commandButton value="Login" action="#{index.iniciarSesion}" update="msg,PG_Grid"/>
-            </h:panelGrid>
+            <p:panel header="Formulario de Login" style="margin-left: 30%; margin-right: 30%; margin-top: 10%">
+                <h:panelGrid id="PG_Grid" columns="2" cellpadding="5">
+
+                    <p:outputLabel value="Username: " for="IT_Username"/>
+                    <p:inputText id="IT_Username" value="${index.username}" required="true" type="text"/>
+
+                    <p:outputLabel value="Contraseña: " for="IT_Contrasenia"/>
+                    <p:inputText id="IT_Contrasenia" value="${index.contrasenia}" required="true" type="password"/>
+
+                    <p:commandButton value="Login" action="#{index.iniciarSesion}" update="msg,PG_Grid"/>
+                </h:panelGrid>
+            </p:panel>
         </h:form>
 
         <br/>
-        <p:button value="Ir al registro" outcome="registro"/>
+        <center>
+            <p:button value="Ir al registro" outcome="registro"/>
+        </center>
     </h:body>
 </html>
 

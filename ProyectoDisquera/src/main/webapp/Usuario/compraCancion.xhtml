@@ -12,7 +12,11 @@
     <h:body>
         <h:form id="form">
             <p:growl id="msg"/>
-            <p:dataTable value="#{compraCancion.canciones}" var="cancion">
+            <p:dataTable value="#{compraCancion.canciones}" var="cancion" style="text-align: center">
+                <f:facet name="header">
+                    Canciones Disponibles
+                </f:facet>
+                
                 <p:column headerText="Genero">
                     <h:outputText value="#{cancion.genero}" /> 
                 </p:column>
@@ -39,11 +43,6 @@
                     <p:commandButton value="Comprar" icon="pi pi-tag" actionListener="#{compraCancion.comprar(cancion)}" update=":form:msg"/>
                 </p:column>
             </p:dataTable>
-
-            <!--MODAL DE CONFIRMACION Y REDIRECCION-->
-            <p:dialog id="modalCanciones" widgetVar="cancionesDialog" modal="true" resizable="false" draggable="false">
-                
-            </p:dialog>
         </h:form>
 
         <br/>

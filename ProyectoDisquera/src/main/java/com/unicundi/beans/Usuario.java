@@ -9,8 +9,10 @@ import com.unicundi.core.CoreCompraCancion;
 import com.unicundi.core.CoreCompraDisco;
 import com.unicundi.utilitarios.UCompraCancion;
 import com.unicundi.utilitarios.UCompraDisco;
+import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
@@ -21,6 +23,7 @@ import javax.faces.view.ViewScoped;
 @Named(value = "usuario")
 @ViewScoped
 public class Usuario implements Serializable {
+    private String username;
     private List<UCompraDisco> discos;
     private List<UCompraCancion> canciones;
     
@@ -28,10 +31,19 @@ public class Usuario implements Serializable {
      * Creates a new instance of Usuario
      */
     public Usuario(){
+        this.username = ((UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsername();
         this.discos = new CoreCompraDisco().listar();
         this.canciones = new CoreCompraCancion().listar();
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     public List<UCompraDisco> getDiscos() {
         return discos;
     }

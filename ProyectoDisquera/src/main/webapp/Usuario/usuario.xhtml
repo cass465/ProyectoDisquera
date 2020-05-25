@@ -10,22 +10,38 @@
         <title>Usuario</title>
     </h:head>
     <h:body>
-        <h:form>
-            <p:commandButton value="Cerrar Sesión" class="fa fa-arrow-left fa-3x"  action="#{index.cerrarSesionUsuario}"/>
-        </h:form>
-        <h:panelGrid id="PG_Grid" columns="2" cellpadding="5">
-            <p:button value="COMPRAR DISCOS" outcome="compraDisco"/>
-            <p:button value="COMPRAR CANCIONES" outcome="compraCancion"/>
-        </h:panelGrid>
+        <center>
+            <p:outputLabel value="#{usuario.username}" style="font-size: 200%"/>
+            <h:form>
+                <p:commandButton value="Cerrar Sesión" action="#{index.cerrarSesionUsuario}"/>
+            </h:form>
+        </center>
 
-        <h:form>
-            <p:commandButton value="VER COMPRAS DE DISCOS" onclick="PF('comprasDiscosDialog').show();"/>
-            <p:commandButton value="VER COMPRAS DE CANCIONES" onclick="PF('comprasCancionesDialog').show();"/>
-        </h:form>
+        <br/>
+        <p:panel>
+            <h:panelGrid id="PG_Grid" columns="3" cellpadding="5">
+                <p:button value="COMPRAR DISCOS" outcome="compraDisco" style="font-size: 200%; margin-left: 30%"/>
+                <p:button value="COMPRAR CANCIONES" outcome="compraCancion" style="font-size: 200%; margin-left: 30%"/>
+                <h:graphicImage value="Guitar.jpg" style="width: 70%; margin-left: 30%"/>
+            </h:panelGrid>
+
+            <h:form>
+                <p:commandButton value="DISCOS COMPRADOS" onclick="PF('comprasDiscosDialog').show();"/>
+                <p:commandButton value="CANCIONES COMPRADAS" onclick="PF('comprasCancionesDialog').show();"/>
+            </h:form>
+        </p:panel>
+
+        <br/>
+
 
         <!--MODAL CON COMPRAS DE DISCOS-->
-        <p:dialog id="modalDiscos" widgetVar="comprasDiscosDialog" modal="true" resizable="false" draggable="false">
-            <p:dataTable value="#{usuario.discos}" var="disco">
+        <p:dialog id="modalDiscos" widgetVar="comprasDiscosDialog" 
+                  modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
+            <p:dataTable value="#{usuario.discos}" var="disco" style="text-align: center">
+                <f:facet name="header">
+                    Discos Comprados
+                </f:facet>
+
                 <p:column headerText="Genero">
                     <h:outputText value="#{disco.genero}" /> 
                 </p:column>
@@ -47,7 +63,7 @@
                         <f:convertNumber type="currency" currencySymbol="$"/>
                     </h:outputText> 
                 </p:column>
-                
+
                 <p:column headerText="Fecha de Compra">
                     <h:outputText value="#{disco.fechaCompra}" /> 
                 </p:column>
@@ -55,8 +71,13 @@
         </p:dialog>
 
         <!--MODAL CON COMPRAS DE CANCIONES-->
-        <p:dialog id="modalCanciones" widgetVar="comprasCancionesDialog" modal="true" resizable="false" draggable="false">
-            <p:dataTable value="#{usuario.canciones}" var="cancion">
+        <p:dialog id="modalCanciones" widgetVar="comprasCancionesDialog" 
+                  modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
+            <p:dataTable value="#{usuario.canciones}" var="cancion" style="text-align: center">
+                <f:facet name="header">
+                    Canciones Compradas
+                </f:facet>
+
                 <p:column headerText="Genero">
                     <h:outputText value="#{cancion.genero}" /> 
                 </p:column>
@@ -78,7 +99,7 @@
                         <f:convertNumber type="currency" currencySymbol="$"/>
                     </h:outputText> 
                 </p:column>
-                
+
                 <p:column headerText="Fecha de Compra">
                     <h:outputText value="#{cancion.fechaCompra}" /> 
                 </p:column>

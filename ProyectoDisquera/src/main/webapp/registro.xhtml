@@ -9,29 +9,33 @@
     <h:body>
         <h:form id="form">
             <p:growl id="msg"/>
-            <h:panelGrid id="PG_Grid" columns="2" cellpadding="5">
-                
-                <p:outputLabel value="Nombre: " for="IT_Nombre"/>
-                <p:inputText id="IT_Nombre" value="${registro.nombre}" required="true" type="text"/>
-                
-                <p:outputLabel value="Apellido: " for="IT_Apellido"/>
-                <p:inputText id="IT_Apellido" value="${registro.apellido}" required="true" type="text"/>
-                
-                <p:outputLabel value="Username: " for="IT_Username"/>
-                <p:inputText id="IT_Username" value="${registro.username}" required="true" type="text"/>
-                
-                <p:outputLabel value="Contraseña: " for="IT_Contrasenia"/>
-                <p:inputText id="IT_Contrasenia" value="${registro.contrasenia}" required="true" type="password"/>
-                
-                <p:outputLabel value="Confirmar Contraseña: " for="IT_Confirmar"/>
-                <p:inputText id="IT_Confirmar" value="${registro.confirmacionContrasenia}" required="true" type="password"/>
-                
-                <p:commandButton value="REGISTRAR" validateClient="true" update="msg" action="#{registro.registrar()}"/>
-            </h:panelGrid>
+            <p:panel header="Formulario de Registro" style="margin-left: 30%; margin-right: 30%">
+                <h:panelGrid id="PG_Grid" columns="2" cellpadding="5">
+
+                    <p:outputLabel value="Nombre: " for="IT_Nombre"/>
+                    <p:inputText id="IT_Nombre" value="${registro.nombre}" required="true" type="text"/>
+
+                    <p:outputLabel value="Apellido: " for="IT_Apellido"/>
+                    <p:inputText id="IT_Apellido" value="${registro.apellido}" required="true" type="text"/>
+
+                    <p:outputLabel value="Username: " for="IT_Username"/>
+                    <p:inputText id="IT_Username" value="${registro.username}" required="true" type="text"/>
+
+                    <p:outputLabel value="Contraseña: " for="IT_Contrasenia"/>
+                    <p:inputText id="IT_Contrasenia" value="${registro.contrasenia}" required="true" type="password"/>
+
+                    <p:outputLabel value="Confirmar Contraseña: " for="IT_Confirmar"/>
+                    <p:inputText id="IT_Confirmar" value="${registro.confirmacionContrasenia}" required="true" type="password"/>
+
+                    <p:commandButton value="REGISTRAR" validateClient="true" update="msg" action="#{registro.registrar()}"/>
+                </h:panelGrid>
+            </p:panel>
         </h:form>
-        
+
         <br/>
-        <p:button value="Volver" outcome="index"/>
+        <center>
+            <p:button value="Volver" outcome="index"/>
+        </center>
     </h:body>
 </html>
 

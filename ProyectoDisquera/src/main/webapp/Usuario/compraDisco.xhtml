@@ -12,7 +12,11 @@
     <h:body>
         <h:form id="form">
             <p:growl id="msg"/>
-            <p:dataTable value="#{compraDisco.discos}" var="disco">
+            <p:dataTable value="#{compraDisco.discos}" var="disco" style="text-align: center">
+                <f:facet name="header">
+                    Discos Disponibles
+                </f:facet>
+
                 <p:column headerText="Genero">
                     <h:outputText value="#{disco.genero}" /> 
                 </p:column>
@@ -44,11 +48,19 @@
                 </p:column>
             </p:dataTable>
 
-            <p:commandButton value="Comprar" action="#{compraDisco.comprar}" update=":form:msg"/>
-
+            <center>
+                <p:commandButton value="Comprar" action="#{compraDisco.comprar}" update=":form:msg"/>
+            </center>
+            
             <!--MODAL DE CANCIONES SEGUN EL DISCO-->
-            <p:dialog id="modalCanciones" widgetVar="cancionesDialog" modal="true" resizable="false" draggable="false">
+            <p:dialog id="modalCanciones" widgetVar="cancionesDialog" modal="true" 
+                      resizable="false" draggable="false" style="margin-left: 30%; 
+                      margin-right: 30%; text-align: center">
                 <p:dataTable value="#{compraDisco.canciones}" var="cancion">
+                    <f:facet name="header">
+                        Canciones Del Disco
+                    </f:facet>
+                    
                     <p:column headerText="Nombre">
                         <h:outputText value="#{cancion.nombre}" /> 
                     </p:column>
