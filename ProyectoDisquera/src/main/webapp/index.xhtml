@@ -4,18 +4,30 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-       <title>Disquera</title>
+        <title>Disquera</title>
     </h:head>
     <h:body>
-        
+
         <h:form id="form">
             <p:growl id="msg"/>
-            <p:inputText value="#{index.username}"/>
-            <p:inputText value="#{index.contrasenia}" type="password"/>
-            <p:commandButton value="Login" action="#{index.iniciarSesion()}" update=":form"/>
+            <p:panel header="Formulario de Login" style="margin-left: 30%; margin-right: 30%; margin-top: 10%">
+                <h:panelGrid id="PG_Grid" columns="2" cellpadding="5">
+
+                    <p:outputLabel value="Username: " for="IT_Username"/>
+                    <p:inputText id="IT_Username" value="${index.username}" required="true" type="text"/>
+
+                    <p:outputLabel value="Contraseña: " for="IT_Contrasenia"/>
+                    <p:inputText id="IT_Contrasenia" value="${index.contrasenia}" required="true" type="password"/>
+
+                    <p:commandButton value="Login" action="#{index.iniciarSesion}" update="msg,PG_Grid"/>
+                </h:panelGrid>
+            </p:panel>
         </h:form>
-        
-        <p:button value="Ir al registro" icon="pi pi-user-plus" outcome="registro"/>
+
+        <br/>
+        <center>
+            <p:button value="Ir al registro" outcome="registro"/>
+        </center>
     </h:body>
 </html>
 

@@ -10,6 +10,7 @@ import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -19,7 +20,9 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class Registro implements Serializable{
     private UUsuario usuario;
+    @Pattern(regexp="^[a-zA-Z]*$")
     private String nombre;
+    @Pattern(regexp="^[a-zA-Z]*$")
     private String apellido;
     private String username;
     private String contrasenia;

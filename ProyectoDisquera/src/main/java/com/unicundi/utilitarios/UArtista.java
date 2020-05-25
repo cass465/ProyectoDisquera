@@ -47,7 +47,7 @@ public class UArtista implements Serializable {
         this.genero = genero;
         this.estado= estado;
     }
-
+    
     public int getId() {
         return id;
     }

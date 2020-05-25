@@ -10,13 +10,101 @@
         <title>Usuario</title>
     </h:head>
     <h:body>
-        <h:form>
-            <p:commandButton value="Cerrar Sesión" class="fa fa-arrow-left fa-3x"  action="#{index.cerrarSesionUsuario}"/>
-        </h:form>
-        <h:panelGrid id="PG_Grid" columns="2" cellpadding="5">
-            <p:button value="COMPRAR DISCOS" outcome="compraDisco"/>
-            <p:button value="COMPRAR CANCIONES" outcome="compraCancion"/>
-        </h:panelGrid>
+        <center>
+            <p:outputLabel value="#{usuario.username}" style="font-size: 200%"/>
+            <h:form>
+                <p:commandButton value="Cerrar Sesión" action="#{index.cerrarSesionUsuario}"/>
+            </h:form>
+        </center>
+
+        <br/>
+        <p:panel>
+            <h:panelGrid id="PG_Grid" columns="3" cellpadding="5">
+                <p:button value="COMPRAR DISCOS" outcome="compraDisco" style="font-size: 200%; margin-left: 30%"/>
+                <p:button value="COMPRAR CANCIONES" outcome="compraCancion" style="font-size: 200%; margin-left: 30%"/>
+                <h:graphicImage value="Guitar.jpg" style="width: 70%; margin-left: 30%"/>
+            </h:panelGrid>
+
+            <h:form>
+                <p:commandButton value="DISCOS COMPRADOS" onclick="PF('comprasDiscosDialog').show();"/>
+                <p:commandButton value="CANCIONES COMPRADAS" onclick="PF('comprasCancionesDialog').show();"/>
+            </h:form>
+        </p:panel>
+
+        <br/>
+
+
+        <!--MODAL CON COMPRAS DE DISCOS-->
+        <p:dialog id="modalDiscos" widgetVar="comprasDiscosDialog" 
+                  modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
+            <p:dataTable value="#{usuario.discos}" var="disco" style="text-align: center">
+                <f:facet name="header">
+                    Discos Comprados
+                </f:facet>
+
+                <p:column headerText="Genero">
+                    <h:outputText value="#{disco.genero}" /> 
+                </p:column>
+
+                <p:column headerText="Artista">
+                    <h:outputText value="#{disco.nombreCompletoArtista}" /> 
+                </p:column>
+
+                <p:column headerText="Nombre de Disco">
+                    <h:outputText value="#{disco.disco}" /> 
+                </p:column>
+
+                <p:column headerText="N° Canciones">
+                    <h:outputText value="#{disco.numeroCanciones}" /> 
+                </p:column>
+
+                <p:column headerText="Precio de Compora">
+                    <h:outputText value="#{disco.valorCompra}">
+                        <f:convertNumber type="currency" currencySymbol="$"/>
+                    </h:outputText> 
+                </p:column>
+
+                <p:column headerText="Fecha de Compra">
+                    <h:outputText value="#{disco.fechaCompra}" /> 
+                </p:column>
+            </p:dataTable>
+        </p:dialog>
+
+        <!--MODAL CON COMPRAS DE CANCIONES-->
+        <p:dialog id="modalCanciones" widgetVar="comprasCancionesDialog" 
+                  modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
+            <p:dataTable value="#{usuario.canciones}" var="cancion" style="text-align: center">
+                <f:facet name="header">
+                    Canciones Compradas
+                </f:facet>
+
+                <p:column headerText="Genero">
+                    <h:outputText value="#{cancion.genero}" /> 
+                </p:column>
+
+                <p:column headerText="Artista">
+                    <h:outputText value="#{cancion.nombreCompletoArtista}" /> 
+                </p:column>
+
+                <p:column headerText="Nombre de Cancion">
+                    <h:outputText value="#{cancion.cancion}" /> 
+                </p:column>
+
+                <p:column headerText="Duración">
+                    <h:outputText value="#{cancion.duracion}" /> 
+                </p:column>
+
+                <p:column headerText="Precio de Compora">
+                    <h:outputText value="#{cancion.valorCompra}">
+                        <f:convertNumber type="currency" currencySymbol="$"/>
+                    </h:outputText> 
+                </p:column>
+
+                <p:column headerText="Fecha de Compra">
+                    <h:outputText value="#{cancion.fechaCompra}" /> 
+                </p:column>
+            </p:dataTable>
+        </p:dialog>
     </h:body>
 </html>
 

@@ -5,41 +5,81 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <!--Valida que la sesion exista antes de cargar la pagina (renderizar)-->
-    <f:event listener="#{index.validarSesionAdministrador}" type="preRenderView" />
+    <f:event listener="#{index.validarSesionUsuario}" type="preRenderView" />
     <h:head>
         <title>Comprar Discos</title>
     </h:head>
     <h:body>
         <h:form id="form">
             <p:growl id="msg"/>
-            <p:dataTable value="#{compraDisco.discos}" var="disco">
+            <p:dataTable value="#{compraDisco.discos}" var="disco" style="text-align: center">
+                <f:facet name="header">
+                    Discos Disponibles
+                </f:facet>
+
+                <p:column headerText="Genero">
+                    <h:outputText value="#{disco.genero}" /> 
+                </p:column>
+
+                <p:column headerText="Artista">
+                    <h:outputText value="#{disco.nombreCompletoArtista}" /> 
+                </p:column>
+
                 <p:column headerText="Nombre">
                     <h:outputText value="#{disco.nombre}" /> 
                 </p:column>
-                
+
                 <p:column headerText="N° Canciones">
                     <h:outputText value="#{disco.numeroCanciones}" /> 
                 </p:column>
-                
+
                 <p:column headerText="Precio">
                     <h:outputText value="#{disco.precio}">
                         <f:convertNumber type="currency" currencySymbol="$"/>
                     </h:outputText> 
                 </p:column>
-                
+
                 <p:column headerText="Ver Canciones">
-                    <p:commandButton icon="pi pi-bars"/>
+                    <p:commandButton icon="pi pi-bars" actionListener="#{compraDisco.buscarCancionesPorDisco(disco)}" update=":form:modalCanciones"/>
                 </p:column>
-                
+
                 <p:column headerText="Comprar">
                     <h:selectBooleanCheckbox value="#{disco.seleccionado}"/>
                 </p:column>
             </p:dataTable>
+
+            <center>
+                <p:commandButton value="Comprar" action="#{compraDisco.comprar}" update=":form:msg"/>
+            </center>
             
-            <p:commandButton value="Comprar" action="#{compraDisco.comprar}" update=":form:msg"/>
+            <!--MODAL DE CANCIONES SEGUN EL DISCO-->
+            <p:dialog id="modalCanciones" widgetVar="cancionesDialog" modal="true" 
+                      resizable="false" draggable="false" style="margin-left: 30%; 
+                      margin-right: 30%; text-align: center">
+                <p:dataTable value="#{compraDisco.canciones}" var="cancion">
+                    <f:facet name="header">
+                        Canciones Del Disco
+                    </f:facet>
+                    
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{cancion.nombre}" /> 
+                    </p:column>
+
+                    <p:column headerText="Duracion">
+                        <h:outputText value="#{cancion.duracion}" /> 
+                    </p:column>
+
+                    <p:column headerText="Precio Unitario">
+                        <h:outputText value="#{cancion.precio}">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </h:outputText> 
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
         </h:form>
-        
-        <p:button value="Volver" icon="pi pi-home" outcome="usuario"/>
+
+        <br/>
+        <p:button value="Volver" outcome="usuario"/>
     </h:body>
 </html>
 
