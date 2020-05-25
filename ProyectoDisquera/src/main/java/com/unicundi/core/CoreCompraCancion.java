@@ -11,6 +11,7 @@ import com.unicundi.utilitarios.UCompraCancion;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -32,5 +33,10 @@ public class CoreCompraCancion implements Serializable {
 
         FacesMessage mensaje = new FacesMessage("CANCIÓN COMPRADA CON ÉXITO");
         FacesContext.getCurrentInstance().addMessage(null, mensaje);
+    }
+    
+    public List<UCompraCancion> listar(){
+        UUsuario usuario = (UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        return new DAOCompraCancion().listarPorUsuario(usuario);
     }
 }

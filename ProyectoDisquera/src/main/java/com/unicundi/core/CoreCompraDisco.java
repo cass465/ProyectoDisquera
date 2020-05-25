@@ -43,4 +43,9 @@ public class CoreCompraDisco implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
         }
     }
+    
+    public List<UCompraDisco> listar(){
+        UUsuario usuario = (UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        return new DAOCompraDisco().listarPorUsuario(usuario);
+    }
 }

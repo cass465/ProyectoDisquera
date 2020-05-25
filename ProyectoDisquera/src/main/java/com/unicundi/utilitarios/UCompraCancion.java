@@ -18,6 +18,11 @@ public class UCompraCancion implements Serializable{
     private int idCancion;
     private float valorCompra;
     private Date fechaCompra;
+    //
+    private String genero;
+    private String nombreCompletoArtista;
+    private String cancion;
+    private String duracion;
 
     public UCompraCancion(int id, int idUsuario, int idCancion, float valorCompra, Date fechaCompra) {
         this.id = id;
@@ -27,6 +32,15 @@ public class UCompraCancion implements Serializable{
         this.fechaCompra = fechaCompra;
     }
 
+    public UCompraCancion(float valorCompra, Date fechaCompra, String genero, String nombreCompletoArtista, String cancion, String duracion) {
+        this.valorCompra = valorCompra;
+        this.fechaCompra = fechaCompra;
+        this.genero = genero;
+        this.nombreCompletoArtista = nombreCompletoArtista;
+        this.cancion = cancion;
+        this.duracion = duracion;
+    }
+    
     public int getId() {
         return id;
     }
@@ -65,6 +79,38 @@ public class UCompraCancion implements Serializable{
 
     public void setFechaCompra(Date fechaCompra) {
         this.fechaCompra = fechaCompra;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getNombreCompletoArtista() {
+        return nombreCompletoArtista;
+    }
+
+    public void setNombreCompletoArtista(String nombreCompletoArtista) {
+        this.nombreCompletoArtista = nombreCompletoArtista;
+    }
+
+    public String getCancion() {
+        return cancion;
+    }
+
+    public void setCancion(String cancion) {
+        this.cancion = cancion;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
     }
     
 }
