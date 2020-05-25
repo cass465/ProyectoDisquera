@@ -16,14 +16,16 @@ public class UArtista implements Serializable{
     private String nombre;
     private String apellido;
     private String genero;
+    private boolean estado;
 
-    public UArtista(int id, String nombre, String apellido, String genero) {
+    public UArtista(int id, String nombre, String apellido, String genero, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
+        this.estado = estado;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -54,6 +56,14 @@ public class UArtista implements Serializable{
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
 }

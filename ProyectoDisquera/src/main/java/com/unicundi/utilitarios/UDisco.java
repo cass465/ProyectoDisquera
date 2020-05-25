@@ -17,17 +17,19 @@ public class UDisco implements Serializable{
     private int numeroCanciones;
     private float precio;
     private int idArtista;
+    private boolean estado;
     //
     private boolean seleccionado;
     private String nombreCompletoArtista;
     private String genero;
 
-    public UDisco(int id, String nombre, int numeroCanciones, float precio, int idArtista) {
+    public UDisco(int id, String nombre, int numeroCanciones, float precio, int idArtista, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.numeroCanciones = numeroCanciones;
         this.precio = precio;
         this.idArtista = idArtista;
+        this.estado = estado;
     }
 
     public UDisco(int id, String nombre, int numeroCanciones, float precio, int idArtista, String nombreCompletoArtista, String genero) {
@@ -82,6 +84,14 @@ public class UDisco implements Serializable{
         this.idArtista = idArtista;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     public boolean isSeleccionado() {
         return seleccionado;
     }
