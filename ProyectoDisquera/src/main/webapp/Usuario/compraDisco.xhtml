@@ -58,14 +58,16 @@
                     </p:column>
 
                     <p:column headerText="Precio Unitario">
-                        <h:outputText value="#{cancion.precio}" /> 
+                        <h:outputText value="#{cancion.precio}">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </h:outputText> 
                     </p:column>
                 </p:dataTable>
             </p:dialog>
         </h:form>
 
-        <p:button value="Volver" icon="pi pi-home" outcome="usuario"/>
-
+        <br/>
+        <p:button value="Volver" outcome="usuario"/>
     </h:body>
 </html>
 

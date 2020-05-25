@@ -28,7 +28,7 @@ public class DAODisco implements Serializable{
                 String query = "SELECT artista.genero, artista.nombre AS nombre_artista, artista.apellido AS apellido_artista, disco.* "
                         + "FROM musica.artista, musica.disco "
                         + "WHERE disco.id_artista = artista.id "
-                        + "AND estado = true";
+                        + "AND disco.estado = true";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
