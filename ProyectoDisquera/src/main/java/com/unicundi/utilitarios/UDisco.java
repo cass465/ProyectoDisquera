@@ -6,26 +6,51 @@
 package com.unicundi.utilitarios;
 
 import java.io.Serializable;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author cass465
  */
-public class UDisco implements Serializable{
+public class UDisco implements Serializable {
+
     private int id;
+
+    @Pattern(regexp = "^([a-zA-Z0-9])*$")
+    @Size(min = 2, max = 20)
     private String nombre;
+
     private int numeroCanciones;
-    private float precio;
+
+    @Min(1000)
+    @Max(10000000)
+    private int precio;
+
+    @NotNull
     private int idArtista;
     //
-    private boolean seleccionado;
+    @NotNull
+    private boolean estado;
 
-    public UDisco(int id, String nombre, int numeroCanciones, float precio, int idArtista) {
+    private boolean seleccionado;
+    private String nombreArtista;
+
+    public UDisco() {
+
+    }
+
+    public UDisco(int id, String nombre, int numeroCanciones, int precio, int idArtista, boolean estado, String nombreArtista) {
         this.id = id;
         this.nombre = nombre;
         this.numeroCanciones = numeroCanciones;
         this.precio = precio;
         this.idArtista = idArtista;
+        this.estado = estado;
+        this.nombreArtista=nombreArtista;
     }
 
     public int getId() {
@@ -52,11 +77,11 @@ public class UDisco implements Serializable{
         this.numeroCanciones = numeroCanciones;
     }
 
-    public float getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
@@ -68,6 +93,14 @@ public class UDisco implements Serializable{
         this.idArtista = idArtista;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     public boolean isSeleccionado() {
         return seleccionado;
     }
@@ -75,5 +108,14 @@ public class UDisco implements Serializable{
     public void setSeleccionado(boolean seleccionado) {
         this.seleccionado = seleccionado;
     }
+
+    public String getNombreArtista() {
+        return nombreArtista;
+    }
+
+    public void setNombreArtista(String nombreArtista) {
+        this.nombreArtista = nombreArtista;
+    }
     
+
 }

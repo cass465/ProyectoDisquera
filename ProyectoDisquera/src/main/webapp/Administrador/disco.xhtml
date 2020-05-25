@@ -3,20 +3,174 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <!--Valida que la sesion exista antes de cargar la pagina (renderizar)-->
     <f:event listener="#{index.validarSesionAdministrador}" type="preRenderView" />
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>  
-	
-	<ui:composition template="administrador.xhtml">
-		<ui:define name="contenido">
-			<h1>Contenido disco</h1>
-		</ui:define>
-	</ui:composition>
-	
+
+        <ui:composition template="administrador.xhtml">
+            <ui:define name="contenido">
+                <h:form id="for1">                    
+
+                    <p:panel header="" style="margin-bottom:5px; ">
+                        <h:panelGrid columns="2" cellpadding="">  
+                            <h:outputLabel styleClass="out1" value="DISCO"></h:outputLabel>                       
+                            <h:outputLabel styleClass="out2" value="CANCION"></h:outputLabel>
+                            <style>
+                                .out1{
+                                    margin-left: 300px;                              
+                                    color: deepskyblue;
+                                    font-weight: bold;
+                                    font-size: 20px;
+                                }
+                            </style>
+                            <style>
+                                .out2{
+                                    margin-left: 420px;                              
+                                    color: deepskyblue;
+                                    font-weight: bold;
+                                    font-size: 20px;
+                                }
+                            </style>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" cellpadding=""  >  
+
+                            <h:panelGrid columns="3" cellpadding="5" style="margin-left: 100px">
+                                <p:outputLabel for="@next" value="NOMBRE" />
+                                <p:inputText value="#{disco.disco.nombre}" required="true"/>
+                                <p:message for="@previous" />
+
+                                <p:outputLabel for="@next" value="PRECIO" />
+                                <p:inputText value="#{disco.disco.precio}" required="true"/>
+                                <p:message for="@previous" />
+                                
+                               
+
+                                <p:outputLabel for="@next" value="ARTISTA" />
+                                <h:selectOneMenu value="#{disco.disco.idArtista}" style="width:100%">
+                                    <f:selectItems value="#{disco.artista}" var="art" itemLabel="#{art.nombre}" itemValue="#{art.id}" />
+                                </h:selectOneMenu><p:message for="@previous" />  
+                            </h:panelGrid>  
+
+
+
+                            <h:panelGrid columns="3" cellpadding="5" style="margin-left:100px">
+                                <p:outputLabel for="@next" value="NOMBRE" />
+                                <p:inputText value="#{disco.cancion.nombre}" required="true"/>
+                                <p:message for="@previous" />
+
+                                <p:outputLabel for="@next" value="DURACION" />
+                                <p:inputText value="#{disco.cancion.duracion}" required="true"/>
+                                <p:message for="@previous" />
+
+                                <p:outputLabel for="@next" value="PRECIO" />
+                                <p:inputText value="#{disco.cancion.precio}" required="true"/>
+                                <p:message for="@previous" />
+
+                            </h:panelGrid>  
+
+
+
+
+
+                        </h:panelGrid>
+                        <p:commandButton value="REGISTRAR" ajax="false" 
+                                         icon="ui-icon-check" styleClass="center" update=""
+                                         validateClient="true" action="#{disco.registrar()}"/>
+                        <style>
+                            .center{
+                                margin-left: 470px;
+                            }
+                        </style>
+
+                    </p:panel>
+                </h:form>
+
+                <h:form id="for">
+
+                    <p:outputPanel id="artistas">
+
+                       <p:growl id="msgs" showDetail="true"/>
+
+                        <p:dataTable id="table1" value="#{disco.discos}" var ="tblDisco" editable="true" style="margin-bottom:20px" >
+                            <f:facet name="header">
+                                DISCOS
+                            </f:facet>
+
+                            <p:ajax event="rowEdit" listener="#{disco.onRowEdit}" update=":for:msgs" /><font></font>
+                            <p:ajax event="rowEditCancel" listener="#{disco.onRowCancel}" update=":for:msgs" /><font></font>
+
+                            <p:column headerText="NOMBRE">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{tblDisco.nombre}" /></f:facet>
+                                    <f:facet name="input"><p:inputText  value="#{tblDisco.nombre}" style="width:100%">
+                                        </p:inputText>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="PRECIO">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{tblDisco.precio}" /></f:facet>
+                                    <f:facet name="input"><p:inputText  value="#{tblDisco.precio}" style="width:100%">
+                                        </p:inputText>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>     
+                            
+                            <p:column headerText="N° CANCIONES">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{tblDisco.numeroCanciones}" /></f:facet>
+                                    <f:facet name="input"><p:inputText disabled="true"  value="#{tblDisco.numeroCanciones}" style="width:100%">
+                                        </p:inputText>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>  
+
+                            <p:column headerText="ARTISTA">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{tblDisco.nombreArtista}"  /></f:facet>
+                                    <f:facet name="input"> <h:selectOneMenu value="#{tblDisco.nombreArtista}" style="width:100%">
+                                            <f:selectItems value="#{disco.artista}" var="art" itemLabel="#{art.nombre}" itemValue="#{art.nombre}" />
+                                        </h:selectOneMenu><p:message for="@previous" />  
+                                       
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="ESTADO">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{tblDisco.estado}" /></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectOneRadio value="#{tblDisco.estado}" required="true">
+                                            <f:selectItem itemValue="true" itemLabel="Activo"/>
+                                            <f:selectItem itemValue="false" itemLabel="Inactivo"/>
+                                        </p:selectOneRadio>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="MODIFICAR">
+                                <p:rowEditor />
+                            </p:column>
+
+
+
+
+                        </p:dataTable>
+
+                    </p:outputPanel>
+                </h:form>
+
+
+
+            </ui:define>
+        </ui:composition>
+
     </h:body>
 </html>
 
