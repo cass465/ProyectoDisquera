@@ -119,38 +119,25 @@ public class DAODisco implements Serializable {
         return nombre;
     }
 
-    public int obtenerPrecio(int id, String nombre, int tipo) {
-        int precio = 0;
+     public boolean obtenerEstado(String nombre) {
+        boolean estado=true;
 
         Connection conexion = new BDConector().open();
         if (conexion != null) {
-            if (tipo == 1) {
-                try {
-                    String query = "SELECT * FROM musica.disco WHERE  id='" + id + "';";
-                    PreparedStatement stmt = conexion.prepareStatement(query);
-                    ResultSet resultado = stmt.executeQuery();
-                    while (resultado.next()) {
-                        precio = resultado.getInt("precio");
-                    }
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+            try {
+
+                String query = "SELECT * FROM musica.disco  WHERE  nombre='" + nombre + "';";
+                PreparedStatement stmt = conexion.prepareStatement(query);
+                ResultSet resultado = stmt.executeQuery();
+                while (resultado.next()) {
+                    estado = resultado.getBoolean("estado");
                 }
-            }else{
-                 try {
-                    String query = "SELECT * FROM musica.disco WHERE  nombre='" + nombre + "';";
-                    PreparedStatement stmt = conexion.prepareStatement(query);
-                    ResultSet resultado = stmt.executeQuery();
-                    while (resultado.next()) {
-                        precio = resultado.getInt("precio");
-                    }
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
-        return precio;
+        return estado;
     }
 
     public UDisco obtenerExistente(UDisco disco) {
@@ -222,7 +209,26 @@ public class DAODisco implements Serializable {
         if (conexion != null) {
             try {
 
-                String query = "UPDATE musica.disco SET n_canciones=(SELECT  COUNT(id_disco)  FROM musica.cancion where cancion.id_disco=disco.id);";
+                String query = "UPDATE musica.disco SET n_canciones=(SELECT  COUNT(id_disco)  "
+                        + "     FROM musica.cancion "
+                        + "     WHERE cancion.id_disco=disco.id AND cancion.estado=true);";
+                PreparedStatement stmt = conexion.prepareStatement(query);
+                stmt.executeUpdate();
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void actualizarPrecio() {
+        Connection conexion = new BDConector().open();
+
+        if (conexion != null) {
+            try {	
+                String query = "UPDATE musica.disco SET precio=(SELECT  SUM(precio)-(SUM(precio)*0.1) "
+                        + "     FROM musica.cancion "
+                        + "     WHERE cancion.id_disco=disco.id AND cancion.estado=true );";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 stmt.executeUpdate();
                 stmt.close();

@@ -43,12 +43,6 @@
                                 <p:outputLabel for="@next" value="NOMBRE" />
                                 <p:inputText value="#{disco.disco.nombre}" required="true"/>
 
-
-                                <p:outputLabel for="@next" value="PRECIO" />
-                                <p:inputText value="#{disco.disco.precio}" required="true"/>
-
-
-
                                 <p:outputLabel for="@next" value="ARTISTA" />
                                 <h:selectOneMenu value="#{disco.disco.idArtista}" style="width:100%">
                                     <f:selectItems value="#{disco.artista}" var="art" itemLabel="#{art.nombre}" itemValue="#{art.id}" />
@@ -68,7 +62,7 @@
 
                                 <p:outputLabel for="@next" value="PRECIO" />
                                 <p:inputText value="#{disco.cancion.precio}" required="true"/>
-                                
+
 
                             </h:panelGrid>  
 
@@ -118,7 +112,7 @@
                             <p:column headerText="PRECIO">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblDisco.precio}" /></f:facet>
-                                    <f:facet name="input"><p:inputText  value="#{tblDisco.precio}" style="width:100%">
+                                    <f:facet name="input"><p:inputText  value="#{tblDisco.precio}" disabled="true"  style="width:100%">
                                         </p:inputText>
                                     </f:facet>
                                 </p:cellEditor>
@@ -137,6 +131,8 @@
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblDisco.nombreArtista}"  /></f:facet>
                                     <f:facet name="input"> <h:selectOneMenu value="#{tblDisco.nombreArtista}" style="width:100%">
+                                            <f:selectItem  itemLabel="#{tblDisco.nombreArtista}" itemValue="#{tblDisco.nombreArtista}" />
+
                                             <f:selectItems value="#{disco.artista}" var="art" itemLabel="#{art.nombre}" itemValue="#{art.nombre}" />
                                         </h:selectOneMenu><p:message for="@previous" />  
 

@@ -99,6 +99,8 @@
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblCancion.nombreDisco}"  /></f:facet>
                                     <f:facet name="input"> <h:selectOneMenu value="#{tblCancion.nombreDisco}" style="width:100%">
+                                             <f:selectItem  itemLabel="#{tblCancion.nombreDisco}" itemValue="#{tblCancion.nombreDisco}" />
+
                                             <f:selectItems value="#{cancion.discos}" var="disc" itemLabel="#{disc.nombre}" itemValue="#{disc.nombre}" />
                                         </h:selectOneMenu><p:message for="@previous" />  
 

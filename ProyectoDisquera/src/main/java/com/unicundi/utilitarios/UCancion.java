@@ -24,7 +24,7 @@ public class UCancion implements Serializable {
     @Size(min = 2, max = 20)
     private String nombre;
 
-    @Pattern(regexp = "^[0-9]+([:])?([0-9]+)?$")
+    @Pattern(regexp = "^([2-9]):[0-5][0-9]$", message="Duracion no valida debe estar entre 2:00 a 9:00 minutos")
     private String duracion;
 
     @Min(1000)

@@ -106,6 +106,29 @@ public class DAOArtista implements Serializable {
         }
         return nombre;
     }
+    
+    public boolean obtenerEstado(String nombre) {
+        boolean estado=true;
+
+        Connection conexion = new BDConector().open();
+        if (conexion != null) {
+            try {
+
+                String query = "SELECT * FROM musica.artista  WHERE CONCAT(CONCAT(nombre, ' '), apellido) ='" + nombre + "';";
+                PreparedStatement stmt = conexion.prepareStatement(query);
+                ResultSet resultado = stmt.executeQuery();
+                while (resultado.next()) {
+                    
+                    estado = resultado.getBoolean("estado");
+                }
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("ESTADO:"+ estado);
+        return estado;
+    }
 
     public UArtista obtenerExistente(UArtista artista) {
        UArtista artistaAux= new UArtista();
