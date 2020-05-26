@@ -69,7 +69,7 @@ public class DAODisco implements Serializable {
 
         return discos;
     }
-    
+
     public ArrayList<UDisco> listarActivos() {
         ArrayList<UDisco> discos = new ArrayList<UDisco>();
         Connection conexion = new BDConector().open();
@@ -118,9 +118,43 @@ public class DAODisco implements Serializable {
         }
         return nombre;
     }
-    
+
+    public int obtenerPrecio(int id, String nombre, int tipo) {
+        int precio = 0;
+
+        Connection conexion = new BDConector().open();
+        if (conexion != null) {
+            if (tipo == 1) {
+                try {
+                    String query = "SELECT * FROM musica.disco WHERE  id='" + id + "';";
+                    PreparedStatement stmt = conexion.prepareStatement(query);
+                    ResultSet resultado = stmt.executeQuery();
+                    while (resultado.next()) {
+                        precio = resultado.getInt("precio");
+                    }
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                 try {
+                    String query = "SELECT * FROM musica.disco WHERE  nombre='" + nombre + "';";
+                    PreparedStatement stmt = conexion.prepareStatement(query);
+                    ResultSet resultado = stmt.executeQuery();
+                    while (resultado.next()) {
+                        precio = resultado.getInt("precio");
+                    }
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return precio;
+    }
+
     public UDisco obtenerExistente(UDisco disco) {
-       UDisco discoAux = new UDisco();
+        UDisco discoAux = new UDisco();
 
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -130,7 +164,7 @@ public class DAODisco implements Serializable {
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
-                   discoAux = new UDisco(resultado.getInt("id"),
+                    discoAux = new UDisco(resultado.getInt("id"),
                             resultado.getString("nombre"),
                             resultado.getInt("n_canciones"),
                             resultado.getInt("precio"),
@@ -145,18 +179,17 @@ public class DAODisco implements Serializable {
         }
         return discoAux;
     }
-    
+
     public void modificar(UDisco disco) {
 
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {
-           
-                       
+
                 String query = "UPDATE musica.disco SET nombre='" + disco.getNombre()
                         + "', n_canciones= '" + 2
                         + "', precio='" + disco.getPrecio()
-                        + "', id_artista= (SELECT id  from musica.artista where CONCAT(CONCAT(nombre, ' '), apellido) = '" + disco.getNombreArtista() 
+                        + "', id_artista= (SELECT id  from musica.artista where CONCAT(CONCAT(nombre, ' '), apellido) = '" + disco.getNombreArtista()
                         + "') , estado='" + disco.isEstado()
                         + "' WHERE  id='" + disco.getId() + "';";
                 PreparedStatement stmt = conexion.prepareStatement(query);
@@ -182,13 +215,13 @@ public class DAODisco implements Serializable {
             }
         }
     }
-    
+
     public void actualizarNCanciones() {
         Connection conexion = new BDConector().open();
-        
+
         if (conexion != null) {
-            try {               
-                
+            try {
+
                 String query = "UPDATE musica.disco SET n_canciones=(SELECT  COUNT(id_disco)  FROM musica.cancion where cancion.id_disco=disco.id);";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 stmt.executeUpdate();
@@ -198,8 +231,5 @@ public class DAODisco implements Serializable {
             }
         }
     }
-    
-    
-     
 
 }
