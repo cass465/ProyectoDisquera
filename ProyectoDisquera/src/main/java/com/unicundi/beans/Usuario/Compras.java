@@ -5,19 +5,17 @@
  */
 package com.unicundi.beans.Usuario;
 
-import com.unicundi.beans.Index;
-import com.unicundi.core.Usuario.CoreCompraCancion;
-import com.unicundi.core.Usuario.CoreCompraDisco;
+import com.unicundi.core.Usuario.CoreCompras;
 import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -34,19 +32,26 @@ public class Compras implements Serializable {
     private List<UCancion> cancionesAgregadas;
 
     private List<UCancion> cancionesDisco;
+    private int precioTotal;
 
     /**
      * Creates a new instance of Compras
      */
     public Compras() {
-        this.discosDisponibles = new CoreCompraDisco().listarDiscosDisponibles();
-        this.cancionesDisponibles = new CoreCompraCancion().listarCancionesDisponibles();
+        
+    }
+    
+    @PostConstruct
+    public void cargar(){
+        this.discosDisponibles = new CoreCompras().listarDiscosDisponibles();
+        this.cancionesDisponibles = new CoreCompras().listarCancionesDisponibles();
         this.discosAgregados = new ArrayList<UDisco>();
         this.cancionesAgregadas = new ArrayList<UCancion>();
+        this.precioTotal = 0;
     }
 
     public void buscarCancionesPorDisco(UDisco disco) {
-        this.cancionesDisco = new CoreCompraDisco().buscarPorDisco(disco.getId());
+        this.cancionesDisco = new CoreCompras().buscarPorDisco(disco.getId());
         //Abrir modal de canciones
         RequestContext.getCurrentInstance().execute("PF('cancionesDialog').show();");
     }
@@ -74,11 +79,15 @@ public class Compras implements Serializable {
         //Despues de sacar las canciones se agrega el disco
         this.discosAgregados.add(disco);
         this.discosDisponibles.remove(disco);
+        
+        this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
 
     public void desAgregarDisco(UDisco disco) {
         this.discosDisponibles.add(disco);
         this.discosAgregados.remove(disco);
+        
+        this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
 
     public void agregarCancion(UCancion cancion) {
@@ -96,11 +105,20 @@ public class Compras implements Serializable {
             this.cancionesAgregadas.add(cancion);
             this.cancionesDisponibles.remove(cancion);
         }
+        
+        this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
 
     public void desAgregarCancion(UCancion cancion) {
         this.cancionesDisponibles.add(cancion);
         this.cancionesAgregadas.remove(cancion);
+        
+        this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
+    }
+    
+    public void comprar(){
+        new CoreCompras().registrar(discosAgregados, cancionesAgregadas);
+        cargar();
     }
 
     public List<UDisco> getDiscosDisponibles() {
@@ -143,4 +161,12 @@ public class Compras implements Serializable {
         this.cancionesDisco = cancionesDisco;
     }
 
+    public int getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(int precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+    
 }

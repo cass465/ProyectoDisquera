@@ -47,7 +47,8 @@
 
                 <p:column headerText="Agregar">
                     <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarDisco(discoDisponible)}" 
-                                     update=":form:discosDisponibles,:form:discosAgregados,:form:cancionesDisponibles,:form:cancionesAgregadas,:form:msg"/>
+                                     update=":form:discosDisponibles,:form:discosAgregados,:form:cancionesDisponibles,
+                                     :form:cancionesAgregadas,:form:msg,:form:panel"/>
                 </p:column>
             </p:dataTable>
 
@@ -73,23 +74,23 @@
                     <h:outputText value="#{cancionDisponible.nombre}" /> 
                 </p:column>
 
-                <p:column headerText="Duración">
-                    <h:outputText value="#{cancionDisponible.duracion}" /> 
-                </p:column>
-
                 <p:column headerText="Precio">
                     <h:outputText value="#{cancionDisponible.precio}">
                         <f:convertNumber type="currency" currencySymbol="$"/>
                     </h:outputText> 
                 </p:column>
+                
+                <p:column headerText="Duración">
+                    <h:outputText value="#{cancionDisponible.duracion}" /> 
+                </p:column>
 
                 <p:column headerText="Agregar">
                     <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarCancion(cancionDisponible)}" 
-                                     update=":form:cancionesDisponibles,:form:cancionesAgregadas,:form:msg"/>
+                                     update=":form:cancionesDisponibles,:form:cancionesAgregadas,:form:msg,:form:panel"/>
                 </p:column>
             </p:dataTable>
 
-            <p:panel header="Elementos Agregados">
+            <p:panel id="panel" header="Elementos Agregados">
                 <!--DATA TABLE CON DISCOS AGREGADOS-->
                 <p:dataTable id="discosAgregados" value="#{compras.discosAgregados}" var="discoAgregado" style="text-align: center">
                     <f:facet name="header">
@@ -119,11 +120,13 @@
                     </p:column>
 
                     <p:column headerText="Ver Canciones">
-                        <p:commandButton icon="ui-icon-folder-open" actionListener="#{compras.buscarCancionesPorDisco(discoAgregado)}" update=":form:modalCanciones"/>
+                        <p:commandButton icon="ui-icon-folder-open" actionListener="#{compras.buscarCancionesPorDisco(discoAgregado)}" 
+                                         update=":form:modalCanciones"/>
                     </p:column>
 
                     <p:column headerText="Desagregar">
-                        <p:commandButton icon="ui-icon-plusthick" action="#{compras.desAgregarDisco(discoAgregado)}" update=":form:discosDisponibles,:form:discosAgregados"/>
+                        <p:commandButton icon="ui-icon-plusthick" action="#{compras.desAgregarDisco(discoAgregado)}" 
+                                         update=":form:discosDisponibles,:form:discosAgregados,:form:panel"/>
                     </p:column>
                 </p:dataTable>
 
@@ -149,23 +152,33 @@
                         <h:outputText value="#{cancionAgregada.nombre}" /> 
                     </p:column>
 
-                    <p:column headerText="Duración">
-                        <h:outputText value="#{cancionAgregada.duracion}" /> 
-                    </p:column>
-
                     <p:column headerText="Precio">
                         <h:outputText value="#{cancionAgregada.precio}">
                             <f:convertNumber type="currency" currencySymbol="$"/>
                         </h:outputText> 
                     </p:column>
 
+                    <p:column headerText="Duración">
+                        <h:outputText value="#{cancionAgregada.duracion}" /> 
+                    </p:column>
+                    
                     <p:column headerText="Desagregar">
-                        <p:commandButton icon="ui-icon-plusthick" action="#{compras.desAgregarCancion(cancionAgregada)}" update=":form:cancionesDisponibles,:form:cancionesAgregadas"/>
+                        <p:commandButton icon="ui-icon-plusthick" action="#{compras.desAgregarCancion(cancionAgregada)}" 
+                                         update=":form:cancionesDisponibles,:form:cancionesAgregadas,:form:panel"/>
                     </p:column>
                 </p:dataTable>
-
-                <p:outputLabel value="TOTAL: "/>
-                <p:commandButton value="COMPRAR"/>
+                
+                <br/>
+                <center>
+                    <p:outputLabel value="TOTAL: "/>
+                    <p:outputLabel value="#{compras.precioTotal}">
+                        <f:convertNumber type="currency" currencySymbol="$"/>
+                    </p:outputLabel>
+                </center>
+                
+                <center>
+                    <p:commandButton value="COMPRAR" style="margin-top: 1%" action="#{compras.comprar}" update=":form"/>
+                </center>
             </p:panel>
 
             <!--MODAL DE CANCIONES SEGUN EL DISCO DISPONIBLE-->
