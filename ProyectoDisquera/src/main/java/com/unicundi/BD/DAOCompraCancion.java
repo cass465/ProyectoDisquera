@@ -30,7 +30,9 @@ public class DAOCompraCancion implements Serializable {
             try {
                 String query = "SELECT artista.genero, artista.nombre AS nombre_artista, artista.apellido AS apellido_artista, cancion.* "
                         + "FROM musica.artista, musica.cancion, musica.disco "
-                        + "WHERE disco.id_artista = artista.id AND cancion.id_disco = disco.id;";
+                        + "WHERE disco.id_artista = artista.id "
+                        + "AND cancion.id_disco = disco.id "
+                        + "AND cancion.estado = true;";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
