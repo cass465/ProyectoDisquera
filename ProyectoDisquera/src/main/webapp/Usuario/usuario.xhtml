@@ -34,42 +34,73 @@
 
         <br/>
 
+        <h:form id="formDiscos">
+            <!--MODAL CON COMPRAS DE DISCOS-->
+            <p:dialog id="modalDiscos" widgetVar="comprasDiscosDialog" 
+                      modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
+                <p:dataTable value="#{usuario.discos}" var="discoComprado" style="text-align: center">
+                    <f:facet name="header">
+                        Discos Comprados
+                    </f:facet>
 
-        <!--MODAL CON COMPRAS DE DISCOS-->
-        <p:dialog id="modalDiscos" widgetVar="comprasDiscosDialog" 
-                  modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
-            <p:dataTable value="#{usuario.discos}" var="discoComprado" style="text-align: center">
-                <f:facet name="header">
-                    Discos Comprados
-                </f:facet>
+                    <p:column headerText="Genero">
+                        <h:outputText value="#{discoComprado.genero}" /> 
+                    </p:column>
 
-                <p:column headerText="Genero">
-                    <h:outputText value="#{discoComprado.genero}" /> 
-                </p:column>
+                    <p:column headerText="Artista">
+                        <h:outputText value="#{discoComprado.nombreCompletoArtista}" /> 
+                    </p:column>
 
-                <p:column headerText="Artista">
-                    <h:outputText value="#{discoComprado.nombreCompletoArtista}" /> 
-                </p:column>
+                    <p:column headerText="Disco">
+                        <h:outputText value="#{discoComprado.disco}" /> 
+                    </p:column>
 
-                <p:column headerText="Nombre de Disco">
-                    <h:outputText value="#{discoComprado.disco}" /> 
-                </p:column>
+                    <p:column headerText="N° Canciones">
+                        <h:outputText value="#{discoComprado.numeroCanciones}" /> 
+                    </p:column>
 
-                <p:column headerText="N° Canciones">
-                    <h:outputText value="#{discoComprado.numeroCanciones}" /> 
-                </p:column>
+                    <p:column headerText="Precio de Compra">
+                        <h:outputText value="#{discoComprado.valorCompra}">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </h:outputText> 
+                    </p:column>
 
-                <p:column headerText="Precio de Compora">
-                    <h:outputText value="#{discoComprado.valorCompra}">
-                        <f:convertNumber type="currency" currencySymbol="$"/>
-                    </h:outputText> 
-                </p:column>
+                    <p:column headerText="Fecha de Compra">
+                        <h:outputText value="#{discoComprado.fechaCompra}" /> 
+                    </p:column>
 
-                <p:column headerText="Fecha de Compra">
-                    <h:outputText value="#{discoComprado.fechaCompra}" /> 
-                </p:column>
-            </p:dataTable>
-        </p:dialog>
+                    <p:column headerText="Ver Canciones">
+                        <p:commandButton icon="ui-icon-folder-open" actionListener="#{usuario.buscarCancionesPorDisco(discoComprado)}" 
+                                         update=":formDiscos:modalCancionesDisco"/>
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+            <!--MODAL DE CANCIONES SEGUN EL DISCO COMPRADO-->
+            <p:dialog id="modalCancionesDisco" widgetVar="cancionesDiscoDialog" modal="true" 
+                      resizable="false" draggable="false" style="margin-left: 30%; 
+                      margin-right: 30%; text-align: center">
+                <p:dataTable value="#{usuario.cancionesDisco}" var="cancionDeDisco">
+                    <f:facet name="header">
+                        Canciones Del Disco
+                    </f:facet>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{cancionDeDisco.nombre}" /> 
+                    </p:column>
+
+                    <p:column headerText="Duracion">
+                        <h:outputText value="#{cancionDeDisco.duracion}" /> 
+                    </p:column>
+
+                    <p:column headerText="Precio Unitario">
+                        <h:outputText value="#{cancionDeDisco.precio}">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </h:outputText> 
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+        </h:form>
 
         <!--MODAL CON COMPRAS DE CANCIONES-->
         <p:dialog id="modalCanciones" widgetVar="comprasCancionesDialog" 
