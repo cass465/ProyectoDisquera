@@ -5,12 +5,13 @@
  */
 package com.unicundi.beans;
 
-import com.unicundi.core.CoreUsuario;
+import com.unicundi.core.Usuario.CoreUsuario;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -20,12 +21,24 @@ import javax.validation.constraints.Pattern;
 @ViewScoped
 public class Registro implements Serializable{
     private UUsuario usuario;
-    @Pattern(regexp="^[a-zA-Z]*$")
+    @Pattern(regexp="^[a-zA-Z ]*$")
+    @Size(min = 2, max = 20)
     private String nombre;
-    @Pattern(regexp="^[a-zA-Z]*$")
+    
+    @Pattern(regexp="^[a-zA-Z ]*$")
+    @Size(min = 2, max = 20)
     private String apellido;
+    
+    @Pattern(regexp="^[a-zA-Z0-9]*$")
+    @Size(min = 2, max = 20)
     private String username;
+    
+    @Pattern(regexp="^[a-zA-Z0-9]*$")
+    @Size(min = 2, max = 20)
     private String contrasenia;
+    
+    @Pattern(regexp="^[a-zA-Z0-9]*$")
+    @Size(min = 2, max = 20)
     private String confirmacionContrasenia;
     /**
      * Creates a new instance of Registro

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicundi.beans;
+package com.unicundi.beans.Usuario;
 
-import com.unicundi.core.CoreCompraCancion;
-import com.unicundi.core.CoreCompraDisco;
+import com.unicundi.core.Usuario.CoreCompras;
 import com.unicundi.utilitarios.UCompraCancion;
 import com.unicundi.utilitarios.UCompraDisco;
 import com.unicundi.utilitarios.UUsuario;
@@ -32,8 +31,8 @@ public class Usuario implements Serializable {
      */
     public Usuario(){
         this.username = ((UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsername();
-        this.discos = new CoreCompraDisco().listar();
-        this.canciones = new CoreCompraCancion().listar();
+        this.discos = new CoreCompras().listarDiscosComprados();
+        this.canciones = new CoreCompras().listarCancionesCompradas();
     }
 
     public String getUsername() {

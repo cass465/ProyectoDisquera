@@ -5,7 +5,7 @@
  */
 package com.unicundi.beans;
 
-import com.unicundi.core.CoreUsuario;
+import com.unicundi.core.Usuario.CoreUsuario;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.IOException;
 import javax.inject.Named;
@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -23,7 +25,13 @@ import javax.faces.event.ComponentSystemEvent;
 @Named(value = "index")
 @RequestScoped
 public class Index implements Serializable {
+    
+    @Pattern(regexp="^[a-zA-Z0-9]*$")
+    @Size(min = 2, max = 20)
     private String username;
+    
+    @Pattern(regexp="^[a-zA-Z0-9]*$")
+    @Size(min = 2, max = 20)
     private String contrasenia;
     private UUsuario usuarioLogueado;
     /**
