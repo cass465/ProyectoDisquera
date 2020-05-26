@@ -20,35 +20,37 @@ public class UCancion implements Serializable {
 
     private int id;
 
+    @Pattern(regexp = "^([a-zA-Z0-9])*$")
     @Size(min = 2, max = 20)
     private String nombre;
 
     @Pattern(regexp = "^[0-9]+([:])?([0-9]+)?$")
     private String duracion;
-    
+
     @Min(1000)
     @Max(10000000)
     private int precio;
-    
+
     @NotNull
     private int idDisco;
-    
+
     @NotNull
     private boolean estado;
-    
+
     private String nombreDisco;
 
-    public UCancion(){
-        
+    public UCancion() {
+
     }
+
     public UCancion(int id, String nombre, String duracion, int precio, int idDisco, boolean estado, String nombreDisco) {
         this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
         this.precio = precio;
         this.idDisco = idDisco;
-        this.estado=estado;
-        this.nombreDisco=nombreDisco;
+        this.estado = estado;
+        this.nombreDisco = nombreDisco;
     }
 
     public int getId() {
@@ -83,15 +85,13 @@ public class UCancion implements Serializable {
         this.precio = precio;
     }
 
-
-
     public int getIdDisco() {
         return idDisco;
     }
 
     public void setIdDisco(int idDisco) {
         this.idDisco = idDisco;
-        
+
     }
 
     public boolean isEstado() {
@@ -109,9 +109,5 @@ public class UCancion implements Serializable {
     public void setNombreDisco(String nombreDisco) {
         this.nombreDisco = nombreDisco;
     }
-    
-    
-    
-    
 
 }

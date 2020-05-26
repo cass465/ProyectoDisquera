@@ -26,14 +26,12 @@ public class UArtista implements Serializable {
     @Size(min = 2, max = 20)
     private String apellido;
 
+    @Pattern(regexp = "^([a-zA-Z0-9])*$")
     @Size(min = 2, max = 20)
     private String genero;
     
     @NotNull
-    private boolean estado;
-    
-
-    
+    private boolean estado;   
     
     
     public UArtista(){
@@ -86,9 +84,7 @@ public class UArtista implements Serializable {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
-    }
-
-    
+    }  
     
 
 }
