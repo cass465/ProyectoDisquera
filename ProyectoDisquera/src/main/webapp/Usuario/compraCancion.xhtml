@@ -12,35 +12,35 @@
     <h:body>
         <h:form id="form">
             <p:growl id="msg"/>
-            <p:dataTable value="#{compraCancion.canciones}" var="cancion" style="text-align: center">
+            <p:dataTable value="#{compraCancion.canciones}" var="cancionDisponible" style="text-align: center">
                 <f:facet name="header">
                     Canciones Disponibles
                 </f:facet>
                 
                 <p:column headerText="Genero">
-                    <h:outputText value="#{cancion.genero}" /> 
+                    <h:outputText value="#{cancionDisponible.genero}" /> 
                 </p:column>
 
                 <p:column headerText="Artista">
-                    <h:outputText value="#{cancion.nombreCompletoArtista}" /> 
+                    <h:outputText value="#{cancionDisponible.nombreArtista}" /> 
                 </p:column>
 
                 <p:column headerText="Nombre">
-                    <h:outputText value="#{cancion.nombre}" /> 
+                    <h:outputText value="#{cancionDisponible.nombre}" /> 
                 </p:column>
 
                 <p:column headerText="Duración">
-                    <h:outputText value="#{cancion.duracion}" /> 
+                    <h:outputText value="#{cancionDisponible.duracion}" /> 
                 </p:column>
 
                 <p:column headerText="Precio">
-                    <h:outputText value="#{cancion.precio}">
+                    <h:outputText value="#{cancionDisponible.precio}">
                         <f:convertNumber type="currency" currencySymbol="$"/>
                     </h:outputText> 
                 </p:column>
 
                 <p:column headerText="Comprar">
-                    <p:commandButton value="Comprar" icon="pi pi-tag" actionListener="#{compraCancion.comprar(cancion)}" update=":form:msg"/>
+                    <p:commandButton value="Comprar" icon="pi pi-tag" actionListener="#{compraCancion.comprar(cancionDisponible)}" update=":form:msg"/>
                 </p:column>
             </p:dataTable>
         </h:form>

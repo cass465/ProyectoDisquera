@@ -5,6 +5,7 @@
  */
 package com.unicundi.BD;
 
+import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UCompraCancion;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
@@ -20,17 +21,47 @@ import java.util.List;
  *
  * @author cass465
  */
-public class DAOCompraCancion implements Serializable{
-    
+public class DAOCompraCancion implements Serializable {
+
+    public List<UCancion> listarCancionesDisponibles() {
+        List<UCancion> canciones = new ArrayList<UCancion>();
+        Connection conexion = new BDConector().open();
+        if (conexion != null) {
+            try {
+                String query = "SELECT artista.genero, artista.nombre AS nombre_artista, artista.apellido AS apellido_artista, cancion.* "
+                        + "FROM musica.artista, musica.cancion, musica.disco "
+                        + "WHERE disco.id_artista = artista.id AND cancion.id_disco = disco.id;";
+                PreparedStatement stmt = conexion.prepareStatement(query);
+                ResultSet resultado = stmt.executeQuery();
+                while (resultado.next()) {
+                    int id = resultado.getInt("id");
+                    String nombre = resultado.getString("nombre");
+                    String duaracion = resultado.getString("duracion");
+                    int precio = resultado.getInt("precio");
+                    int idDisco = resultado.getInt("id_disco");
+                    String genero = resultado.getString("genero");
+                    String nombreArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");
+
+                    canciones.add(new UCancion(id, nombre, duaracion, precio, idDisco, genero, nombreArtista));
+                }
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return canciones;
+    }
+
     public void registrar(UCompraCancion compra) {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {
                 String query = "INSERT INTO compras.compra_cancion(id_usuario, id_cancion, valor_compra, fecha_compra) VALUES ('"
-                        + compra.getIdUsuario()+ "','"
-                        + compra.getIdCancion()+ "','"
-                        + compra.getValorCompra()+ "','"
-                        + compra.getFechaCompra()+ "');";
+                        + compra.getIdUsuario() + "','"
+                        + compra.getIdCancion() + "','"
+                        + compra.getValorCompra() + "','"
+                        + compra.getFechaCompra() + "');";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 stmt.executeUpdate();
                 stmt.close();
@@ -39,8 +70,8 @@ public class DAOCompraCancion implements Serializable{
             }
         }
     }
-    
-    public List<UCompraCancion> listarPorUsuario(UUsuario usuario){
+
+    public List<UCompraCancion> listarPorUsuario(UUsuario usuario) {
         List<UCompraCancion> compras = new ArrayList<UCompraCancion>();
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -59,7 +90,7 @@ public class DAOCompraCancion implements Serializable{
                     String nombreCompletoArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");
                     String cancion = resultado.getString("nombre");
                     String duracion = resultado.getString("duracion");
-                    
+
                     compras.add(new UCompraCancion(valorCompra, fechaCompra, genero, nombreCompletoArtista, cancion, duracion));
                 }
                 stmt.close();

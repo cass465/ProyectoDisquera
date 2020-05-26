@@ -12,39 +12,39 @@
     <h:body>
         <h:form id="form">
             <p:growl id="msg"/>
-            <p:dataTable value="#{compraDisco.discos}" var="disco" style="text-align: center">
+            <p:dataTable value="#{compraDisco.discos}" var="discoDisponible" style="text-align: center">
                 <f:facet name="header">
                     Discos Disponibles
                 </f:facet>
 
                 <p:column headerText="Genero">
-                    <h:outputText value="#{disco.genero}" /> 
+                    <h:outputText value="#{discoDisponible.genero}" /> 
                 </p:column>
 
                 <p:column headerText="Artista">
-                    <h:outputText value="#{disco.nombreCompletoArtista}" /> 
+                    <h:outputText value="#{discoDisponible.nombreArtista}" /> 
                 </p:column>
 
                 <p:column headerText="Nombre">
-                    <h:outputText value="#{disco.nombre}" /> 
+                    <h:outputText value="#{discoDisponible.nombre}" /> 
                 </p:column>
 
                 <p:column headerText="N° Canciones">
-                    <h:outputText value="#{disco.numeroCanciones}" /> 
+                    <h:outputText value="#{discoDisponible.numeroCanciones}" /> 
                 </p:column>
 
                 <p:column headerText="Precio">
-                    <h:outputText value="#{disco.precio}">
+                    <h:outputText value="#{discoDisponible.precio}">
                         <f:convertNumber type="currency" currencySymbol="$"/>
                     </h:outputText> 
                 </p:column>
 
                 <p:column headerText="Ver Canciones">
-                    <p:commandButton icon="pi pi-bars" actionListener="#{compraDisco.buscarCancionesPorDisco(disco)}" update=":form:modalCanciones"/>
+                    <p:commandButton icon="pi pi-bars" actionListener="#{compraDisco.buscarCancionesPorDisco(discoDisponible)}" update=":form:modalCanciones"/>
                 </p:column>
 
                 <p:column headerText="Comprar">
-                    <h:selectBooleanCheckbox value="#{disco.seleccionado}"/>
+                    <h:selectBooleanCheckbox value="#{discoDisponible.seleccionado}"/>
                 </p:column>
             </p:dataTable>
 
@@ -56,21 +56,21 @@
             <p:dialog id="modalCanciones" widgetVar="cancionesDialog" modal="true" 
                       resizable="false" draggable="false" style="margin-left: 30%; 
                       margin-right: 30%; text-align: center">
-                <p:dataTable value="#{compraDisco.canciones}" var="cancion">
+                <p:dataTable value="#{compraDisco.canciones}" var="cancionDeDisco">
                     <f:facet name="header">
                         Canciones Del Disco
                     </f:facet>
                     
                     <p:column headerText="Nombre">
-                        <h:outputText value="#{cancion.nombre}" /> 
+                        <h:outputText value="#{cancionDeDisco.nombre}" /> 
                     </p:column>
 
                     <p:column headerText="Duracion">
-                        <h:outputText value="#{cancion.duracion}" /> 
+                        <h:outputText value="#{cancionDeDisco.duracion}" /> 
                     </p:column>
 
                     <p:column headerText="Precio Unitario">
-                        <h:outputText value="#{cancion.precio}">
+                        <h:outputText value="#{cancionDeDisco.precio}">
                             <f:convertNumber type="currency" currencySymbol="$"/>
                         </h:outputText> 
                     </p:column>

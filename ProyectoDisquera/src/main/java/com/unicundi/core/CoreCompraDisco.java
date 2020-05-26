@@ -21,6 +21,10 @@ import javax.faces.context.FacesContext;
  */
 public class CoreCompraDisco implements Serializable {
 
+    public List<UDisco> listarDiscosDisponibles() {
+        return new DAOCompraDisco().listarDiscosDisponibles();
+    }
+    
     public void registrar(List<UDisco> discos) {
         int nCompras = 0;
         for (UDisco disco : discos) {

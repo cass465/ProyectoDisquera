@@ -6,8 +6,10 @@
 package com.unicundi.core;
 
 import com.unicundi.BD.DAOCompraCancion;
+import com.unicundi.BD.DAOCompraDisco;
 import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UCompraCancion;
+import com.unicundi.utilitarios.UDisco;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +23,10 @@ import javax.faces.context.FacesContext;
  */
 public class CoreCompraCancion implements Serializable {
 
+    public List<UCancion> listarCancionesDisponibles() {
+        return new DAOCompraCancion().listarCancionesDisponibles();
+    }
+    
     public void registrar(UCancion cancion) {
         int idUsuario = ((UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getId();
         int idCancion = cancion.getId();

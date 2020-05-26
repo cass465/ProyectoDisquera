@@ -97,7 +97,7 @@ public class DAOCancion implements Serializable {
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
-                    cancionAux= new UCancion(resultado.getInt("id"),
+                    cancionAux = new UCancion(resultado.getInt("id"),
                             resultado.getString("nombre"),
                             resultado.getString("duracion"),
                             resultado.getInt("precio"),
@@ -165,8 +165,8 @@ public class DAOCancion implements Serializable {
             }
         }
     }
-    
-     public List<UCancion> buscarPorDisco(int idDisco){
+
+    public List<UCancion> buscarPorDisco(int idDisco) {
         List<UCancion> canciones = new ArrayList<UCancion>();
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -178,10 +178,10 @@ public class DAOCancion implements Serializable {
                     int id = resultado.getInt("id");
                     String nombre = resultado.getString("nombre");
                     String duracion = resultado.getString("duracion");
-                    int precio =  resultado.getInt("precio");
-                    boolean estado= resultado.getBoolean("estado");
-                    
-                    canciones.add(new UCancion(id, nombre, duracion, precio, idDisco,estado,null));
+                    int precio = resultado.getInt("precio");
+                    boolean estado = resultado.getBoolean("estado");
+
+                    canciones.add(new UCancion(id, nombre, duracion, precio, idDisco, estado, null));
                 }
                 stmt.close();
             } catch (SQLException e) {

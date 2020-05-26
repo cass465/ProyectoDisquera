@@ -37,35 +37,35 @@
         <!--MODAL CON COMPRAS DE DISCOS-->
         <p:dialog id="modalDiscos" widgetVar="comprasDiscosDialog" 
                   modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
-            <p:dataTable value="#{usuario.discos}" var="disco" style="text-align: center">
+            <p:dataTable value="#{usuario.discos}" var="discoComprado" style="text-align: center">
                 <f:facet name="header">
                     Discos Comprados
                 </f:facet>
 
                 <p:column headerText="Genero">
-                    <h:outputText value="#{disco.genero}" /> 
+                    <h:outputText value="#{discoComprado.genero}" /> 
                 </p:column>
 
                 <p:column headerText="Artista">
-                    <h:outputText value="#{disco.nombreCompletoArtista}" /> 
+                    <h:outputText value="#{discoComprado.nombreCompletoArtista}" /> 
                 </p:column>
 
                 <p:column headerText="Nombre de Disco">
-                    <h:outputText value="#{disco.disco}" /> 
+                    <h:outputText value="#{discoComprado.disco}" /> 
                 </p:column>
 
                 <p:column headerText="N° Canciones">
-                    <h:outputText value="#{disco.numeroCanciones}" /> 
+                    <h:outputText value="#{discoComprado.numeroCanciones}" /> 
                 </p:column>
 
                 <p:column headerText="Precio de Compora">
-                    <h:outputText value="#{disco.valorCompra}">
+                    <h:outputText value="#{discoComprado.valorCompra}">
                         <f:convertNumber type="currency" currencySymbol="$"/>
                     </h:outputText> 
                 </p:column>
 
                 <p:column headerText="Fecha de Compra">
-                    <h:outputText value="#{disco.fechaCompra}" /> 
+                    <h:outputText value="#{discoComprado.fechaCompra}" /> 
                 </p:column>
             </p:dataTable>
         </p:dialog>
@@ -73,35 +73,35 @@
         <!--MODAL CON COMPRAS DE CANCIONES-->
         <p:dialog id="modalCanciones" widgetVar="comprasCancionesDialog" 
                   modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
-            <p:dataTable value="#{usuario.canciones}" var="cancion" style="text-align: center">
+            <p:dataTable value="#{usuario.canciones}" var="cancionComprada" style="text-align: center">
                 <f:facet name="header">
                     Canciones Compradas
                 </f:facet>
 
                 <p:column headerText="Genero">
-                    <h:outputText value="#{cancion.genero}" /> 
+                    <h:outputText value="#{cancionComprada.genero}" /> 
                 </p:column>
 
                 <p:column headerText="Artista">
-                    <h:outputText value="#{cancion.nombreCompletoArtista}" /> 
+                    <h:outputText value="#{cancionComprada.nombreCompletoArtista}" /> 
                 </p:column>
 
                 <p:column headerText="Nombre de Cancion">
-                    <h:outputText value="#{cancion.cancion}" /> 
+                    <h:outputText value="#{cancionComprada.cancion}" /> 
                 </p:column>
 
                 <p:column headerText="Duración">
-                    <h:outputText value="#{cancion.duracion}" /> 
+                    <h:outputText value="#{cancionComprada.duracion}" /> 
                 </p:column>
 
                 <p:column headerText="Precio de Compora">
-                    <h:outputText value="#{cancion.valorCompra}">
+                    <h:outputText value="#{cancionComprada.valorCompra}">
                         <f:convertNumber type="currency" currencySymbol="$"/>
                     </h:outputText> 
                 </p:column>
 
                 <p:column headerText="Fecha de Compra">
-                    <h:outputText value="#{cancion.fechaCompra}" /> 
+                    <h:outputText value="#{cancionComprada.fechaCompra}" /> 
                 </p:column>
             </p:dataTable>
         </p:dialog>

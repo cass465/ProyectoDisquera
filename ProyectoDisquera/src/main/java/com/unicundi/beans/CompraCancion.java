@@ -25,7 +25,7 @@ public class CompraCancion implements Serializable{
      * Creates a new instance of CompraCancion
      */
     public CompraCancion() {
-        this.canciones = new CoreCancion().listar();
+        this.canciones = new CoreCompraCancion().listarCancionesDisponibles();
     }
 
     public void comprar(UCancion cancion){

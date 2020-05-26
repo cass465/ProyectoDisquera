@@ -7,7 +7,6 @@ package com.unicundi.beans;
 
 import com.unicundi.core.CoreCancion;
 import com.unicundi.core.CoreCompraDisco;
-import com.unicundi.core.Administrador.CoreDisco;
 import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
@@ -30,7 +29,7 @@ public class CompraDisco implements Serializable{
      * Creates a new instance of CompraDisco
      */
     public CompraDisco() {
-        this.discos = new CoreDisco().listar();
+        this.discos = new CoreCompraDisco().listarDiscosDisponibles();
     }
     
     public void comprar(){

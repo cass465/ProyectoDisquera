@@ -11,6 +11,7 @@ import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -50,12 +51,10 @@ public class CoreDisco implements Serializable {
     }
 
     public ArrayList<UDisco> listar() {
-        System.out.println("entre a core");
         return new DAODisco().listar();
     }
 
     public ArrayList<UDisco> listarActivos() {
-        System.out.println("entre a core");
         return new DAODisco().listarActivos();
     }
 
@@ -73,5 +72,4 @@ public class CoreDisco implements Serializable {
         }
 
     }
-
 }
