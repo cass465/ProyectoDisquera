@@ -20,7 +20,7 @@ public class UCancion implements Serializable {
 
     private int id;
 
-    @Pattern(regexp = "^([a-zA-Z0-9])*$")
+    @Pattern(regexp = "^([a-zA-Z0-9 ])*$")
     @Size(min = 2, max = 20)
     private String nombre;
 
