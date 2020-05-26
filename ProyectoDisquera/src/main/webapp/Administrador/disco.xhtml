@@ -22,7 +22,7 @@
                             <h:outputLabel styleClass="out2" value="CANCIÓN"></h:outputLabel>
                             <style>
                                 .out1{
-                                    margin-left: 390px;                              
+                                    margin-left: 430px;                              
                                     color: #ffffff;
                                     font-weight: bold;
                                     font-size: 20px;
@@ -39,37 +39,36 @@
                         </h:panelGrid>
                         <h:panelGrid columns="2" cellpadding=""  >  
 
-                            <h:panelGrid columns="3" cellpadding="5" style="margin-left: 200px">
+                            <h:panelGrid columns="2" cellpadding="5" style="margin-left: 240px">
                                 <p:outputLabel for="@next" value="NOMBRE" />
                                 <p:inputText value="#{disco.disco.nombre}" required="true"/>
-                                <p:message for="@previous" />
+
 
                                 <p:outputLabel for="@next" value="PRECIO" />
                                 <p:inputText value="#{disco.disco.precio}" required="true"/>
-                                <p:message for="@previous" />
-                                
-                               
+
+
 
                                 <p:outputLabel for="@next" value="ARTISTA" />
                                 <h:selectOneMenu value="#{disco.disco.idArtista}" style="width:100%">
                                     <f:selectItems value="#{disco.artista}" var="art" itemLabel="#{art.nombre}" itemValue="#{art.id}" />
-                                </h:selectOneMenu><p:message for="@previous" />  
+                                </h:selectOneMenu>
                             </h:panelGrid>  
 
 
 
-                            <h:panelGrid columns="3" cellpadding="5" style="margin-left:100px">
+                            <h:panelGrid columns="2" cellpadding="5" style="margin-left:100px">
                                 <p:outputLabel for="@next" value="NOMBRE" />
                                 <p:inputText value="#{disco.cancion.nombre}" required="true"/>
-                                <p:message for="@previous" />
+
 
                                 <p:outputLabel for="@next" value="DURACIÓN" />
                                 <p:inputText value="#{disco.cancion.duracion}" required="true"/>
-                                <p:message for="@previous" />
+
 
                                 <p:outputLabel for="@next" value="PRECIO" />
                                 <p:inputText value="#{disco.cancion.precio}" required="true"/>
-                                <p:message for="@previous" />
+                                
 
                             </h:panelGrid>  
 
@@ -83,7 +82,8 @@
                                          validateClient="true" action="#{disco.registrar()}"/>
                         <style>
                             .center{
-                                margin-left: 550px;
+                                margin-top: 20px;
+                                margin-left: 585px;
                                 font-style: italic;
                                 background: black;
                             }
@@ -96,7 +96,7 @@
 
                     <p:outputPanel id="artistas">
 
-                       <p:growl id="msgs" showDetail="true"/>
+                        <p:growl id="msgs" showDetail="true"/>
 
                         <p:dataTable id="table1" value="#{disco.discos}" var ="tblDisco" editable="true" style="margin-bottom:20px" >
                             <f:facet name="header">
@@ -123,7 +123,7 @@
                                     </f:facet>
                                 </p:cellEditor>
                             </p:column>     
-                            
+
                             <p:column headerText="N° CANCIONES">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblDisco.numeroCanciones}" /></f:facet>
@@ -139,7 +139,7 @@
                                     <f:facet name="input"> <h:selectOneMenu value="#{tblDisco.nombreArtista}" style="width:100%">
                                             <f:selectItems value="#{disco.artista}" var="art" itemLabel="#{art.nombre}" itemValue="#{art.nombre}" />
                                         </h:selectOneMenu><p:message for="@previous" />  
-                                       
+
                                     </f:facet>
                                 </p:cellEditor>
                             </p:column>

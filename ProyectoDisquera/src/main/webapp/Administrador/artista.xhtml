@@ -18,19 +18,19 @@
                 <h:form id="for1">                    
 
                     <p:panel header="REGISTRAR ARTISTA" style="margin-bottom:5px;  font-style: italic; text-align: center; color: brown">
-                        <h:panelGrid columns="3" cellpadding="5"  style="margin-left: 500px;"  >   
+                        <h:panelGrid columns="2" cellpadding="5"  style="margin-left: 500px;"  >   
                            
                             <p:outputLabel for="@next" value="NOMBRE" styleClass="out"/>
                             <p:inputText value="#{artista.artista.nombre}" required="true"/>
-                            <p:message for="@previous" />
+                           
 
                             <p:outputLabel for="@next" value="APELLIDO" styleClass="out" />
                             <p:inputText value="#{artista.artista.apellido}" required="true"/>
-                            <p:message for="@previous" />
+                            
 
                             <p:outputLabel for="@next" value="GENERO" styleClass="out"   />
                             <p:inputText value="#{artista.artista.genero}" required="true"/>                          
-                            <p:message for="@previous" />  
+                            
                             
                              <style>
                                 .out{                                                                 
