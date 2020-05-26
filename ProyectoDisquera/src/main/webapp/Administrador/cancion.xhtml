@@ -16,7 +16,7 @@
                 <h:form id="for1">    
                     <p:growl id="msgs" showDetail="true"/>
 
-                    <p:panel header="REGISTRAR CANCIÓN" style="margin-bottom:5px; font-family: cursive; text-align: center; color: brown">
+                    <p:panel header="REGISTRAR CANCIÓN" style="margin-bottom:5px;  font-style: italic; text-align: center; color: brown">
                         <h:panelGrid columns="3" cellpadding="5"  style="margin-left: 500px;"  >   
 
                             <p:outputLabel for="@next" value="NOMBRE" styleClass="out"/>
@@ -31,17 +31,17 @@
                             <p:inputText value="#{cancion.cancion.precio}" required="true"/>                          
                             <p:message for="@previous" />  
 
-                            <p:outputLabel for="@next" value="DISCO" />
+                            <p:outputLabel for="@next" value="DISCO" styleClass="out" />
                             <h:selectOneMenu value="#{cancion.cancion.idDisco}" style="width:100%">
                                 <f:selectItems value="#{cancion.discos}" var="disc" itemLabel="#{disc.nombre}" itemValue="#{disc.id}" />
                             </h:selectOneMenu><p:message for="@previous" />  
 
                             <style>
                                 .out{                                                                 
-                                    color: goldenrod;
-                                    font-family: cursive;
-                                    font-weight: bold;
-                                    font-size: 20px;
+                                    color: #ffffff;
+                                    font-style: italic;
+                                    font-weight: 400;
+                                    font-size: 100%;
                                 }
                             </style>
 

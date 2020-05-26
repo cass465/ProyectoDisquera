@@ -22,16 +22,16 @@
                             <h:outputLabel styleClass="out2" value="CANCION"></h:outputLabel>
                             <style>
                                 .out1{
-                                    margin-left: 300px;                              
-                                    color: deepskyblue;
+                                    margin-left: 320px;                              
+                                    color: #ffffff;
                                     font-weight: bold;
                                     font-size: 20px;
                                 }
                             </style>
                             <style>
                                 .out2{
-                                    margin-left: 420px;                              
-                                    color: deepskyblue;
+                                    margin-left: 300px;                              
+                                    color: #ffffff;
                                     font-weight: bold;
                                     font-size: 20px;
                                 }
@@ -39,7 +39,7 @@
                         </h:panelGrid>
                         <h:panelGrid columns="2" cellpadding=""  >  
 
-                            <h:panelGrid columns="3" cellpadding="5" style="margin-left: 100px">
+                            <h:panelGrid columns="3" cellpadding="5" style="margin-left: 200px">
                                 <p:outputLabel for="@next" value="NOMBRE" />
                                 <p:inputText value="#{disco.disco.nombre}" required="true"/>
                                 <p:message for="@previous" />
@@ -83,7 +83,9 @@
                                          validateClient="true" action="#{disco.registrar()}"/>
                         <style>
                             .center{
-                                margin-left: 470px;
+                                margin-left: 460px;
+                                font-style: italic;
+                                background: black;
                             }
                         </style>
 
