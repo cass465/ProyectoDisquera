@@ -27,14 +27,14 @@
                     <p:outputLabel value="Confirmar Contraseña: " for="IT_Confirmar"/>
                     <p:inputText id="IT_Confirmar" value="${registro.confirmacionContrasenia}" required="true" type="password"/>
 
-                    <p:commandButton value="REGISTRAR" validateClient="true" update="msg" action="#{registro.registrar()}"/>
+                    <p:commandButton icon="ui-icon-check" value="REGISTRAR" validateClient="true" update="msg" action="#{registro.registrar()}"/>
                 </h:panelGrid>
             </p:panel>
         </h:form>
 
         <br/>
         <center>
-            <p:button value="Volver" outcome="index"/>
+            <p:button icon="ui-icon-home" value="Volver" outcome="index"/>
         </center>
     </h:body>
 </html>
