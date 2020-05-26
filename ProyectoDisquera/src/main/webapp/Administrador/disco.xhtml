@@ -19,10 +19,10 @@
                     <p:panel header="" style="margin-bottom:5px; ">
                         <h:panelGrid columns="2" cellpadding="">  
                             <h:outputLabel styleClass="out1" value="DISCO"></h:outputLabel>                       
-                            <h:outputLabel styleClass="out2" value="CANCION"></h:outputLabel>
+                            <h:outputLabel styleClass="out2" value="CANCIÓN"></h:outputLabel>
                             <style>
                                 .out1{
-                                    margin-left: 320px;                              
+                                    margin-left: 390px;                              
                                     color: #ffffff;
                                     font-weight: bold;
                                     font-size: 20px;
@@ -30,7 +30,7 @@
                             </style>
                             <style>
                                 .out2{
-                                    margin-left: 300px;                              
+                                    margin-left: 400px;                              
                                     color: #ffffff;
                                     font-weight: bold;
                                     font-size: 20px;
@@ -63,7 +63,7 @@
                                 <p:inputText value="#{disco.cancion.nombre}" required="true"/>
                                 <p:message for="@previous" />
 
-                                <p:outputLabel for="@next" value="DURACION" />
+                                <p:outputLabel for="@next" value="DURACIÓN" />
                                 <p:inputText value="#{disco.cancion.duracion}" required="true"/>
                                 <p:message for="@previous" />
 
@@ -83,7 +83,7 @@
                                          validateClient="true" action="#{disco.registrar()}"/>
                         <style>
                             .center{
-                                margin-left: 460px;
+                                margin-left: 550px;
                                 font-style: italic;
                                 background: black;
                             }
