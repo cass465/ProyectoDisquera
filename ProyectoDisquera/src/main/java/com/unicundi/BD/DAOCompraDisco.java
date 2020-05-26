@@ -85,6 +85,8 @@ public class DAOCompraDisco implements Serializable {
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
+                    int id = resultado.getInt("id");
+                    int idDisco = resultado.getInt("id_disco");
                     int valorCompra = resultado.getInt("valor_compra");
                     Date fechaCompra = resultado.getDate("fecha_compra");
                     String genero = resultado.getString("genero");
@@ -92,7 +94,7 @@ public class DAOCompraDisco implements Serializable {
                     String disco = resultado.getString("nombre");
                     int numeroCanciones = resultado.getInt("n_canciones");
                     
-                    compras.add(new UCompraDisco(valorCompra, fechaCompra, genero, nombreCompletoArtista, disco, numeroCanciones));
+                    compras.add(new UCompraDisco(id, idDisco, valorCompra, fechaCompra, genero, nombreCompletoArtista, disco, numeroCanciones));
                 }
                 stmt.close();
             } catch (SQLException e) {

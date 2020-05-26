@@ -32,7 +32,9 @@ public class UCompraDisco implements Serializable{
         this.fechaCompra = fechaCompra;
     }
 
-    public UCompraDisco(int valorCompra, Date fechaCompra, String genero, String nombreCompletoArtista, String disco, int numeroCanciones) {
+    public UCompraDisco(int id, int idDisco, int valorCompra, Date fechaCompra, String genero, String nombreCompletoArtista, String disco, int numeroCanciones) {
+        this.id = id;
+        this.idDisco = idDisco;
         this.valorCompra = valorCompra;
         this.fechaCompra = fechaCompra;
         this.genero = genero;
