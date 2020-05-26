@@ -21,7 +21,7 @@ import javax.faces.context.FacesContext;
  *
  * @author cass465
  */
-public class CoreCompraDisco implements Serializable {
+public class CoreCompraDisco implements Serializable{
 
     public List<UDisco> listarDiscosDisponibles() {
         return new DAOCompraDisco().listarDiscosDisponibles();
@@ -31,7 +31,7 @@ public class CoreCompraDisco implements Serializable {
         return new DAOCancion().buscarPorDisco(idDisco);
     }
     
-    public void registrar(List<UDisco> discos) {
+    public void registrar(List<UDisco> discos) {////modificar esto
         int nCompras = 0;
         for (UDisco disco : discos) {
             if (disco.isSeleccionado()) {
@@ -58,4 +58,5 @@ public class CoreCompraDisco implements Serializable {
         UUsuario usuario = (UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return new DAOCompraDisco().listarPorUsuario(usuario);
     }
+
 }

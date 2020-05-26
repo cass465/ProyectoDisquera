@@ -11,6 +11,8 @@
     </h:head>
     <h:body>
         <h:form id="form">
+            <p:growl id="msg" showDetail="true"/>
+            
             <!--DATA TABLE CON DISCOS DISPONIBLES-->
             <p:dataTable id="discosDisponibles" value="#{compras.discosDisponibles}" var="discoDisponible" style="text-align: center">
                 <f:facet name="header">
@@ -44,7 +46,8 @@
                 </p:column>
 
                 <p:column headerText="Agregar">
-                    <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarDisco(discoDisponible)}" update=":form:discosDisponibles,:form:discosAgregados"/>
+                    <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarDisco(discoDisponible)}" 
+                                     update=":form:discosDisponibles,:form:discosAgregados,:form:cancionesDisponibles,:form:cancionesAgregadas,:form:msg"/>
                 </p:column>
             </p:dataTable>
 
@@ -81,7 +84,8 @@
                 </p:column>
 
                 <p:column headerText="Agregar">
-                    <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarCancion(cancionDisponible)}" update=":form:cancionesDisponibles,:form:cancionesAgregadas"/>
+                    <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarCancion(cancionDisponible)}" 
+                                     update=":form:cancionesDisponibles,:form:cancionesAgregadas,:form:msg"/>
                 </p:column>
             </p:dataTable>
 
@@ -138,7 +142,7 @@
                     </p:column>
 
                     <p:column headerText="Disco">
-                        <h:outputText value="#{cancionAgregada.nombreArtista}" /> 
+                        <h:outputText value="#{cancionAgregada.nombreDisco}" /> 
                     </p:column>
 
                     <p:column headerText="Nombre">
@@ -189,6 +193,9 @@
                 </p:dataTable>
             </p:dialog>
         </h:form>
+        
+        <br/>
+        <p:button icon="ui-icon-home" value="Volver" outcome="usuario"/>
     </h:body>
 </html>
 

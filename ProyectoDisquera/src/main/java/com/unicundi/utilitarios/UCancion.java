@@ -65,8 +65,9 @@ public class UCancion implements Serializable {
         this.nombreArtista = nombreArtista;
     }
 
-    public UCancion(int id, String nombre, String duracion, int precio, String nombreDisco, String genero, String nombreArtista) {
+    public UCancion(int id, int idDisco, String nombre, String duracion, int precio, String nombreDisco, String genero, String nombreArtista) {
         this.id = id;
+        this.idDisco = idDisco;
         this.nombre = nombre;
         this.duracion = duracion;
         this.precio = precio;

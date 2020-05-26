@@ -38,6 +38,7 @@ public class DAOCompraCancion implements Serializable {
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
                     int id = resultado.getInt("id");
+                    int idDisco = resultado.getInt("id_disco");
                     String nombre = resultado.getString("nombre");
                     String duaracion = resultado.getString("duracion");
                     int precio = resultado.getInt("precio");
@@ -45,7 +46,7 @@ public class DAOCompraCancion implements Serializable {
                     String nombreArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");
                     String nombreDisco = resultado.getString("nombre_disco");
 
-                    canciones.add(new UCancion(id, nombre, duaracion, precio, nombreDisco, genero, nombreArtista));
+                    canciones.add(new UCancion(id, idDisco, nombre, duaracion, precio, nombreDisco, genero, nombreArtista));
                 }
                 stmt.close();
             } catch (SQLException e) {
