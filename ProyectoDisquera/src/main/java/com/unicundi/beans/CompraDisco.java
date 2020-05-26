@@ -5,8 +5,7 @@
  */
 package com.unicundi.beans;
 
-import com.unicundi.core.CoreCancion;
-import com.unicundi.core.CoreCompraDisco;
+import com.unicundi.core.Usuario.CoreCompraDisco;
 import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
@@ -37,7 +36,7 @@ public class CompraDisco implements Serializable{
     }
     
     public void buscarCancionesPorDisco(UDisco disco){
-        this.canciones = new CoreCancion().buscarPorDisco(disco.getId());
+        //this.canciones = new CoreCancion().buscarPorDisco(disco.getId());
         //Abrir modal de canciones
         RequestContext.getCurrentInstance().execute("PF('cancionesDialog').show();");
     }

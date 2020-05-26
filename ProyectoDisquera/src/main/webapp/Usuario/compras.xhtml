@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--Valida que la sesion exista antes de cargar la pagina (renderizar)-->
+    <f:event listener="#{index.validarSesionUsuario}" type="preRenderView" />
+    <h:head>
+        <title>Compras</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <!--DATA TABLE CON DISCOS DISPONIBLES-->
+            <p:dataTable id="discosDisponibles" value="#{compras.discosDisponibles}" var="discoDisponible" style="text-align: center">
+                <f:facet name="header">
+                    Discos Disponibles
+                </f:facet>
+
+                <p:column headerText="Genero">
+                    <h:outputText value="#{discoDisponible.genero}" /> 
+                </p:column>
+
+                <p:column headerText="Artista">
+                    <h:outputText value="#{discoDisponible.nombreArtista}" /> 
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{discoDisponible.nombre}" /> 
+                </p:column>
+
+                <p:column headerText="N° Canciones">
+                    <h:outputText value="#{discoDisponible.numeroCanciones}" /> 
+                </p:column>
+
+                <p:column headerText="Precio">
+                    <h:outputText value="#{discoDisponible.precio}">
+                        <f:convertNumber type="currency" currencySymbol="$"/>
+                    </h:outputText> 
+                </p:column>
+
+                <p:column headerText="Ver Canciones">
+                    <p:commandButton icon="ui-icon-folder-open" actionListener="#{compras.buscarCancionesPorDisco(discoDisponible)}" update=":form:modalCanciones"/>
+                </p:column>
+
+                <p:column headerText="Agregar">
+                    <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarDisco(discoDisponible)}" update=":form:discosDisponibles,:form:discosAgregados"/>
+                </p:column>
+            </p:dataTable>
+
+            <!--DATA TABLE CON CANCIONES DISPONIBLES-->
+            <p:dataTable id="cancionesDisponibles" value="#{compras.cancionesDisponibles}" var="cancionDisponible" style="text-align: center">
+                <f:facet name="header">
+                    Canciones Disponibles
+                </f:facet>
+
+                <p:column headerText="Genero">
+                    <h:outputText value="#{cancionDisponible.genero}" /> 
+                </p:column>
+
+                <p:column headerText="Artista">
+                    <h:outputText value="#{cancionDisponible.nombreArtista}" /> 
+                </p:column>
+
+                <p:column headerText="Disco">
+                    <h:outputText value="#{cancionDisponible.nombreDisco}" /> 
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{cancionDisponible.nombre}" /> 
+                </p:column>
+
+                <p:column headerText="Duración">
+                    <h:outputText value="#{cancionDisponible.duracion}" /> 
+                </p:column>
+
+                <p:column headerText="Precio">
+                    <h:outputText value="#{cancionDisponible.precio}">
+                        <f:convertNumber type="currency" currencySymbol="$"/>
+                    </h:outputText> 
+                </p:column>
+
+                <p:column headerText="Agregar">
+                    <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarCancion(cancionDisponible)}" update=":form:cancionesDisponibles,:form:cancionesAgregadas"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:panel header="Elementos Agregados">
+                <!--DATA TABLE CON DISCOS AGREGADOS-->
+                <p:dataTable id="discosAgregados" value="#{compras.discosAgregados}" var="discoAgregado" style="text-align: center">
+                    <f:facet name="header">
+                        Discos Agregados
+                    </f:facet>
+
+                    <p:column headerText="Genero">
+                        <h:outputText value="#{discoAgregado.genero}" /> 
+                    </p:column>
+
+                    <p:column headerText="Artista">
+                        <h:outputText value="#{discoAgregado.nombreArtista}" /> 
+                    </p:column>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{discoAgregado.nombre}" /> 
+                    </p:column>
+
+                    <p:column headerText="N° Canciones">
+                        <h:outputText value="#{discoAgregado.numeroCanciones}" /> 
+                    </p:column>
+
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{discoAgregado.precio}">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </h:outputText> 
+                    </p:column>
+
+                    <p:column headerText="Ver Canciones">
+                        <p:commandButton icon="ui-icon-folder-open" actionListener="#{compras.buscarCancionesPorDisco(discoAgregado)}" update=":form:modalCanciones"/>
+                    </p:column>
+
+                    <p:column headerText="Desagregar">
+                        <p:commandButton icon="ui-icon-plusthick" action="#{compras.desAgregarDisco(discoAgregado)}" update=":form:discosDisponibles,:form:discosAgregados"/>
+                    </p:column>
+                </p:dataTable>
+
+                <!--DATA TABLE CON CANCIONES AGREGADAS-->
+                <p:dataTable id="cancionesAgregadas" value="#{compras.cancionesAgregadas}" var="cancionAgregada" style="text-align: center">
+                    <f:facet name="header">
+                        Canciones Agregadas
+                    </f:facet>
+
+                    <p:column headerText="Genero">
+                        <h:outputText value="#{cancionAgregada.genero}" /> 
+                    </p:column>
+
+                    <p:column headerText="Artista">
+                        <h:outputText value="#{cancionAgregada.nombreArtista}" /> 
+                    </p:column>
+
+                    <p:column headerText="Disco">
+                        <h:outputText value="#{cancionAgregada.nombreArtista}" /> 
+                    </p:column>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{cancionAgregada.nombre}" /> 
+                    </p:column>
+
+                    <p:column headerText="Duración">
+                        <h:outputText value="#{cancionAgregada.duracion}" /> 
+                    </p:column>
+
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{cancionAgregada.precio}">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </h:outputText> 
+                    </p:column>
+
+                    <p:column headerText="Desagregar">
+                        <p:commandButton icon="ui-icon-plusthick" action="#{compras.desAgregarCancion(cancionAgregada)}" update=":form:cancionesDisponibles,:form:cancionesAgregadas"/>
+                    </p:column>
+                </p:dataTable>
+
+                <p:outputLabel value="TOTAL: "/>
+                <p:commandButton value="COMPRAR"/>
+            </p:panel>
+
+            <!--MODAL DE CANCIONES SEGUN EL DISCO DISPONIBLE-->
+            <p:dialog id="modalCanciones" widgetVar="cancionesDialog" modal="true" 
+                      resizable="false" draggable="false" style="margin-left: 30%; 
+                      margin-right: 30%; text-align: center">
+                <p:dataTable value="#{compras.cancionesDisco}" var="cancionDeDisco">
+                    <f:facet name="header">
+                        Canciones Del Disco
+                    </f:facet>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{cancionDeDisco.nombre}" /> 
+                    </p:column>
+
+                    <p:column headerText="Duracion">
+                        <h:outputText value="#{cancionDeDisco.duracion}" /> 
+                    </p:column>
+
+                    <p:column headerText="Precio Unitario">
+                        <h:outputText value="#{cancionDeDisco.precio}">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </h:outputText> 
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+

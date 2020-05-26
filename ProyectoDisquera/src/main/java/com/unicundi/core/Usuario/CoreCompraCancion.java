@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicundi.core;
+package com.unicundi.core.Usuario;
 
 import com.unicundi.BD.DAOCompraCancion;
-import com.unicundi.BD.DAOCompraDisco;
 import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UCompraCancion;
-import com.unicundi.utilitarios.UDisco;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 import java.util.Date;

@@ -5,7 +5,7 @@
  */
 package com.unicundi.beans;
 
-import com.unicundi.core.CoreUsuario;
+import com.unicundi.core.Usuario.CoreUsuario;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.IOException;
 import javax.inject.Named;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicundi.core;
+package com.unicundi.core.Usuario;
 
 import com.unicundi.BD.DAOUsuario;
 import com.unicundi.utilitarios.UUsuario;

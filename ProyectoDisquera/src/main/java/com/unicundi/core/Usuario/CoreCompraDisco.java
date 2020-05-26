@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicundi.core;
+package com.unicundi.core.Usuario;
 
+import com.unicundi.BD.DAOCancion;
 import com.unicundi.BD.DAOCompraDisco;
+import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UCompraDisco;
 import com.unicundi.utilitarios.UDisco;
 import com.unicundi.utilitarios.UUsuario;
@@ -23,6 +25,10 @@ public class CoreCompraDisco implements Serializable {
 
     public List<UDisco> listarDiscosDisponibles() {
         return new DAOCompraDisco().listarDiscosDisponibles();
+    }
+    
+    public List<UCancion> buscarPorDisco(int idDisco){
+        return new DAOCancion().buscarPorDisco(idDisco);
     }
     
     public void registrar(List<UDisco> discos) {

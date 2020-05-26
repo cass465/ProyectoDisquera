@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicundi.beans;
+package com.unicundi.beans.Usuario;
 
-import com.unicundi.core.CoreCompraCancion;
-import com.unicundi.core.CoreCompraDisco;
+import com.unicundi.core.Usuario.CoreCompraCancion;
+import com.unicundi.core.Usuario.CoreCompraDisco;
 import com.unicundi.utilitarios.UCompraCancion;
 import com.unicundi.utilitarios.UCompraDisco;
 import com.unicundi.utilitarios.UUsuario;

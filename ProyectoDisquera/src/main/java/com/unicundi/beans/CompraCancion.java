@@ -5,8 +5,7 @@
  */
 package com.unicundi.beans;
 
-import com.unicundi.core.CoreCancion;
-import com.unicundi.core.CoreCompraCancion;
+import com.unicundi.core.Usuario.CoreCompraCancion;
 import com.unicundi.utilitarios.UCancion;
 import java.io.Serializable;
 import java.util.List;
