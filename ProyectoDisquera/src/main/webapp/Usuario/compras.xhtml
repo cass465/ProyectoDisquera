@@ -12,9 +12,11 @@
     <h:body>
         <h:form id="form">
             <p:growl id="msg" showDetail="true"/>
-            
+
             <!--DATA TABLE CON DISCOS DISPONIBLES-->
-            <p:dataTable id="discosDisponibles" value="#{compras.discosDisponibles}" var="discoDisponible" style="text-align: center">
+            <p:dataTable id="discosDisponibles" value="#{compras.discosDisponibles}" var="discoDisponible" 
+                         style="text-align: center; font-size: 95%; margin-left: 10%; margin-right: 10%; margin-top: 1%; margin-bottom: 1%" 
+                         scrollable="true" scrollHeight="150" emptyMessage="NO SE ENCUENTRAN REGISTROS">
                 <f:facet name="header">
                     Discos Disponibles
                 </f:facet>
@@ -37,7 +39,7 @@
 
                 <p:column headerText="Precio">
                     <h:outputText value="#{discoDisponible.precio}">
-                        <f:convertNumber type="currency" currencySymbol="$"/>
+                        <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                     </h:outputText> 
                 </p:column>
 
@@ -46,14 +48,16 @@
                 </p:column>
 
                 <p:column headerText="Agregar">
-                    <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarDisco(discoDisponible)}" 
+                    <p:commandButton icon="ui-icon-cart" action="#{compras.agregarDisco(discoDisponible)}" 
                                      update=":form:discosDisponibles,:form:discosAgregados,:form:cancionesDisponibles,
                                      :form:cancionesAgregadas,:form:msg,:form:panel"/>
                 </p:column>
             </p:dataTable>
 
             <!--DATA TABLE CON CANCIONES DISPONIBLES-->
-            <p:dataTable id="cancionesDisponibles" value="#{compras.cancionesDisponibles}" var="cancionDisponible" style="text-align: center">
+            <p:dataTable id="cancionesDisponibles" value="#{compras.cancionesDisponibles}" var="cancionDisponible" 
+                         style="text-align: center; font-size: 95%; margin-left: 10%; margin-right: 10%; margin-top: 1%; margin-bottom: 1%" 
+                         scrollable="true" scrollHeight="150" emptyMessage="NO SE ENCUENTRAN REGISTROS">
                 <f:facet name="header">
                     Canciones Disponibles
                 </f:facet>
@@ -76,23 +80,25 @@
 
                 <p:column headerText="Precio">
                     <h:outputText value="#{cancionDisponible.precio}">
-                        <f:convertNumber type="currency" currencySymbol="$"/>
+                        <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                     </h:outputText> 
                 </p:column>
-                
+
                 <p:column headerText="Duración">
                     <h:outputText value="#{cancionDisponible.duracion}" /> 
                 </p:column>
 
                 <p:column headerText="Agregar">
-                    <p:commandButton icon="ui-icon-plusthick" action="#{compras.agregarCancion(cancionDisponible)}" 
+                    <p:commandButton icon="ui-icon-cart" action="#{compras.agregarCancion(cancionDisponible)}" 
                                      update=":form:discosDisponibles,:form:cancionesDisponibles,:form:cancionesAgregadas,:form:msg,:form:panel"/>
                 </p:column>
             </p:dataTable>
 
-            <p:panel id="panel" header="Elementos Agregados">
+            <p:panel id="panel" header="Elementos Agregados" style="margin-left: 5%; margin-right: 5%">
                 <!--DATA TABLE CON DISCOS AGREGADOS-->
-                <p:dataTable id="discosAgregados" value="#{compras.discosAgregados}" var="discoAgregado" style="text-align: center">
+                <p:dataTable id="discosAgregados" value="#{compras.discosAgregados}" var="discoAgregado" 
+                             style="text-align: center; font-size: 95%; margin-top: 1%; margin-bottom: 1%" 
+                             scrollable="true" scrollHeight="150" emptyMessage="NO SE HAN AGREGADO DISCOS PARA LA COMPRA">
                     <f:facet name="header">
                         Discos Agregados
                     </f:facet>
@@ -115,7 +121,7 @@
 
                     <p:column headerText="Precio">
                         <h:outputText value="#{discoAgregado.precio}">
-                            <f:convertNumber type="currency" currencySymbol="$"/>
+                            <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                         </h:outputText> 
                     </p:column>
 
@@ -125,13 +131,15 @@
                     </p:column>
 
                     <p:column headerText="Desagregar">
-                        <p:commandButton icon="ui-icon-plusthick" action="#{compras.desAgregarDisco(discoAgregado)}" 
+                        <p:commandButton icon="ui-icon-closethick" action="#{compras.desAgregarDisco(discoAgregado)}" 
                                          update=":form:discosDisponibles,:form:discosAgregados,:form:panel"/>
                     </p:column>
                 </p:dataTable>
 
                 <!--DATA TABLE CON CANCIONES AGREGADAS-->
-                <p:dataTable id="cancionesAgregadas" value="#{compras.cancionesAgregadas}" var="cancionAgregada" style="text-align: center">
+                <p:dataTable id="cancionesAgregadas" value="#{compras.cancionesAgregadas}" var="cancionAgregada" 
+                             style="text-align: center; font-size: 95%; margin-top: 1%; margin-bottom: 1%" 
+                             scrollable="true" scrollHeight="150" emptyMessage="NO SE HAN AGREGADO CANCIONES PARA LA COMPRA">
                     <f:facet name="header">
                         Canciones Agregadas
                     </f:facet>
@@ -154,30 +162,30 @@
 
                     <p:column headerText="Precio">
                         <h:outputText value="#{cancionAgregada.precio}">
-                            <f:convertNumber type="currency" currencySymbol="$"/>
+                            <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                         </h:outputText> 
                     </p:column>
 
                     <p:column headerText="Duración">
                         <h:outputText value="#{cancionAgregada.duracion}" /> 
                     </p:column>
-                    
+
                     <p:column headerText="Desagregar">
-                        <p:commandButton icon="ui-icon-plusthick" action="#{compras.desAgregarCancion(cancionAgregada)}" 
+                        <p:commandButton icon="ui-icon-closethick" action="#{compras.desAgregarCancion(cancionAgregada)}" 
                                          update=":form:cancionesDisponibles,:form:cancionesAgregadas,:form:panel"/>
                     </p:column>
                 </p:dataTable>
-                
+
                 <br/>
                 <center>
                     <p:outputLabel value="TOTAL: "/>
                     <p:outputLabel value="#{compras.precioTotal}">
-                        <f:convertNumber type="currency" currencySymbol="$"/>
+                        <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                     </p:outputLabel>
                 </center>
-                
+
                 <center>
-                    <p:commandButton value="COMPRAR" style="margin-top: 1%" action="#{compras.comprar}" update=":form"/>
+                    <p:commandButton icon="ui-icon-tag" value="COMPRAR" style="margin-top: 1%" action="#{compras.comprar}" update=":form"/>
                 </center>
             </p:panel>
 
@@ -185,7 +193,8 @@
             <p:dialog id="modalCanciones" widgetVar="cancionesDialog" modal="true" 
                       resizable="false" draggable="false" style="margin-left: 30%; 
                       margin-right: 30%; text-align: center">
-                <p:dataTable value="#{compras.cancionesDisco}" var="cancionDeDisco">
+                <p:dataTable value="#{compras.cancionesDisco}" var="cancionDeDisco"
+                             scrollable="true" scrollHeight="150">
                     <f:facet name="header">
                         Canciones Del Disco
                     </f:facet>
@@ -200,13 +209,13 @@
 
                     <p:column headerText="Precio Unitario">
                         <h:outputText value="#{cancionDeDisco.precio}">
-                            <f:convertNumber type="currency" currencySymbol="$"/>
+                            <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                         </h:outputText> 
                     </p:column>
                 </p:dataTable>
             </p:dialog>
         </h:form>
-        
+
         <br/>
         <p:button icon="ui-icon-home" value="Volver" outcome="usuario"/>
     </h:body>

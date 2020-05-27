@@ -38,7 +38,8 @@
             <!--MODAL CON COMPRAS DE DISCOS-->
             <p:dialog id="modalDiscos" widgetVar="comprasDiscosDialog" 
                       modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
-                <p:dataTable value="#{usuario.discos}" var="discoComprado" style="text-align: center">
+                <p:dataTable value="#{usuario.discos}" var="discoComprado" emptyMessage="NO SE ENCUENTRAN REGISTROS" 
+                             style="text-align: center" scrollable="true" scrollHeight="200">
                     <f:facet name="header">
                         Discos Comprados
                     </f:facet>
@@ -61,7 +62,7 @@
 
                     <p:column headerText="Precio de Compra">
                         <h:outputText value="#{discoComprado.valorCompra}">
-                            <f:convertNumber type="currency" currencySymbol="$"/>
+                            <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                         </h:outputText> 
                     </p:column>
 
@@ -80,7 +81,8 @@
             <p:dialog id="modalCancionesDisco" widgetVar="cancionesDiscoDialog" modal="true" 
                       resizable="false" draggable="false" style="margin-left: 30%; 
                       margin-right: 30%; text-align: center">
-                <p:dataTable value="#{usuario.cancionesDisco}" var="cancionDeDisco">
+                <p:dataTable value="#{usuario.cancionesDisco}" var="cancionDeDisco" 
+                             style="text-align: center" scrollable="true" scrollHeight="200">
                     <f:facet name="header">
                         Canciones Del Disco
                     </f:facet>
@@ -95,7 +97,7 @@
 
                     <p:column headerText="Precio Unitario">
                         <h:outputText value="#{cancionDeDisco.precio}">
-                            <f:convertNumber type="currency" currencySymbol="$"/>
+                            <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                         </h:outputText> 
                     </p:column>
                 </p:dataTable>
@@ -105,7 +107,8 @@
         <!--MODAL CON COMPRAS DE CANCIONES-->
         <p:dialog id="modalCanciones" widgetVar="comprasCancionesDialog" 
                   modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
-            <p:dataTable value="#{usuario.canciones}" var="cancionComprada" style="text-align: center">
+            <p:dataTable value="#{usuario.canciones}" var="cancionComprada" emptyMessage="NO SE ENCUENTRAN REGISTROS"
+                         style="text-align: center" scrollable="true" scrollHeight="200">
                 <f:facet name="header">
                     Canciones Compradas
                 </f:facet>
@@ -128,7 +131,7 @@
 
                 <p:column headerText="Precio de Compora">
                     <h:outputText value="#{cancionComprada.valorCompra}">
-                        <f:convertNumber type="currency" currencySymbol="$"/>
+                        <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                     </h:outputText> 
                 </p:column>
 
