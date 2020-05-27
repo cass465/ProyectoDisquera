@@ -38,11 +38,11 @@ public class Compras implements Serializable {
      * Creates a new instance of Compras
      */
     public Compras() {
-        
+
     }
-    
+
     @PostConstruct
-    public void cargar(){
+    public void cargar() {
         this.discosDisponibles = new CoreCompras().listarDiscosDisponibles();
         this.cancionesDisponibles = new CoreCompras().listarCancionesDisponibles();
         this.discosAgregados = new ArrayList<UDisco>();
@@ -79,14 +79,14 @@ public class Compras implements Serializable {
         //Despues de sacar las canciones se agrega el disco
         this.discosAgregados.add(disco);
         this.discosDisponibles.remove(disco);
-        
+
         this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
 
     public void desAgregarDisco(UDisco disco) {
         this.discosDisponibles.add(disco);
         this.discosAgregados.remove(disco);
-        
+
         this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
 
@@ -102,21 +102,57 @@ public class Compras implements Serializable {
         }
 
         if (aceptado) {
-            this.cancionesAgregadas.add(cancion);
-            this.cancionesDisponibles.remove(cancion);
+            UDisco discoCompleto = new UDisco();
+            for (UDisco disco : discosDisponibles) {
+                if (disco.getId() == cancion.getIdDisco()) {
+                    discoCompleto = disco;
+                    break;
+                }
+            }
+
+            if (contarCanciones(cancion.getIdDisco()) == discoCompleto.getNumeroCanciones()-1) {
+                this.discosAgregados.add(discoCompleto);
+                this.discosDisponibles.remove(discoCompleto);
+                
+                List<UCancion> cancionesDesagregar = new ArrayList<UCancion>();
+                for (UCancion cancionDesagregar : cancionesAgregadas){
+                    if (cancionDesagregar.getIdDisco() == discoCompleto.getId()){
+                        cancionesDesagregar.add(cancionDesagregar);
+                    }
+                }
+                
+                this.cancionesDisponibles.addAll(cancionesDesagregar);
+                this.cancionesAgregadas.removeAll(cancionesDesagregar);
+                
+                FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_WARN, "DISCO AGREGADO!!", "HA AGREGADO TODAS LAS CANCIONES DE UN DISCO");
+                FacesContext.getCurrentInstance().addMessage(null, mensaje);
+            } else {
+                this.cancionesAgregadas.add(cancion);
+                this.cancionesDisponibles.remove(cancion);
+            }
         }
-        
+
         this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
+    }
+
+    public int contarCanciones(int idDisco) {
+        int nCanciones = 0;
+        for (UCancion cancion : cancionesAgregadas) {
+            if (cancion.getIdDisco() == idDisco) {
+                nCanciones++;
+            }
+        }
+        return nCanciones;
     }
 
     public void desAgregarCancion(UCancion cancion) {
         this.cancionesDisponibles.add(cancion);
         this.cancionesAgregadas.remove(cancion);
-        
+
         this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
-    
-    public void comprar(){
+
+    public void comprar() {
         new CoreCompras().registrar(discosAgregados, cancionesAgregadas);
         cargar();
     }
@@ -168,5 +204,5 @@ public class Compras implements Serializable {
     public void setPrecioTotal(int precioTotal) {
         this.precioTotal = precioTotal;
     }
-    
+
 }
