@@ -171,7 +171,8 @@ public class DAOCancion implements Serializable {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {
-                String query = "SELECT * FROM musica.cancion WHERE cancion.id_disco = " + idDisco + ";";
+                String query = "SELECT * FROM musica.cancion WHERE cancion.id_disco = " + idDisco + 
+                        "AND cancion.estado = true;";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {

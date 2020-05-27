@@ -21,7 +21,7 @@ public class UDisco implements Serializable {
     private int id;
 
     @Pattern(regexp = "^([a-zA-Z0-9 ])*$")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 30)
     private String nombre;
 
     private int numeroCanciones;
