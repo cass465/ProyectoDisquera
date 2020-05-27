@@ -19,15 +19,15 @@ public class UArtista implements Serializable {
     private int id;
 
     @Pattern(regexp="^[a-zA-Z ]*$")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 30)
     private String nombre;
 
     @Pattern(regexp="^[a-zA-Z ]*$")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 30)
     private String apellido;
 
     @Pattern(regexp = "^([a-zA-Z0-9 ])*$")
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 30)
     private String genero;
     
     @NotNull

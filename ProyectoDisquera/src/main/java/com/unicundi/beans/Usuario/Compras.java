@@ -38,11 +38,11 @@ public class Compras implements Serializable {
      * Creates a new instance of Compras
      */
     public Compras() {
-        
+
     }
-    
+
     @PostConstruct
-    public void cargar(){
+    public void cargar() {
         this.discosDisponibles = new CoreCompras().listarDiscosDisponibles();
         this.cancionesDisponibles = new CoreCompras().listarCancionesDisponibles();
         this.discosAgregados = new ArrayList<UDisco>();
@@ -57,18 +57,9 @@ public class Compras implements Serializable {
     }
 
     public void agregarDisco(UDisco disco) {
-        List<UCancion> removerCanciones = new ArrayList<UCancion>();
-        //Recorre las canciones agregadas y se listan las que tienen que salir
-        for (UCancion cancionAgregada : this.cancionesAgregadas) {
-            if (cancionAgregada.getIdDisco() == disco.getId()) {
-                removerCanciones.add(cancionAgregada);
-            }
-        }
-
-        /*
-         * Si hay canciones para remover Se añaden a disponibles las canciones
-         * que se remueven de agregadas*
-         */
+        List<UCancion> removerCanciones = new CoreCompras().listarCancionesARemover(cancionesAgregadas, disco);
+        
+        //Si hay canciones para remover
         if (removerCanciones.size() > 0) {
             this.cancionesDisponibles.addAll(removerCanciones);
             this.cancionesAgregadas.removeAll(removerCanciones);
@@ -76,47 +67,59 @@ public class Compras implements Serializable {
                     "MENSAJE", "SE HAN REMOVIDO LAS CANCIONES DEL DISCO AGREGADO EN LA LISTA DE COMPRAS");
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
         }
-        //Despues de sacar las canciones se agrega el disco
+        //Despues de sacar las canciones (si es el caso) se agrega el disco
         this.discosAgregados.add(disco);
         this.discosDisponibles.remove(disco);
-        
+
         this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
 
     public void desAgregarDisco(UDisco disco) {
         this.discosDisponibles.add(disco);
         this.discosAgregados.remove(disco);
-        
+
         this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
 
     public void agregarCancion(UCancion cancion) {
-        boolean aceptado = true;
-        for (UDisco discoAgregado : discosAgregados) {
-            if (discoAgregado.getId() == cancion.getIdDisco()) {
-                FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_FATAL, "ERROR", "NO SE PUEDE AGREGAR LA CANCIÓN PORQUE EL DISCO YA ESTÁ AGREGADO");
+        boolean aceptado = new CoreCompras().validarDiscoAgregado(discosAgregados, cancion);
+
+        if (aceptado) {
+            UDisco disco = new CoreCompras().obtenerDiscoPorCancion(discosDisponibles, cancion);
+            int numeroCanciones = new CoreCompras().contarCancionesAgregadasDeDisco(cancionesAgregadas, disco.getId());
+            
+            /*Si el numero de canciones agregadas mas la que se está agregando
+            es igual al total de canciones del disco entonces agregue el disco y
+            desagregue las canciones*/
+            if ((numeroCanciones + 1) == disco.getNumeroCanciones()) {
+                this.discosAgregados.add(disco);
+                this.discosDisponibles.remove(disco);
+                
+                List<UCancion> cancionesARemover = new CoreCompras().listarCancionesARemover(cancionesAgregadas, disco);
+                
+                this.cancionesDisponibles.addAll(cancionesARemover);
+                this.cancionesAgregadas.removeAll(cancionesARemover);
+                
+                FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_WARN, 
+                        "DISCO AGREGADO!!", "NO SE PUEDEN AGREGAR TODAS LAS CANCIONES DE UN DISCO");
                 FacesContext.getCurrentInstance().addMessage(null, mensaje);
-                aceptado = false;
-                break;
+            } else {
+                this.cancionesAgregadas.add(cancion);
+                this.cancionesDisponibles.remove(cancion);
             }
         }
 
-        if (aceptado) {
-            this.cancionesAgregadas.add(cancion);
-            this.cancionesDisponibles.remove(cancion);
-        }
-        
         this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
 
     public void desAgregarCancion(UCancion cancion) {
         this.cancionesDisponibles.add(cancion);
         this.cancionesAgregadas.remove(cancion);
-        
+
         this.precioTotal = new CoreCompras().calcularTotal(discosAgregados, cancionesAgregadas);
     }
-    
-    public void comprar(){
+
+    public void comprar() {
         new CoreCompras().registrar(discosAgregados, cancionesAgregadas);
         cargar();
     }
@@ -168,5 +171,5 @@ public class Compras implements Serializable {
     public void setPrecioTotal(int precioTotal) {
         this.precioTotal = precioTotal;
     }
-    
+
 }
