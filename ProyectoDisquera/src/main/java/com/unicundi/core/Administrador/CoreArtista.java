@@ -21,8 +21,8 @@ import javax.faces.context.FacesContext;
 public class CoreArtista implements Serializable {
 
     public void registrar(UArtista artista) {
-        UArtista artistaAux=new DAOArtista().obtenerExistente(artista);
-        if (artistaAux.getNombre()!=null   ) {
+        UArtista artistaAux = new DAOArtista().obtenerExistente(artista);
+        if (artistaAux.getNombre() != null) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El artista ya existe", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } else {
@@ -44,14 +44,21 @@ public class CoreArtista implements Serializable {
     }
 
     public void modificar(UArtista artista) {
-       UArtista artistaAux=new DAOArtista().obtenerExistente(artista);
-        if (artistaAux.getNombre()!=null && artistaAux.getId()!=artista.getId() ) {
+        UArtista artistaAux = new DAOArtista().obtenerExistente(artista);
+        if (artistaAux.getNombre() != null && artistaAux.getId() != artista.getId()) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El artista ya existe", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } else {
-            new DAOArtista().modificar(artista);
-            new DAODisco().cambiarEstadoArtista(artista.getId(), artista.isEstado());
-            new DAOCancion().cambiarEstadoArtista(artista.getId(), artista.isEstado());
+
+            if (new DAOArtista().obtenerEstado(artista.getNombre() + " " + artista.getApellido()) && artista.isEstado()) {
+                new DAOArtista().modificar(artista);
+            } else {
+                new DAOArtista().modificar(artista);
+                new DAODisco().cambiarEstadoArtista(artista.getId(), artista.isEstado());
+                new DAOCancion().cambiarEstadoArtista(artista.getId(), artista.isEstado());
+
+            }
+
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado Satisfactoriamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }

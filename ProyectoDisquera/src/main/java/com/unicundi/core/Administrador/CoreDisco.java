@@ -63,12 +63,16 @@ public class CoreDisco implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El disco ya existe", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } else {
-            if (estadoArtista==false && disco.isEstado()==true) {
+            if (estadoArtista == false && disco.isEstado() == true) {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No puede activar el disco, artista inactivo", "");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             } else {
-                new DAODisco().modificar(disco);
-                new DAOCancion().cambiarEstadoDisco(disco.getId(), disco.isEstado());
+                if (new DAODisco().obtenerEstado(disco.getNombre()) && disco.isEstado()) {
+                    new DAODisco().modificar(disco);
+                } else {
+                    new DAODisco().modificar(disco);
+                    new DAOCancion().cambiarEstadoDisco(disco.getId(), disco.isEstado());
+                }
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado Satisfactoriamente", "");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
 
