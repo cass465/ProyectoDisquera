@@ -14,22 +14,22 @@
         <ui:composition template="administrador.xhtml">
             <ui:define name="contenido">
                 <h:form id="for1">    
-                   
+
 
                     <p:panel header="REGISTRAR CANCIÓN" style="margin-bottom:5px;  font-style: italic; text-align: center; color: brown">
                         <h:panelGrid columns="2" cellpadding="5"  style="margin-left: 500px;"  >   
 
                             <p:outputLabel for="@next" value="NOMBRE" styleClass="out"/>
                             <p:inputText value="#{cancion.cancion.nombre}" required="true"/>
-                          
+
 
                             <p:outputLabel for="@next" value="DURACIÓN" styleClass="out" />
                             <p:inputText value="#{cancion.cancion.duracion}" required="true"/>
-                        
+
 
                             <p:outputLabel for="@next" value="PRECIO" styleClass="out"   />
                             <p:inputText value="#{cancion.cancion.precio}" required="true"/>                          
-                           
+
 
                             <p:outputLabel for="@next" value="DISCO" styleClass="out" />
                             <h:selectOneMenu value="#{cancion.cancion.idDisco}" style="width:100%">
@@ -60,15 +60,20 @@
 
                         <p:growl id="msgs" showDetail="false"/>
 
-                        <p:dataTable id="table1" value="#{cancion.canciones}" var ="tblCancion" editable="true" style="margin-bottom:20px" >
+                        <p:dataTable id="table1" value="#{cancion.canciones}" var ="tblCancion" editable="true" 
+                                     paginator="true" rows="8" 
+                                     style="text-align: center; margin-bottom:20px"
+                                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                     emptyMessage="NO SE ENCUENTRAN REGISTROS"
+                                     rowsPerPageTemplate="5,10,15" >
                             <f:facet name="header">
                                 CANCIONES
                             </f:facet>
 
-                            <p:ajax event="rowEdit" listener="#{cancion.onRowEdit}" update=":for:msgs" /><font></font>
-                            <p:ajax event="rowEditCancel" listener="#{cancion.onRowCancel}" update=":for:msgs" /><font></font>
+                            <p:ajax event="rowEdit" listener="#{cancion.onRowEdit}" update=":for:msgs" />
+                            <p:ajax event="rowEditCancel" listener="#{cancion.onRowCancel}" update=":for:msgs" />
 
-                            <p:column headerText="NOMBRE">
+                            <p:column headerText="NOMBRE" sortBy="#{tblCancion.nombre}" filterBy="#{tblCancion.nombre}" >
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblCancion.nombre}" /></f:facet>
                                     <f:facet name="input"><p:inputText  value="#{tblCancion.nombre}" style="width:100%">
@@ -77,7 +82,7 @@
                                 </p:cellEditor>
                             </p:column>
 
-                            <p:column headerText="DURACION">
+                            <p:column headerText="DURACION" sortBy="#{tblCancion.duracion}" filterBy="#{tblCancion.duracion}">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblCancion.duracion}" /></f:facet>
                                     <f:facet name="input"><p:inputText  value="#{tblCancion.duracion}" style="width:100%">
@@ -85,21 +90,25 @@
                                     </f:facet>
                                 </p:cellEditor>
                             </p:column>  
-                            
-                             <p:column headerText="PRECIO">
+
+                            <p:column headerText="PRECIO" sortBy="#{tblCancion.precio}" filterBy="#{tblCancion.precio}">
                                 <p:cellEditor>
-                                    <f:facet name="output"><h:outputText value="#{tblCancion.precio}" /></f:facet>
+                                     <f:facet name="output">
+                                        <h:outputText value="#{tblCancion.precio}">
+                                            <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
+                                        </h:outputText>
+                                    </f:facet>
                                     <f:facet name="input"><p:inputText  value="#{tblCancion.precio}" style="width:100%">
                                         </p:inputText>
                                     </f:facet>
                                 </p:cellEditor>
                             </p:column>  
 
-                            <p:column headerText="DISCO">
+                            <p:column headerText="DISCO" sortBy="#{tblCancion.nombreDisco}" filterBy="#{tblCancion.nombreDisco}">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblCancion.nombreDisco}"  /></f:facet>
                                     <f:facet name="input"> <h:selectOneMenu value="#{tblCancion.nombreDisco}" style="width:100%">
-                                             <f:selectItem  itemLabel="#{tblCancion.nombreDisco}" itemValue="#{tblCancion.nombreDisco}" />
+                                            <f:selectItem  itemLabel="#{tblCancion.nombreDisco}" itemValue="#{tblCancion.nombreDisco}" />
 
                                             <f:selectItems value="#{cancion.discos}" var="disc" itemLabel="#{disc.nombre}" itemValue="#{disc.nombre}" />
                                         </h:selectOneMenu><p:message for="@previous" />  
@@ -108,7 +117,7 @@
                                 </p:cellEditor>
                             </p:column>
 
-                            <p:column headerText="ESTADO">
+                            <p:column headerText="ESTADO" sortBy="#{tblCancion.nombre}">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblCancion.estado}" /></f:facet>
                                     <f:facet name="input">
