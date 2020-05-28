@@ -93,7 +93,7 @@
 
                             <p:column headerText="PRECIO" sortBy="#{tblCancion.precio}" filterBy="#{tblCancion.precio}">
                                 <p:cellEditor>
-                                     <f:facet name="output">
+                                    <f:facet name="output">
                                         <h:outputText value="#{tblCancion.precio}">
                                             <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                                         </h:outputText>
@@ -119,7 +119,10 @@
 
                             <p:column headerText="ESTADO" sortBy="#{tblCancion.nombre}">
                                 <p:cellEditor>
-                                    <f:facet name="output"><h:outputText value="#{tblCancion.estado}" /></f:facet>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{tblCancion.estado eq true ? 'ACTIVO' : ''}" />
+                                        <h:outputText value="#{tblCancion.estado eq false ? 'INACTIVO' : ''}"/>
+                                    </f:facet>
                                     <f:facet name="input">
                                         <p:selectOneRadio value="#{tblCancion.estado}" required="true">
                                             <f:selectItem itemValue="true" itemLabel="Activo"/>

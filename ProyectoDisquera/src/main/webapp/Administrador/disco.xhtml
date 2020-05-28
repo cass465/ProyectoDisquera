@@ -151,7 +151,10 @@
 
                             <p:column headerText="ESTADO" sortBy="#{tblDisco.nombre}">
                                 <p:cellEditor>
-                                    <f:facet name="output"><h:outputText value="#{tblDisco.estado}" /></f:facet>
+                                    <f:facet name="output">                                      
+                                        <h:outputText value="#{tblDisco.estado eq true ? 'ACTIVO' : ''}" />
+                                        <h:outputText value="#{tblDisco.estado eq false ? 'INACTIVO' : ''}"/>
+                                    </f:facet>
                                     <f:facet name="input">
                                         <p:selectOneRadio value="#{tblDisco.estado}" required="true">
                                             <f:selectItem itemValue="true" itemLabel="Activo"/>

@@ -97,7 +97,10 @@
 
                             <p:column headerText="ESTADO" sortBy="#{tblArtista.estado}">
                                 <p:cellEditor>
-                                    <f:facet name="output"><h:outputText value="#{tblArtista.estado}" /></f:facet>
+                                    <f:facet name="output">                                        
+                                        <h:outputText value="#{tblArtista.estado eq true ? 'ACTIVO' : ''}" />
+                                        <h:outputText value="#{tblArtista.estado eq false ? 'INACTIVO' : ''}"/>
+                                    </f:facet>
                                     <f:facet name="input">
                                         <p:selectOneRadio value="#{tblArtista.estado}" required="true">
                                             <f:selectItem itemValue="true" itemLabel="Activo"/>
