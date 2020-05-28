@@ -12,16 +12,22 @@ import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UDisco;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
+ * Clase core que tiene la logica de la aplicación 
  *
- * @author cass465
+ * @author Yeison Cifuentes
+ * @version 1.0.0
  */
 public class CoreDisco implements Serializable {
 
+    /**
+     * Registrar disco
+     * @param disco
+     * @param cancion 
+     */
     public void registrar(UDisco disco, UCancion cancion) {
         UDisco discoAux = new DAODisco().obtenerExistente(disco);
         UCancion cancionAux = new DAOCancion().obtenerExistente(cancion);
@@ -47,14 +53,26 @@ public class CoreDisco implements Serializable {
 
     }
 
+    /**
+     * Listar todos los discos
+     * @return 
+     */
     public ArrayList<UDisco> listar() {
         return new DAODisco().listar();
     }
 
+    /**
+     * Listar disco activos
+     * @return 
+     */
     public ArrayList<UDisco> listarActivos() {
         return new DAODisco().listarActivos();
     }
 
+    /**
+     * Modificar disco
+     * @param disco 
+     */
     public void modificar(UDisco disco) {
 
         UDisco discoAux = new DAODisco().obtenerExistente(disco);
@@ -75,7 +93,7 @@ public class CoreDisco implements Serializable {
                 }
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado Satisfactoriamente", "");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
-
+                
             }
         }
 

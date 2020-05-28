@@ -15,11 +15,18 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
+ * Clase core que tiene la logica de la aplicación
  *
- * @author cass465
+ * @author Yeison Cifuentes
+ * @version 1.0.0
  */
 public class CoreArtista implements Serializable {
 
+    /**
+     * Registrar artista
+     *
+     * @param artista
+     */
     public void registrar(UArtista artista) {
         UArtista artistaAux = new DAOArtista().obtenerExistente(artista);
         if (artistaAux.getNombre() != null) {
@@ -33,16 +40,31 @@ public class CoreArtista implements Serializable {
 
     }
 
+    /**
+     * Listar los artistas
+     *
+     * @return
+     */
     public ArrayList<UArtista> listar() {
         System.out.println("entre a core");
         return new DAOArtista().listar();
     }
 
+    /**
+     * Listar los artistas activos
+     *
+     * @return
+     */
     public ArrayList<UArtista> listarActivos() {
         System.out.println("entre a core");
         return new DAOArtista().listarActivos();
     }
 
+    /**
+     * Modificar artista
+     *
+     * @param artista
+     */
     public void modificar(UArtista artista) {
         UArtista artistaAux = new DAOArtista().obtenerExistente(artista);
         if (artistaAux.getNombre() != null && artistaAux.getId() != artista.getId()) {
@@ -65,6 +87,11 @@ public class CoreArtista implements Serializable {
 
     }
 
+    /**
+     * Eliminar artista, no utilizado
+     *
+     * @param artista
+     */
     public void eliminar(UArtista artista) {
         System.out.println("core Modificar");
         new DAOArtista().eliminar(artista);

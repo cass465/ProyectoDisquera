@@ -12,14 +12,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
+ * Clase que permite hacer operaciones en BD para el disco
  *
- * @author cass465
+ * @author Yeison Cifuentes
+ * @version 1.0.0
  */
 public class DAODisco implements Serializable {
 
+    /**
+     * Inserta el disco
+     *
+     * @param disco
+     */
     public void registrar(UDisco disco) {
         String[] returnId = {"id"};
         Connection conexion = new BDConector().open();
@@ -42,6 +48,11 @@ public class DAODisco implements Serializable {
 
     }
 
+    /**
+     * Lista todos los diacos
+     *
+     * @return
+     */
     public ArrayList<UDisco> listar() {
         ArrayList<UDisco> discos = new ArrayList<UDisco>();
         Connection conexion = new BDConector().open();
@@ -70,6 +81,11 @@ public class DAODisco implements Serializable {
         return discos;
     }
 
+    /**
+     * Listar discos activos
+     *
+     * @return
+     */
     public ArrayList<UDisco> listarActivos() {
         ArrayList<UDisco> discos = new ArrayList<UDisco>();
         Connection conexion = new BDConector().open();
@@ -98,6 +114,12 @@ public class DAODisco implements Serializable {
         return discos;
     }
 
+    /**
+     * Obtener el nombre del disco filtrando por el id
+     *
+     * @param id
+     * @return
+     */
     public String obtenerNombre(int id) {
         String nombre = null;
 
@@ -119,8 +141,14 @@ public class DAODisco implements Serializable {
         return nombre;
     }
 
-     public boolean obtenerEstado(String nombre) {
-        boolean estado=true;
+    /**
+     * Obtener el estado de disco apartir del nombre
+     *
+     * @param nombre
+     * @return
+     */
+    public boolean obtenerEstado(String nombre) {
+        boolean estado = true;
 
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -140,6 +168,12 @@ public class DAODisco implements Serializable {
         return estado;
     }
 
+    /**
+     * obtener disco
+     *
+     * @param disco
+     * @return
+     */
     public UDisco obtenerExistente(UDisco disco) {
         UDisco discoAux = new UDisco();
 
@@ -167,6 +201,11 @@ public class DAODisco implements Serializable {
         return discoAux;
     }
 
+    /**
+     * Modificar disco
+     *
+     * @param disco
+     */
     public void modificar(UDisco disco) {
 
         Connection conexion = new BDConector().open();
@@ -188,6 +227,12 @@ public class DAODisco implements Serializable {
         }
     }
 
+    /**
+     * Cambiar el estado si el artista se activa o inactiva
+     *
+     * @param id
+     * @param estado
+     */
     public void cambiarEstadoArtista(int id, boolean estado) {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -203,6 +248,9 @@ public class DAODisco implements Serializable {
         }
     }
 
+    /**
+     * Actualiza el numero de canciones del disco
+     */
     public void actualizarNCanciones() {
         Connection conexion = new BDConector().open();
 
@@ -221,11 +269,14 @@ public class DAODisco implements Serializable {
         }
     }
 
+    /**
+     * Actualiza el precio de disco
+     */
     public void actualizarPrecio() {
         Connection conexion = new BDConector().open();
 
         if (conexion != null) {
-            try {	
+            try {
                 String query = "UPDATE musica.disco SET precio=(SELECT  SUM(precio)-(SUM(precio)*0.1) "
                         + "     FROM musica.cancion "
                         + "     WHERE cancion.id_disco=disco.id AND cancion.estado=true );";
