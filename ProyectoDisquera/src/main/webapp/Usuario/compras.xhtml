@@ -17,7 +17,7 @@
             <p:dataTable id="discosDisponibles" value="#{compras.discosDisponibles}" var="discoDisponible" 
                          style="text-align: center; font-size: 95%; margin-left: 10%; margin-right: 10%; margin-top: 1%; margin-bottom: 1%" 
                          scrollable="true" scrollHeight="150" emptyMessage="NO SE ENCUENTRAN REGISTROS"
-                         filteredValue="#{compras.filtroDiscosDisponibles}">
+                         filteredValue="#{compras.filtroDiscosDisponibles}" widgetVar="discosDisponiblesWV">
                 <f:facet name="header">
                     Discos Disponibles
                 </f:facet>
@@ -55,7 +55,11 @@
                 <p:column headerText="Agregar">
                     <p:commandButton icon="ui-icon-cart" action="#{compras.agregarDisco(discoDisponible)}" 
                                      update=":form:discosDisponibles,:form:discosAgregados,:form:cancionesDisponibles,
-                                     :form:cancionesAgregadas,:form:msg,:form:panel"/>
+                                     :form:cancionesAgregadas,:form:msg,:form:panel" 
+                                     oncomplete="PF('discosDisponiblesWV').filter();
+                                     PF('discosAgregadosWV').filter();
+                                     PF('cancionesDisponiblesWV').filter();
+                                     PF('cancionesAgregadasWV').filter()"/>
                 </p:column>
             </p:dataTable>
 
@@ -63,7 +67,7 @@
             <p:dataTable id="cancionesDisponibles" value="#{compras.cancionesDisponibles}" var="cancionDisponible" 
                          style="text-align: center; font-size: 95%; margin-left: 10%; margin-right: 10%; margin-top: 1%; margin-bottom: 1%" 
                          scrollable="true" scrollHeight="150" emptyMessage="NO SE ENCUENTRAN REGISTROS"
-                         filteredValue="#{compras.filtroCancionesDisponibles}">
+                         filteredValue="#{compras.filtroCancionesDisponibles}" widgetVar="cancionesDisponiblesWV">
                 <f:facet name="header">
                     Canciones Disponibles
                 </f:facet>
@@ -101,7 +105,12 @@
 
                 <p:column headerText="Agregar">
                     <p:commandButton icon="ui-icon-cart" action="#{compras.agregarCancion(cancionDisponible)}" 
-                                     update=":form:discosDisponibles,:form:cancionesDisponibles,:form:cancionesAgregadas,:form:msg,:form:panel"/>
+                                     update=":form:discosDisponibles,:form:cancionesDisponibles,
+                                     :form:cancionesAgregadas,:form:msg,:form:panel"
+                                     oncomplete="PF('discosDisponiblesWV').filter();
+                                     PF('discosAgregadosWV').filter();
+                                     PF('cancionesDisponiblesWV').filter();
+                                     PF('cancionesAgregadasWV').filter()"/>
                 </p:column>
             </p:dataTable>
 
@@ -110,7 +119,7 @@
                 <p:dataTable id="discosAgregados" value="#{compras.discosAgregados}" var="discoAgregado" 
                              style="text-align: center; font-size: 95%; margin-top: 1%; margin-bottom: 1%" 
                              scrollable="true" scrollHeight="150" emptyMessage="NO SE HAN AGREGADO DISCOS PARA LA COMPRA"
-                             filteredValue="#{compras.filtroDiscosAgregados}">
+                             filteredValue="#{compras.filtroDiscosAgregados}" widgetVar="discosAgregadosWV">
                     <f:facet name="header">
                         Discos Agregados
                     </f:facet>
@@ -148,7 +157,11 @@
 
                     <p:column headerText="Desagregar">
                         <p:commandButton icon="ui-icon-closethick" action="#{compras.desAgregarDisco(discoAgregado)}" 
-                                         update=":form:discosDisponibles,:form:discosAgregados,:form:panel"/>
+                                         update=":form:discosDisponibles,:form:discosAgregados,:form:panel"
+                                         oncomplete="PF('discosDisponiblesWV').filter();
+                                         PF('discosAgregadosWV').filter();
+                                         PF('cancionesDisponiblesWV').filter();
+                                         PF('cancionesAgregadasWV').filter()"/>
                     </p:column>
                 </p:dataTable>
 
@@ -156,7 +169,7 @@
                 <p:dataTable id="cancionesAgregadas" value="#{compras.cancionesAgregadas}" var="cancionAgregada" 
                              style="text-align: center; font-size: 95%; margin-top: 1%; margin-bottom: 1%" 
                              scrollable="true" scrollHeight="150" emptyMessage="NO SE HAN AGREGADO CANCIONES PARA LA COMPRA"
-                             filteredValue="#{compras.filtroCancionesAgregadas}">
+                             filteredValue="#{compras.filtroCancionesAgregadas}" widgetVar="cancionesAgregadasWV">
                     <f:facet name="header">
                         Canciones Agregadas
                     </f:facet>
@@ -194,7 +207,11 @@
 
                     <p:column headerText="Desagregar">
                         <p:commandButton icon="ui-icon-closethick" action="#{compras.desAgregarCancion(cancionAgregada)}" 
-                                         update=":form:cancionesDisponibles,:form:cancionesAgregadas,:form:panel"/>
+                                         update=":form:cancionesDisponibles,:form:cancionesAgregadas,:form:panel"
+                                         oncomplete="PF('discosDisponiblesWV').filter();
+                                         PF('discosAgregadosWV').filter();
+                                         PF('cancionesDisponiblesWV').filter();
+                                         PF('cancionesAgregadasWV').filter()"/>
                     </p:column>
                 </p:dataTable>
 

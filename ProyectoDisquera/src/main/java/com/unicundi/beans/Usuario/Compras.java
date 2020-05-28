@@ -33,7 +33,7 @@ public class Compras implements Serializable {
 
     private List<UCancion> cancionesDisco;
     private int precioTotal;
-    
+
     private List<UDisco> filtroDiscosDisponibles;
     private List<UCancion> filtroCancionesDisponibles;
     private List<UDisco> filtroDiscosAgregados;
@@ -52,6 +52,7 @@ public class Compras implements Serializable {
         this.cancionesDisponibles = new CoreCompras().listarCancionesDisponibles();
         this.discosAgregados = new ArrayList<UDisco>();
         this.cancionesAgregadas = new ArrayList<UCancion>();
+
         this.precioTotal = 0;
     }
 
@@ -63,7 +64,7 @@ public class Compras implements Serializable {
 
     public void agregarDisco(UDisco disco) {
         List<UCancion> removerCanciones = new CoreCompras().listarCancionesARemover(cancionesAgregadas, disco);
-        
+
         //Si hay canciones para remover
         if (removerCanciones.size() > 0) {
             this.cancionesDisponibles.addAll(removerCanciones);
@@ -92,20 +93,20 @@ public class Compras implements Serializable {
         if (aceptado) {
             UDisco disco = new CoreCompras().obtenerDiscoPorCancion(discosDisponibles, cancion);
             int numeroCanciones = new CoreCompras().contarCancionesAgregadasDeDisco(cancionesAgregadas, disco.getId());
-            
+
             /*Si el numero de canciones agregadas mas la que se está agregando
             es igual al total de canciones del disco entonces agregue el disco y
             desagregue las canciones*/
             if ((numeroCanciones + 1) == disco.getNumeroCanciones()) {
                 this.discosAgregados.add(disco);
                 this.discosDisponibles.remove(disco);
-                
+
                 List<UCancion> cancionesARemover = new CoreCompras().listarCancionesARemover(cancionesAgregadas, disco);
-                
+
                 this.cancionesDisponibles.addAll(cancionesARemover);
                 this.cancionesAgregadas.removeAll(cancionesARemover);
-                
-                FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_WARN, 
+
+                FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_WARN,
                         "DISCO AGREGADO!!", "NO SE PUEDEN AGREGAR TODAS LAS CANCIONES DE UN DISCO");
                 FacesContext.getCurrentInstance().addMessage(null, mensaje);
             } else {
@@ -208,5 +209,5 @@ public class Compras implements Serializable {
     public void setFiltroCancionesAgregadas(List<UCancion> filtroCancionesAgregadas) {
         this.filtroCancionesAgregadas = filtroCancionesAgregadas;
     }
-    
+
 }
