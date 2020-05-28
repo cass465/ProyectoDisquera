@@ -24,17 +24,17 @@ public class UCompraDisco implements Serializable{
     private String disco;
     private int numeroCanciones;
 
-    public UCompraDisco(int id, int idUsuario, int idDisco, int valorCompra, Date fechaCompra) {
+    public UCompraDisco(int id, int idUsuario, int idDisco, int valorCompra, Date fechaCompra, int numeroCanciones) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idDisco = idDisco;
         this.valorCompra = valorCompra;
         this.fechaCompra = fechaCompra;
+        this.numeroCanciones = numeroCanciones;
     }
 
-    public UCompraDisco(int id, int idDisco, int valorCompra, Date fechaCompra, String genero, String nombreCompletoArtista, String disco, int numeroCanciones) {
+    public UCompraDisco(int id, int valorCompra, Date fechaCompra, String genero, String nombreCompletoArtista, String disco, int numeroCanciones) {
         this.id = id;
-        this.idDisco = idDisco;
         this.valorCompra = valorCompra;
         this.fechaCompra = fechaCompra;
         this.genero = genero;

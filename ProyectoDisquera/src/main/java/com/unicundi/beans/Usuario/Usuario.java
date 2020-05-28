@@ -6,9 +6,9 @@
 package com.unicundi.beans.Usuario;
 
 import com.unicundi.core.Usuario.CoreCompras;
-import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UCompraCancion;
 import com.unicundi.utilitarios.UCompraDisco;
+import com.unicundi.utilitarios.UCompraDiscoCancion;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Usuario implements Serializable {
     private String username;
     private List<UCompraDisco> discos;
     private List<UCompraCancion> canciones;
-    private List<UCancion> cancionesDisco;
+    private List<UCompraDiscoCancion> cancionesDisco;
     
     /**
      * Creates a new instance of Usuario
@@ -39,7 +39,7 @@ public class Usuario implements Serializable {
     }
     
     public void buscarCancionesPorDisco(UCompraDisco compra) {
-        this.cancionesDisco = new CoreCompras().buscarPorDisco(compra.getIdDisco());
+        this.cancionesDisco = new CoreCompras().buscarPorCompraDisco(compra.getId());
         //Abrir modal de canciones de disco comprado
         RequestContext.getCurrentInstance().execute("PF('cancionesDiscoDialog').show();");
     }
@@ -68,11 +68,11 @@ public class Usuario implements Serializable {
         this.canciones = canciones;
     }
 
-    public List<UCancion> getCancionesDisco() {
+    public List<UCompraDiscoCancion> getCancionesDisco() {
         return cancionesDisco;
     }
 
-    public void setCancionesDisco(List<UCancion> cancionesDisco) {
+    public void setCancionesDisco(List<UCompraDiscoCancion> cancionesDisco) {
         this.cancionesDisco = cancionesDisco;
     }
     
