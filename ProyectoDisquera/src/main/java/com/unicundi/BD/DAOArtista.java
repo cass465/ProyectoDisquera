@@ -14,11 +14,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Clase que permite hacer operaciones en BD para el artista
  *
- * @author cass465
+ * @author Yeison Cifuentes
+ * @version 1.0.0
  */
 public class DAOArtista implements Serializable {
 
+    /**
+     * Registrar artista
+     * @param artista 
+     */
     public void registrar(UArtista artista) {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -38,6 +44,10 @@ public class DAOArtista implements Serializable {
         }
     }
 
+    /**
+     * listar todos los artistas 
+     * @return 
+     */
     public ArrayList<UArtista> listar() {
         String estado;
         ArrayList<UArtista> artistas = new ArrayList<UArtista>();
@@ -62,6 +72,10 @@ public class DAOArtista implements Serializable {
         return artistas;
     }
 
+    /**
+     * Listar los artistas que estan activos
+     * @return 
+     */
     public ArrayList<UArtista> listarActivos() {
         String estado;
         ArrayList<UArtista> artistas = new ArrayList<UArtista>();
@@ -86,6 +100,11 @@ public class DAOArtista implements Serializable {
         return artistas;
     }
 
+    /**
+     * Obtiene el nombre del arista a partir del id
+     * @param id
+     * @return 
+     */
     public String obtenerNombre(int id) {
         String nombre = null;
 
@@ -107,6 +126,11 @@ public class DAOArtista implements Serializable {
         return nombre;
     }
     
+    /**
+     * Obtiene el estado apartir del nombre
+     * @param nombre
+     * @return 
+     */
     public boolean obtenerEstado(String nombre) {
         boolean estado=true;
 
@@ -130,6 +154,11 @@ public class DAOArtista implements Serializable {
         return estado;
     }
 
+    /**
+     * Obtener artista 
+     * @param artista
+     * @return 
+     */
     public UArtista obtenerExistente(UArtista artista) {
        UArtista artistaAux= new UArtista();
 
@@ -157,6 +186,10 @@ public class DAOArtista implements Serializable {
         return artistaAux;
     }
 
+    /**
+     * Modificar artista
+     * @param artista 
+     */
     public void modificar(UArtista artista) {
 
         Connection conexion = new BDConector().open();
@@ -177,6 +210,10 @@ public class DAOArtista implements Serializable {
         }
     }
 
+    /**
+     * Eliminar artista, no utilizado
+     * @param artista 
+     */
     public void eliminar(UArtista artista) {
 
         Connection conexion = new BDConector().open();
