@@ -16,7 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
- * Clase core que tiene la logica de la aplicación 
+ * Clase core que tiene la logica de la aplicación
  *
  * @author Yeison Cifuentes
  * @version 1.0.0
@@ -25,8 +25,9 @@ public class CoreDisco implements Serializable {
 
     /**
      * Registrar disco
+     *
      * @param disco
-     * @param cancion 
+     * @param cancion
      */
     public void registrar(UDisco disco, UCancion cancion) {
         UDisco discoAux = new DAODisco().obtenerExistente(disco);
@@ -55,7 +56,8 @@ public class CoreDisco implements Serializable {
 
     /**
      * Listar todos los discos
-     * @return 
+     *
+     * @return
      */
     public ArrayList<UDisco> listar() {
         return new DAODisco().listar();
@@ -63,7 +65,8 @@ public class CoreDisco implements Serializable {
 
     /**
      * Listar disco activos
-     * @return 
+     *
+     * @return
      */
     public ArrayList<UDisco> listarActivos() {
         return new DAODisco().listarActivos();
@@ -71,7 +74,8 @@ public class CoreDisco implements Serializable {
 
     /**
      * Modificar disco
-     * @param disco 
+     *
+     * @param disco
      */
     public void modificar(UDisco disco) {
 
@@ -91,9 +95,11 @@ public class CoreDisco implements Serializable {
                     new DAODisco().modificar(disco);
                     new DAOCancion().cambiarEstadoDisco(disco.getId(), disco.isEstado());
                 }
+                new DAODisco().actualizarNCanciones();
+                new DAODisco().actualizarPrecio();
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Modificado Satisfactoriamente", "");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
-                
+
             }
         }
 

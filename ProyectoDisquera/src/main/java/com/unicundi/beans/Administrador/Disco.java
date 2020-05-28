@@ -5,6 +5,7 @@
  */
 package com.unicundi.beans.Administrador;
 
+import com.unicundi.BD.DAODisco;
 import com.unicundi.core.Administrador.CoreArtista;
 import com.unicundi.core.Administrador.CoreDisco;
 import com.unicundi.utilitarios.UArtista;
@@ -32,12 +33,12 @@ public class Disco implements Serializable {
      * Disco para obtener los datos
      */
     private UDisco disco;
-    
+
     /**
      * Cancion para obtener los datos
      */
     private UCancion cancion;
-    
+
     /**
      * Lista de discos
      */
@@ -52,6 +53,7 @@ public class Disco implements Serializable {
      * Constructor de la clase
      */
     public Disco() {
+        
         disco = new UDisco();
         cancion = new UCancion();
     }
@@ -66,7 +68,8 @@ public class Disco implements Serializable {
 
     /**
      * Editar disco
-     * @param event 
+     *
+     * @param event
      */
     public void onRowEdit(RowEditEvent event) {
         UDisco discoEdit = (UDisco) event.getObject();
@@ -74,8 +77,9 @@ public class Disco implements Serializable {
     }
 
     /**
-     * Cancelar operacion 
-     * @param event 
+     * Cancelar operacion
+     *
+     * @param event
      */
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Operacion Cancelada");
@@ -84,7 +88,8 @@ public class Disco implements Serializable {
 
     /**
      * Obtiene el disco
-     * @return 
+     *
+     * @return
      */
     public UDisco getDisco() {
         return disco;
@@ -92,7 +97,8 @@ public class Disco implements Serializable {
 
     /**
      * Establece los valores del disco
-     * @param disco 
+     *
+     * @param disco
      */
     public void setDisco(UDisco disco) {
         this.disco = disco;
@@ -100,7 +106,8 @@ public class Disco implements Serializable {
 
     /**
      * Obtiene la lista de discos
-     * @return 
+     *
+     * @return
      */
     public ArrayList<UDisco> getDiscos() {
         return discos;
@@ -108,7 +115,8 @@ public class Disco implements Serializable {
 
     /**
      * Establece la lista
-     * @param discos 
+     *
+     * @param discos
      */
     public void setDiscos(ArrayList<UDisco> discos) {
         this.discos = discos;
@@ -116,7 +124,8 @@ public class Disco implements Serializable {
 
     /**
      * Obtiene los valores de la lista artista
-     * @return 
+     *
+     * @return
      */
     public ArrayList<UArtista> getArtista() {
         return artista;
@@ -124,23 +133,26 @@ public class Disco implements Serializable {
 
     /**
      * Establece los valores de la lista
-     * @param artista 
+     *
+     * @param artista
      */
     public void setArtista(ArrayList<UArtista> artista) {
         this.artista = artista;
     }
 
     /**
-     * Obtiene los valores de la cancion 
-     * @return 
+     * Obtiene los valores de la cancion
+     *
+     * @return
      */
     public UCancion getCancion() {
         return cancion;
     }
 
     /**
-     * Establece los valores de la cancion 
-     * @param cancion 
+     * Establece los valores de la cancion
+     *
+     * @param cancion
      */
     public void setCancion(UCancion cancion) {
         this.cancion = cancion;

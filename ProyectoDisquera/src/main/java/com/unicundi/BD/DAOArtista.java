@@ -23,7 +23,8 @@ public class DAOArtista implements Serializable {
 
     /**
      * Registrar artista
-     * @param artista 
+     *
+     * @param artista
      */
     public void registrar(UArtista artista) {
         Connection conexion = new BDConector().open();
@@ -45,8 +46,9 @@ public class DAOArtista implements Serializable {
     }
 
     /**
-     * listar todos los artistas 
-     * @return 
+     * listar todos los artistas
+     *
+     * @return
      */
     public ArrayList<UArtista> listar() {
         String estado;
@@ -74,7 +76,8 @@ public class DAOArtista implements Serializable {
 
     /**
      * Listar los artistas que estan activos
-     * @return 
+     *
+     * @return
      */
     public ArrayList<UArtista> listarActivos() {
         String estado;
@@ -102,8 +105,9 @@ public class DAOArtista implements Serializable {
 
     /**
      * Obtiene el nombre del arista a partir del id
+     *
      * @param id
-     * @return 
+     * @return
      */
     public String obtenerNombre(int id) {
         String nombre = null;
@@ -125,14 +129,15 @@ public class DAOArtista implements Serializable {
         }
         return nombre;
     }
-    
+
     /**
      * Obtiene el estado apartir del nombre
+     *
      * @param nombre
-     * @return 
+     * @return
      */
     public boolean obtenerEstado(String nombre) {
-        boolean estado=true;
+        boolean estado = true;
 
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -142,7 +147,7 @@ public class DAOArtista implements Serializable {
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
-                    
+
                     estado = resultado.getBoolean("estado");
                 }
                 stmt.close();
@@ -150,17 +155,18 @@ public class DAOArtista implements Serializable {
                 e.printStackTrace();
             }
         }
-        System.out.println("ESTADO:"+ estado);
+        System.out.println("ESTADO:" + estado);
         return estado;
     }
 
     /**
-     * Obtener artista 
+     * Obtener artista
+     *
      * @param artista
-     * @return 
+     * @return
      */
     public UArtista obtenerExistente(UArtista artista) {
-       UArtista artistaAux= new UArtista();
+        UArtista artistaAux = new UArtista();
 
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -171,7 +177,7 @@ public class DAOArtista implements Serializable {
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
-                   artistaAux= new UArtista(resultado.getInt("id"),
+                    artistaAux = new UArtista(resultado.getInt("id"),
                             resultado.getString("nombre"),
                             resultado.getString("apellido"),
                             resultado.getString("genero"),
@@ -182,13 +188,14 @@ public class DAOArtista implements Serializable {
                 e.printStackTrace();
             }
         }
-        System.out.println("ARTISTA AUX"+ artistaAux.getApellido());
+        System.out.println("ARTISTA AUX" + artistaAux.getApellido());
         return artistaAux;
     }
 
     /**
      * Modificar artista
-     * @param artista 
+     *
+     * @param artista
      */
     public void modificar(UArtista artista) {
 
@@ -212,7 +219,8 @@ public class DAOArtista implements Serializable {
 
     /**
      * Eliminar artista, no utilizado
-     * @param artista 
+     *
+     * @param artista
      */
     public void eliminar(UArtista artista) {
 

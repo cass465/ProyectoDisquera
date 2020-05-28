@@ -15,9 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * Clase que permite hacer operaciones en BD para la cancion 
+ * Clase que permite hacer operaciones en BD para la cancion
  *
  * @author Yeison Cifuentes
  * @version 1.0.0
@@ -25,8 +24,9 @@ import java.util.List;
 public class DAOCancion implements Serializable {
 
     /**
-     * Inserta la cancion 
-     * @param cancion 
+     * Inserta la cancion
+     *
+     * @param cancion
      */
     public void registrar(UCancion cancion) {
 
@@ -51,9 +51,10 @@ public class DAOCancion implements Serializable {
     }
 
     /**
-     * registra la cancion cuando se hace desde la vista del disco 
+     * registra la cancion cuando se hace desde la vista del disco
+     *
      * @param cancion
-     * @param nombreDisco 
+     * @param nombreDisco
      */
     public void registrarDisco(UCancion cancion, String nombreDisco) {
         Connection conexion = new BDConector().open();
@@ -75,8 +76,9 @@ public class DAOCancion implements Serializable {
     }
 
     /**
-     * Listar todas la canciones 
-     * @return 
+     * Listar todas la canciones
+     *
+     * @return
      */
     public ArrayList<UCancion> listar() {
         ArrayList<UCancion> canciones = new ArrayList<UCancion>();
@@ -105,9 +107,10 @@ public class DAOCancion implements Serializable {
     }
 
     /**
-     * Obtener cancion 
+     * Obtener cancion
+     *
      * @param cancion
-     * @return 
+     * @return
      */
     public UCancion obtenerExistente(UCancion cancion) {
         UCancion cancionAux = new UCancion();
@@ -137,7 +140,8 @@ public class DAOCancion implements Serializable {
 
     /**
      * Modificar cancion
-     * @param cancion 
+     *
+     * @param cancion
      */
     public void modificar(UCancion cancion) {
 
@@ -162,8 +166,9 @@ public class DAOCancion implements Serializable {
 
     /**
      * Cambiar el estado si el artista se activa o inactiva
+     *
      * @param id
-     * @param estado 
+     * @param estado
      */
     public void cambiarEstadoArtista(int id, boolean estado) {
         Connection conexion = new BDConector().open();
@@ -183,8 +188,9 @@ public class DAOCancion implements Serializable {
 
     /**
      * Cambia el estado si el disco se inactiva o activa
+     *
      * @param id
-     * @param estado 
+     * @param estado
      */
     public void cambiarEstadoDisco(int id, boolean estado) {
         Connection conexion = new BDConector().open();
@@ -202,17 +208,18 @@ public class DAOCancion implements Serializable {
     }
 
     /**
-     * Buscar las canciones filtrando por disco 
+     * Buscar las canciones filtrando por disco
+     *
      * @param idDisco
-     * @return 
+     * @return
      */
     public List<UCancion> buscarPorDisco(int idDisco) {
         List<UCancion> canciones = new ArrayList<UCancion>();
         Connection conexion = new BDConector().open();
         if (conexion != null) {
             try {
-                String query = "SELECT * FROM musica.cancion WHERE cancion.id_disco = " + idDisco + 
-                        "AND cancion.estado = true;";
+                String query = "SELECT * FROM musica.cancion WHERE cancion.id_disco = " + idDisco
+                        + "AND cancion.estado = true;";
                 PreparedStatement stmt = conexion.prepareStatement(query);
                 ResultSet resultado = stmt.executeQuery();
                 while (resultado.next()) {
