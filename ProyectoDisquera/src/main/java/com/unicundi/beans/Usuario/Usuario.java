@@ -29,6 +29,9 @@ public class Usuario implements Serializable {
     private List<UCompraCancion> canciones;
     private List<UCompraDiscoCancion> cancionesDisco;
     
+    private List<UCompraDisco> filtroDiscos;
+    private List<UCompraCancion> filtroCanciones;
+    
     /**
      * Creates a new instance of Usuario
      */
@@ -74,6 +77,22 @@ public class Usuario implements Serializable {
 
     public void setCancionesDisco(List<UCompraDiscoCancion> cancionesDisco) {
         this.cancionesDisco = cancionesDisco;
+    }
+
+    public List<UCompraDisco> getFiltroDiscos() {
+        return filtroDiscos;
+    }
+
+    public void setFiltroDiscos(List<UCompraDisco> filtroDiscos) {
+        this.filtroDiscos = filtroDiscos;
+    }
+
+    public List<UCompraCancion> getFiltroCanciones() {
+        return filtroCanciones;
+    }
+
+    public void setFiltroCanciones(List<UCompraCancion> filtroCanciones) {
+        this.filtroCanciones = filtroCanciones;
     }
     
 }

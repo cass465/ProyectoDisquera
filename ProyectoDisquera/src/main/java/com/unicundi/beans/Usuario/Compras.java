@@ -33,6 +33,11 @@ public class Compras implements Serializable {
 
     private List<UCancion> cancionesDisco;
     private int precioTotal;
+    
+    private List<UDisco> filtroDiscosDisponibles;
+    private List<UCancion> filtroCancionesDisponibles;
+    private List<UDisco> filtroDiscosAgregados;
+    private List<UCancion> filtroCancionesAgregadas;
 
     /**
      * Creates a new instance of Compras
@@ -172,4 +177,36 @@ public class Compras implements Serializable {
         this.precioTotal = precioTotal;
     }
 
+    public List<UDisco> getFiltroDiscosDisponibles() {
+        return filtroDiscosDisponibles;
+    }
+
+    public void setFiltroDiscosDisponibles(List<UDisco> filtroDiscosDisponibles) {
+        this.filtroDiscosDisponibles = filtroDiscosDisponibles;
+    }
+
+    public List<UCancion> getFiltroCancionesDisponibles() {
+        return filtroCancionesDisponibles;
+    }
+
+    public void setFiltroCancionesDisponibles(List<UCancion> filtroCancionesDisponibles) {
+        this.filtroCancionesDisponibles = filtroCancionesDisponibles;
+    }
+
+    public List<UDisco> getFiltroDiscosAgregados() {
+        return filtroDiscosAgregados;
+    }
+
+    public void setFiltroDiscosAgregados(List<UDisco> filtroDiscosAgregados) {
+        this.filtroDiscosAgregados = filtroDiscosAgregados;
+    }
+
+    public List<UCancion> getFiltroCancionesAgregadas() {
+        return filtroCancionesAgregadas;
+    }
+
+    public void setFiltroCancionesAgregadas(List<UCancion> filtroCancionesAgregadas) {
+        this.filtroCancionesAgregadas = filtroCancionesAgregadas;
+    }
+    
 }
