@@ -6,6 +6,7 @@
 package com.unicundi.utilitarios;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -40,6 +41,7 @@ public class UDisco implements Serializable {
     private boolean seleccionado;
     private String nombreArtista;
     private String genero;
+    private List<UCancion> cancionesDisco;
     
     public UDisco() {
 
@@ -55,7 +57,8 @@ public class UDisco implements Serializable {
         this.nombreArtista=nombreArtista;
     }
 
-    public UDisco(int id, String nombre, int numeroCanciones, int precio, int idArtista, String nombreArtista, String genero) {
+    public UDisco(int id, String nombre, int numeroCanciones, int precio, int idArtista, 
+            String nombreArtista, String genero, List<UCancion> cancionesDisco) {
         this.id = id;
         this.nombre = nombre;
         this.numeroCanciones = numeroCanciones;
@@ -63,6 +66,7 @@ public class UDisco implements Serializable {
         this.idArtista = idArtista;
         this.nombreArtista = nombreArtista;
         this.genero = genero;
+        this.cancionesDisco = cancionesDisco;
     }
     
    
@@ -138,6 +142,14 @@ public class UDisco implements Serializable {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public List<UCancion> getCancionesDisco() {
+        return cancionesDisco;
+    }
+
+    public void setCancionesDisco(List<UCancion> cancionesDisco) {
+        this.cancionesDisco = cancionesDisco;
     }
     
 }

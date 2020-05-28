@@ -57,7 +57,7 @@ public class Compras implements Serializable {
     }
 
     public void buscarCancionesPorDisco(UDisco disco) {
-        this.cancionesDisco = new CoreCompras().buscarPorDisco(disco.getId());
+        this.cancionesDisco = disco.getCancionesDisco();
         //Abrir modal de canciones
         RequestContext.getCurrentInstance().execute("PF('cancionesDialog').show();");
     }

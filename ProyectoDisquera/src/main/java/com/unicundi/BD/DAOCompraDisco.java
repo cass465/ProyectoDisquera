@@ -5,6 +5,7 @@
  */
 package com.unicundi.BD;
 
+import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UCompraDisco;
 import com.unicundi.utilitarios.UDisco;
 import com.unicundi.utilitarios.UUsuario;
@@ -42,8 +43,9 @@ public class DAOCompraDisco implements Serializable {
                     int idArtista = resultado.getInt("id_artista");
                     String genero = resultado.getString("genero");
                     String nombreArtista = resultado.getString("nombre_artista") + " " + resultado.getString("apellido_artista");
-
-                    discos.add(new UDisco(id, nombre, numeroCanciones, precio, idArtista, nombreArtista, genero));
+                    List<UCancion> cancionesDisco = new DAOCancion().buscarPorDisco(id);
+                    
+                    discos.add(new UDisco(id, nombre, numeroCanciones, precio, idArtista, nombreArtista, genero, cancionesDisco));
                 }
                 stmt.close();
             } catch (SQLException e) {
