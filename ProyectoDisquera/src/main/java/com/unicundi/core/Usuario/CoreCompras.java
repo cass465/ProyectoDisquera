@@ -8,9 +8,11 @@ package com.unicundi.core.Usuario;
 import com.unicundi.BD.DAOCancion;
 import com.unicundi.BD.DAOCompraCancion;
 import com.unicundi.BD.DAOCompraDisco;
+import com.unicundi.BD.DAOCompraDiscoCancion;
 import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UCompraCancion;
 import com.unicundi.utilitarios.UCompraDisco;
+import com.unicundi.utilitarios.UCompraDiscoCancion;
 import com.unicundi.utilitarios.UDisco;
 import com.unicundi.utilitarios.UUsuario;
 import java.io.Serializable;
@@ -37,6 +39,10 @@ public class CoreCompras implements Serializable {
     public List<UCancion> buscarPorDisco(int idDisco) {
         return new DAOCancion().buscarPorDisco(idDisco);
     }
+    
+    public List<UCompraDiscoCancion> buscarPorCompraDisco(int idCompraDisco) {
+        return new DAOCompraDiscoCancion().buscarPorCompraDisco(idCompraDisco);
+    }
 
     public void registrar(List<UDisco> discosAgregados, List<UCancion> cancionesAgregadas) {
         int nCompras = 0;
@@ -46,8 +52,18 @@ public class CoreCompras implements Serializable {
         for (UDisco disco : discosAgregados) {
             int idDisco = disco.getId();
             int valorCompra = disco.getPrecio();
-            UCompraDisco compra = new UCompraDisco(0, idUsuario, idDisco, valorCompra, fechaCompra);
+            int numeroCanciones = buscarPorDisco(disco.getId()).size();
+            UCompraDisco compra = new UCompraDisco(0, idUsuario, idDisco, valorCompra, fechaCompra, numeroCanciones);
             new DAOCompraDisco().registrar(compra);
+            int idCompraDisco = new DAOCompraDisco().obtenerIdMayor();
+            
+            List<UCancion> cancionesDisco = new DAOCancion().buscarPorDisco(compra.getIdDisco());
+            for (UCancion cancionDisco : cancionesDisco){
+                int idCancion = cancionDisco.getId();
+                UCompraDiscoCancion compraCancion = new UCompraDiscoCancion(0, idCompraDisco, idCancion);
+                new DAOCompraDiscoCancion().registrar(compraCancion);
+            }
+            
             nCompras++;
         }
 

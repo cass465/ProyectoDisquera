@@ -39,20 +39,24 @@
             <p:dialog id="modalDiscos" widgetVar="comprasDiscosDialog" 
                       modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
                 <p:dataTable value="#{usuario.discos}" var="discoComprado" emptyMessage="NO SE ENCUENTRAN REGISTROS" 
-                             style="text-align: center" scrollable="true" scrollHeight="200">
+                             style="text-align: center" scrollable="true" 
+                             scrollHeight="200" filteredValue="#{usuario.filtroDiscos}">
                     <f:facet name="header">
                         Discos Comprados
                     </f:facet>
 
-                    <p:column headerText="Genero">
+                    <p:column headerText="Genero" filterBy="#{discoComprado.genero}" 
+                              filterMatchMode="contains" sortBy="#{discoComprado.genero}">
                         <h:outputText value="#{discoComprado.genero}" /> 
                     </p:column>
 
-                    <p:column headerText="Artista">
+                    <p:column headerText="Artista" filterBy="#{discoComprado.nombreCompletoArtista}" 
+                              filterMatchMode="contains" sortBy="#{discoComprado.nombreCompletoArtista}">
                         <h:outputText value="#{discoComprado.nombreCompletoArtista}" /> 
                     </p:column>
 
-                    <p:column headerText="Disco">
+                    <p:column headerText="Disco" filterBy="#{discoComprado.disco}" 
+                              filterMatchMode="contains" sortBy="#{discoComprado.disco}">
                         <h:outputText value="#{discoComprado.disco}" /> 
                     </p:column>
 
@@ -87,19 +91,14 @@
                         Canciones Del Disco
                     </f:facet>
 
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{cancionDeDisco.nombre}" /> 
+                    <p:column headerText="Nombre" sortBy="#{cancionDeDisco.cancion}">
+                        <h:outputText value="#{cancionDeDisco.cancion}" /> 
                     </p:column>
 
                     <p:column headerText="Duracion">
                         <h:outputText value="#{cancionDeDisco.duracion}" /> 
                     </p:column>
 
-                    <p:column headerText="Precio Unitario">
-                        <h:outputText value="#{cancionDeDisco.precio}">
-                            <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
-                        </h:outputText> 
-                    </p:column>
                 </p:dataTable>
             </p:dialog>
         </h:form>
@@ -108,20 +107,24 @@
         <p:dialog id="modalCanciones" widgetVar="comprasCancionesDialog" 
                   modal="true" resizable="false" draggable="false" style="margin-left: 10%; margin-right: 10%;">
             <p:dataTable value="#{usuario.canciones}" var="cancionComprada" emptyMessage="NO SE ENCUENTRAN REGISTROS"
-                         style="text-align: center" scrollable="true" scrollHeight="200">
+                         style="text-align: center" scrollable="true" 
+                         scrollHeight="200" filteredValue="#{usuario.filtroCanciones}">
                 <f:facet name="header">
                     Canciones Compradas
                 </f:facet>
 
-                <p:column headerText="Genero">
+                <p:column headerText="Genero" filterBy="#{cancionComprada.genero}" 
+                          filterMatchMode="contains" sortBy="#{cancionComprada.genero}">
                     <h:outputText value="#{cancionComprada.genero}" /> 
                 </p:column>
 
-                <p:column headerText="Artista">
+                <p:column headerText="Artista" filterBy="#{cancionComprada.nombreCompletoArtista}" 
+                          filterMatchMode="contains" sortBy="#{cancionComprada.nombreCompletoArtista}">
                     <h:outputText value="#{cancionComprada.nombreCompletoArtista}" /> 
                 </p:column>
 
-                <p:column headerText="Nombre de Cancion">
+                <p:column headerText="Nombre de Cancion" filterBy="#{cancionComprada.cancion}" 
+                          filterMatchMode="contains" sortBy="#{cancionComprada.cancion}">
                     <h:outputText value="#{cancionComprada.cancion}" /> 
                 </p:column>
 
@@ -129,7 +132,7 @@
                     <h:outputText value="#{cancionComprada.duracion}" /> 
                 </p:column>
 
-                <p:column headerText="Precio de Compora">
+                <p:column headerText="Precio de Compra">
                     <h:outputText value="#{cancionComprada.valorCompra}">
                         <f:convertNumber type="currency" currencySymbol="$" maxFractionDigits="0"/>
                     </h:outputText> 
