@@ -19,20 +19,20 @@
 
                     <p:panel header="REGISTRAR ARTISTA" style="margin-bottom:5px;  font-style: italic; text-align: center; color: brown">
                         <h:panelGrid columns="2" cellpadding="5"  style="margin-left: 500px;"  >   
-                           
+
                             <p:outputLabel for="@next" value="NOMBRE" styleClass="out"/>
                             <p:inputText value="#{artista.artista.nombre}" required="true"/>
-                           
+
 
                             <p:outputLabel for="@next" value="APELLIDO" styleClass="out" />
                             <p:inputText value="#{artista.artista.apellido}" required="true"/>
-                            
+
 
                             <p:outputLabel for="@next" value="GENERO" styleClass="out"   />
                             <p:inputText value="#{artista.artista.genero}" required="true"/>                          
-                            
-                            
-                             <style>
+
+
+                            <style>
                                 .out{                                                                 
                                     color: #ffffff;
                                     font-style: italic;
@@ -43,7 +43,7 @@
 
                         </h:panelGrid>
                         <p:commandButton value="REGISTRAR" ajax="false" icon="ui-icon-check" styleClass="center" validateClient="true" action="#{artista.registrar()}"/>
-                       
+
 
                     </p:panel>
                 </h:form>
@@ -54,15 +54,21 @@
 
                         <p:growl id="msgs" />
 
-                        <p:dataTable id="table1" value="#{artista.artistas}" var ="tblArtista" editable="true" style="margin-bottom:20px" >
+                        <p:dataTable id="table1" value="#{artista.artistas}" var ="tblArtista" editable="true" 
+                                     paginator="true" rows="8" 
+                                     style="text-align: center;margin-bottom:20px"
+                                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                                     emptyMessage="NO SE ENCUENTRAN REGISTROS"
+                                     rowsPerPageTemplate="5,10,15" >
+
                             <f:facet name="header">
                                 ARTISTAS
                             </f:facet>
+                            <p:ajax event="rowEdit" listener="#{artista.onRowEdit}" update=":for:msgs" />
+                            <p:ajax event="rowEditCancel" listener="#{artista.onRowCancel}" update=":for:msgs" />
 
-                            <p:ajax event="rowEdit" listener="#{artista.onRowEdit}" update=":for:msgs" /><font></font>
-                            <p:ajax event="rowEditCancel" listener="#{artista.onRowCancel}" update=":for:msgs" /><font></font>
+                            <p:column headerText="NOMBRE"  sortBy="#{tblArtista.nombre}" filterBy="#{tblArtista.nombre}">
 
-                            <p:column headerText="NOMBRE">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblArtista.nombre}" /></f:facet>
                                     <f:facet name="input"><p:inputText  value="#{tblArtista.nombre}" style="width:100%">
@@ -71,7 +77,7 @@
                                 </p:cellEditor>
                             </p:column>
 
-                            <p:column headerText="APELLIDO">
+                            <p:column headerText="APELLIDO" sortBy="#{tblArtista.apellido}" filterBy="#{tblArtista.apellido}">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblArtista.apellido}" /></f:facet>
                                     <f:facet name="input"><p:inputText  value="#{tblArtista.apellido}" style="width:100%">
@@ -80,7 +86,7 @@
                                 </p:cellEditor>
                             </p:column>                           
 
-                            <p:column headerText="GENERO">
+                            <p:column headerText="GENERO" sortBy="#{tblArtista.genero}" filterBy="#{tblArtista.genero}">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblArtista.genero}" /></f:facet>
                                     <f:facet name="input"><p:inputText  value="#{tblArtista.genero}" style="width:100%">
@@ -89,7 +95,7 @@
                                 </p:cellEditor>
                             </p:column>
 
-                            <p:column headerText="ESTADO">
+                            <p:column headerText="ESTADO" sortBy="#{tblArtista.estado}">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{tblArtista.estado}" /></f:facet>
                                     <f:facet name="input">
@@ -101,7 +107,7 @@
                                 </p:cellEditor>
                             </p:column>
 
-                            <p:column headerText="MODIFICAR">
+                            <p:column headerText="MODIFICAR" style="align-content:center">
                                 <p:rowEditor />
                             </p:column>
 
