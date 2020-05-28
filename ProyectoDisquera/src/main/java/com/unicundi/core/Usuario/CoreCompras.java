@@ -52,12 +52,12 @@ public class CoreCompras implements Serializable {
         for (UDisco disco : discosAgregados) {
             int idDisco = disco.getId();
             int valorCompra = disco.getPrecio();
-            int numeroCanciones = buscarPorDisco(disco.getId()).size();
+            int numeroCanciones = disco.getCancionesDisco().size();
             UCompraDisco compra = new UCompraDisco(0, idUsuario, idDisco, valorCompra, fechaCompra, numeroCanciones);
             new DAOCompraDisco().registrar(compra);
             int idCompraDisco = new DAOCompraDisco().obtenerIdMayor();
             
-            List<UCancion> cancionesDisco = new DAOCancion().buscarPorDisco(compra.getIdDisco());
+            List<UCancion> cancionesDisco = disco.getCancionesDisco();
             for (UCancion cancionDisco : cancionesDisco){
                 int idCancion = cancionDisco.getId();
                 UCompraDiscoCancion compraCancion = new UCompraDiscoCancion(0, idCompraDisco, idCancion);
