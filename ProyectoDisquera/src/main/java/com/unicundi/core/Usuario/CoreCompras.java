@@ -23,27 +23,51 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
- *
- * @author cass465
+ * Clase que maneja la logica de las compras
+ * @author Camilo Sanabria
+ * @version 1.0.0
  */
 public class CoreCompras implements Serializable {
 
+    /**
+     * Lista los discos disponibles 
+     * @return Todos los discos disponibles
+     */
     public List<UDisco> listarDiscosDisponibles() {
         return new DAOCompraDisco().listarDiscosDisponibles();
     }
 
+    /**
+     * Lista las canciones disponibles
+     * @return Todas las canciones disponibles
+     */
     public List<UCancion> listarCancionesDisponibles() {
         return new DAOCompraCancion().listarCancionesDisponibles();
     }
 
+    /**
+     * Lista las canciones del disco especificado
+     * @param idDisco Id del disco al que se desea listar sus canciones
+     * @return Lista de canciones del disco
+     */
     public List<UCancion> buscarPorDisco(int idDisco) {
         return new DAOCancion().buscarPorDisco(idDisco);
     }
     
+    /**
+     * Lista las compras que relacionan la compra de los discos con sus canciones
+     * @param idCompraDisco Id de las compras de las canciones que tienen el disco
+     * @return Lista de compras de canciones de disco
+     */
     public List<UCompraDiscoCancion> buscarPorCompraDisco(int idCompraDisco) {
         return new DAOCompraDiscoCancion().buscarPorCompraDisco(idCompraDisco);
     }
 
+    /**
+     * Registra las compras realizadas por el usuario
+     * @param discosAgregados Lista de discos que se compran
+     * @param cancionesAgregadas Lista de canciones que se compran
+     */
     public void registrar(List<UDisco> discosAgregados, List<UCancion> cancionesAgregadas) {
         int nCompras = 0;
         int idUsuario = ((UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getId();
@@ -84,16 +108,31 @@ public class CoreCompras implements Serializable {
         }
     }
 
+    /**
+     * Lista los discos comprados
+     * @return Todos los discos comprados
+     */
     public List<UCompraDisco> listarDiscosComprados() {
         UUsuario usuario = (UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return new DAOCompraDisco().listarPorUsuario(usuario);
     }
 
+    /**
+     * Lista las canciones compradas
+     * @return Todas las canciones compradas
+     */
     public List<UCompraCancion> listarCancionesCompradas() {
         UUsuario usuario = (UUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return new DAOCompraCancion().listarPorUsuario(usuario);
     }
 
+    /**
+     * Lista las canciones de disco que se van a remover de la compra
+     * cuando se agrega el disco
+     * @param cancionesAgregadas Lista de todas las canciones agregadas
+     * @param disco Disco al que pertenecen las canciones a remover
+     * @return Lista de canciones que deben ser removidas
+     */
     public List<UCancion> listarCancionesARemover(List<UCancion> cancionesAgregadas, UDisco disco) {
         //Recorre las canciones agregadas y se listan las que tienen que salir
         List<UCancion> removerCanciones = new ArrayList<UCancion>();
@@ -105,6 +144,13 @@ public class CoreCompras implements Serializable {
         return removerCanciones;
     }
 
+    /**
+     * Valida que una cancion no se pueda agregar si
+     * el disco ya esta agregado en la compra
+     * @param discosAgregados Todos los discos agregados
+     * @param cancion Cancion que se valida
+     * @return Si es aceptada la cancion para agregar o no
+     */
     public boolean validarDiscoAgregado(List<UDisco> discosAgregados, UCancion cancion) {
         boolean aceptado = true;
         for (UDisco discoAgregado : discosAgregados) {
@@ -118,6 +164,12 @@ public class CoreCompras implements Serializable {
         return aceptado;
     }
 
+    /**
+     * Obtiene el disco disponible de la cancion especificada
+     * @param discosDisponibles Todos los discos disponibles
+     * @param cancion Cancion por la que se desea buscar el disco
+     * @return Disco encontrado de la cancion
+     */
     public UDisco obtenerDiscoPorCancion(List<UDisco> discosDisponibles, UCancion cancion) {
         UDisco discoCompleto = new UDisco();
         for (UDisco disco : discosDisponibles) {
@@ -128,6 +180,12 @@ public class CoreCompras implements Serializable {
         return discoCompleto;
     }
     
+    /**
+     * Cuenta el numero de canciones del disco especificado
+     * @param cancionesAgregadas Todas las canciones que han sido agregadas a la compra
+     * @param idDisco id de disco al que se desea contar sus canciones
+     * @return Numero de canciones del disco
+     */
     public int contarCancionesAgregadasDeDisco(List<UCancion> cancionesAgregadas, int idDisco) {
         int nCanciones = 0;
         for (UCancion cancion : cancionesAgregadas) {
@@ -138,6 +196,12 @@ public class CoreCompras implements Serializable {
         return nCanciones;
     }
 
+    /**
+     * Calcula el precio total a pagar segun los discos y canciones agregadas
+     * @param discosAgregados Todos los discos agregados
+     * @param cancionesAgregadas Todas las canciones agregadas
+     * @return Valor total a pagar
+     */
     public int calcularTotal(List<UDisco> discosAgregados, List<UCancion> cancionesAgregadas) {
         int total = 0;
         for (UDisco disco : discosAgregados) {

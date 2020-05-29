@@ -19,11 +19,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
- * @author cass465
+ * Clase que maneja las acciones de compras de disco en Base de Datos
+ * @author Camilo Sanabria
+ * @version 1.0.0
  */
 public class DAOCompraDisco implements Serializable {
     
+    /**
+     * Lista todos los discos disponibles
+     * @return Todos los discos disponibles
+     */
     public List<UDisco> listarDiscosDisponibles() {
         List<UDisco> discos = new ArrayList<UDisco>();
         Connection conexion = new BDConector().open();
@@ -56,6 +61,10 @@ public class DAOCompraDisco implements Serializable {
         return discos;
     }
     
+    /**
+     * Regitra la compra de disco especificado
+     * @param compra Compra de disco a registrar
+     */
     public void registrar(UCompraDisco compra) {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -75,6 +84,11 @@ public class DAOCompraDisco implements Serializable {
         }
     }
     
+    /**
+     * Lista las compras de discos filtrado por usuario
+     * @param usuario Usuario al que se le consultan las compras de disco
+     * @return Lista de compras de usuario encontradas
+     */
     public List<UCompraDisco> listarPorUsuario(UUsuario usuario){
         List<UCompraDisco> compras = new ArrayList<UCompraDisco>();
         Connection conexion = new BDConector().open();
@@ -108,6 +122,10 @@ public class DAOCompraDisco implements Serializable {
         return compras;
     }
     
+    /**
+     * Obtiene el mayor id de todas las compras de discos
+     * @return Id mayor de compras de discos
+     */
     public int obtenerIdMayor(){
         int idCompraDisco = 0;
         Connection conexion = new BDConector().open();

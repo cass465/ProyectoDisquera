@@ -18,11 +18,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
- * @author cass465
+ * Clase que maneja las acciones de compras de cancion en Base de Datos
+ * @author Camilo Sanabria
+ * @version 1.0.0
  */
 public class DAOCompraCancion implements Serializable {
 
+    /**
+     * Lista todas las canciones disponibles
+     * @return Todas las canciones disponibles
+     */
     public List<UCancion> listarCancionesDisponibles() {
         List<UCancion> canciones = new ArrayList<UCancion>();
         Connection conexion = new BDConector().open();
@@ -57,6 +62,10 @@ public class DAOCompraCancion implements Serializable {
         return canciones;
     }
 
+    /**
+     * Registra la compra de cancion especificada
+     * @param compra Compra de disco que se va a registrar
+     */
     public void registrar(UCompraCancion compra) {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -75,6 +84,11 @@ public class DAOCompraCancion implements Serializable {
         }
     }
 
+    /**
+     * Lista las compras de canciones filtrando por usuario
+     * @param usuario Usuario al que se van a listar las compras
+     * @return Todas las compras de canciones hechas por el usuario
+     */
     public List<UCompraCancion> listarPorUsuario(UUsuario usuario) {
         List<UCompraCancion> compras = new ArrayList<UCompraCancion>();
         Connection conexion = new BDConector().open();

@@ -5,7 +5,6 @@
  */
 package com.unicundi.BD;
 
-import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UCompraDiscoCancion;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -16,11 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author cass465
+ * Clase que maneja las acciones de las compras de discos y sus canciones
+ * @author Camilo Sanabria
+ * @version 1.0.0
  */
 public class DAOCompraDiscoCancion implements Serializable {
 
+    /**
+     * Registra la compra de cancion segun el disco al que pertenece
+     * @param compraCancion Cancion que se esta comprando
+     */
     public void registrar(UCompraDiscoCancion compraCancion) {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
@@ -37,6 +41,11 @@ public class DAOCompraDiscoCancion implements Serializable {
         }
     }
 
+    /**
+     * Lista las compras de canciones filtrando por la compra de disco
+     * @param idCompraDisco Id de la compra de disco al que se desea consultar
+     * @return Lista de compras de disco
+     */
     public List<UCompraDiscoCancion> buscarPorCompraDisco(int idCompraDisco) {
         List<UCompraDiscoCancion> canciones = new ArrayList<UCompraDiscoCancion>();
         Connection conexion = new BDConector().open();

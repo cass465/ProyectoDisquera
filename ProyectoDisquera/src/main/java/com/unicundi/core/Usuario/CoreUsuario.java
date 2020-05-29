@@ -15,11 +15,17 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
- *
- * @author cass465
+ * Clase que maneja la logica del usuario
+ * @author Camilo Sanabria
+ * @version 1.0.0
  */
 public class CoreUsuario implements Serializable{
     
+    /**
+     * Inicia la sesion del usuario
+     * @param username Username que esta iniciando sesion
+     * @param contrasenia Contraseña del usuario
+     */
     public void iniciarSesion(String username, String contrasenia){
         UUsuario usuario = new UUsuario();
         usuario.setUsername(username);
@@ -43,6 +49,11 @@ public class CoreUsuario implements Serializable{
         }
     }
     
+    /**
+     * Registra los datos de usuarop
+     * @param usuario Datos de usuario a registrar
+     * @param confirmacionContrasenia Contraseña que es validada para que coincida
+     */
     public void registrar(UUsuario usuario, String confirmacionContrasenia){
         UUsuario usuarioValidador = new DAOUsuario().buscarPorUsername(usuario.getUsername());
         if(usuarioValidador == null){
@@ -62,6 +73,10 @@ public class CoreUsuario implements Serializable{
         }
     }
     
+    /**
+     * Redirecciona a la direccion especificada
+     * @param url Direccion a la que se desea ir
+     */
     public void redireccionar(String url){
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);

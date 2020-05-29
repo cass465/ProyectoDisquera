@@ -5,7 +5,6 @@
  */
 package com.unicundi.BD;
 
-import com.unicundi.utilitarios.UArtista;
 import com.unicundi.utilitarios.UCancion;
 import java.io.Serializable;
 import java.sql.Connection;

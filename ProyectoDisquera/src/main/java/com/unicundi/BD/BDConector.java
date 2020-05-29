@@ -11,22 +11,49 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
- * @author cass465
+ * Clase que conecta al sistema con la Base de Datos
+ * @author Camilo Sanabria
+ * @version 1.0.0
  */
 public class BDConector implements Serializable {
 
+    /**
+     * Manejador de JDBC
+     */
     private final String JDBC_DRIVER = "org.postgresql.Driver";
+    
+    /**
+     * Direccion a la que se conecta BD
+     */
     private final String DB_URL = "jdbc:postgresql://localhost:5432/Disquera";
+    
+    /**
+     * Usuario de postgreSQL
+     */
     private String user;
+    
+    /**
+     * Contraseña de postgreSQL
+     */
     private String pass;
+    
+    /**
+     * Variable de conexion
+     */
     private Connection conexion;
 
+    /**
+     * Constructor de clase
+     */
     public BDConector() {
         this.user = "postgres";
         this.pass = "XVV254";
     }
 
+    /**
+     * Abrir conexion
+     * @return La conexion realizada
+     */
     public Connection open() {
         try {
             Class.forName(JDBC_DRIVER);
@@ -42,6 +69,9 @@ public class BDConector implements Serializable {
         return conexion;
     }
 
+    /**
+     * Cierra la conexion
+     */
     public void close() {
         try {
             conexion.close();

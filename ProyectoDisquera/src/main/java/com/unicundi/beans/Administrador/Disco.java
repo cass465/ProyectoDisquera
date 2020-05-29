@@ -5,7 +5,6 @@
  */
 package com.unicundi.beans.Administrador;
 
-import com.unicundi.BD.DAODisco;
 import com.unicundi.core.Administrador.CoreArtista;
 import com.unicundi.core.Administrador.CoreDisco;
 import com.unicundi.utilitarios.UArtista;

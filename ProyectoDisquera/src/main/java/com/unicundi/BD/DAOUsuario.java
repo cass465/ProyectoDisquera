@@ -13,11 +13,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
- * @author cass465
+ * Clase que maneja las acciones de usuario en Base de Datos
+ * @author Camilo Sanabria
+ * @version 1.0.0
  */
 public class DAOUsuario implements Serializable {
 
+    /**
+     * Inicia la sesion del usuario 
+     * @param usuario Datos de usuario que desea ingresar
+     * @return Datos de usuario logueado
+     */
     public UUsuario iniciarSesion(UUsuario usuario) {
         UUsuario usuarioLogueado = null;
         Connection conexion = new BDConector().open();
@@ -48,6 +54,11 @@ public class DAOUsuario implements Serializable {
         return usuarioLogueado;
     }
 
+    /**
+     * Busca un usuario filtrado por username para validar el registro
+     * @param username Username a buscar
+     * @return Datos de usuario encontrado
+     */
     public UUsuario buscarPorUsername(String username){
         UUsuario usuarioEncontrado = null;
         Connection conexion = new BDConector().open();
@@ -71,6 +82,10 @@ public class DAOUsuario implements Serializable {
         return usuarioEncontrado;
     }
     
+    /**
+     * Registra el usuario especificado en Base de Datos
+     * @param usuario Datos de usuario que se desean registrar
+     */
     public void registrar(UUsuario usuario) {
         Connection conexion = new BDConector().open();
         if (conexion != null) {
