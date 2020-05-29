@@ -11,12 +11,15 @@ import com.unicundi.core.Administrador.CoreDisco;
 import com.unicundi.utilitarios.UArtista;
 import com.unicundi.utilitarios.UCancion;
 import com.unicundi.utilitarios.UDisco;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.inject.Named;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -53,7 +56,7 @@ public class Disco implements Serializable {
      * Constructor de la clase
      */
     public Disco() {
-        
+
         disco = new UDisco();
         cancion = new UCancion();
     }
@@ -70,10 +73,20 @@ public class Disco implements Serializable {
      * Editar disco
      *
      * @param event
+     * 
+     * @throws java.io.IOException
      */
-    public void onRowEdit(RowEditEvent event) {
+    public void onRowEdit(RowEditEvent event) throws IOException {
         UDisco discoEdit = (UDisco) event.getObject();
         new CoreDisco().modificar(discoEdit);
+
+        try {
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        } catch (IOException e) {
+            throw e;
+        }
+
     }
 
     /**
