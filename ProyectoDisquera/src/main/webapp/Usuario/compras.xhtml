@@ -224,7 +224,12 @@
                 </center>
 
                 <center>
-                    <p:commandButton icon="ui-icon-tag" value="COMPRAR" style="margin-top: 1%" action="#{compras.comprar}" update=":form"/>
+                    <p:commandButton icon="ui-icon-tag" value="COMPRAR" style="margin-top: 1%" 
+                                     action="#{compras.comprar}" update="form"
+                                     oncomplete="PF('discosDisponiblesWV').filter();
+                                     PF('discosAgregadosWV').filter();
+                                     PF('cancionesDisponiblesWV').filter();
+                                     PF('cancionesAgregadasWV').filter()"/>
                 </center>
             </p:panel>
 
